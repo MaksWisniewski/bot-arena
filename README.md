@@ -149,3 +149,23 @@ Player can make an action of 3 types:
     - S archer - spawns an archer that is a ranged unit.
 - Skip turn
     - W - don't do anything in this turn.
+
+---
+
+# Additional info
+
+Save enviroment to file
+```bash
+conda list --explicit > bio-env.txt
+```
+
+Create enviroment from a text file
+```bash
+conda env create --file bio-env.txt
+```
+
+
+possible fix for conda enviroment, with radeon egpu
+```bash
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+```
