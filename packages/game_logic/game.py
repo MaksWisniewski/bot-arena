@@ -29,7 +29,7 @@ ErrorCode = {
 class Game:
     def __init__(self, map_path = None) -> None:
         map_path = os.path.join(MAPS_DIRECTORY, map_path) if map_path is not None else None
-        
+
         self._map = Map(map_path)
 
         self.turrets = {
@@ -70,29 +70,29 @@ class Game:
     def __shoot_turrets(self) -> None:
         self.turrets['left'].shoot(self.soldiers['right'])
         self.turrets['right'].shoot(self.soldiers['left'])
-        
+
     def __handle_actions_error(self) -> tuple[int, int]:
         def check_build_place(action: Action) -> int:
             if self.gold[action.side] < COST['turret']:
                 return -1
             if action.cords[0] < 0 or action.cords[0] >= self._map.MAP_SIZE_X or action.cords[1] < 0 or action.cords[1] >= self._map.MAP_SIZE_Y:
                 return -4
-            
+
             wrong_build_places = [
-                self._map.obstacles, 
-                self._map.path, 
-                self.turrets['left'], 
-                self.turrets['right'], 
-                self.farms['left'], 
+                self._map.obstacles,
+                self._map.path,
+                self.turrets['left'],
+                self.turrets['right'],
+                self.farms['left'],
                 self.farms['right']
                 ]
 
             for place in wrong_build_places:
                 if action.cords in place:
                     return -4
-                
+
             return 0
-        
+
         def check_spawn_soldier(action: Action) -> int:
             soldier_name = action.name
             if self.gold[action.side] < SOLDIERS_STATS[soldier_name]['cost']:
@@ -105,13 +105,13 @@ class Game:
         if isinstance(self.action_left, BuildTurret) and isinstance(self.action_right, BuildTurret):
             if self.action_left.cords == self.action_right.cords:
                 return (-3, -3)
-            
+
         left_error = None
         right_error = None
 
         left_error = check_build_place(self.action_left) if isinstance(self.action_left, BuildAction) else 0
         right_error = check_build_place(self.action_right) if isinstance(self.action_right, BuildAction) else 0
-        
+
         left_error = check_spawn_soldier(self.action_left) if isinstance(self.action_left, SpawnSoldier) else left_error
         right_error = check_spawn_soldier(self.action_right) if isinstance(self.action_right, SpawnSoldier) else right_error
 
@@ -127,7 +127,7 @@ class Game:
                 self.gold[action.side] -= COST['farm']
                 self.farms[action.side].spawn(action.cords)
                 return
-            
+
         def spawn(action: Action) -> None:
             soldier_name = action.name
             self.gold[action.side] -= SOLDIERS_STATS[soldier_name]['cost']
@@ -153,7 +153,7 @@ class Game:
             return (ErrorCode[1], ErrorCode[1])
         if right_win:
             return (ErrorCode[2], ErrorCode[2])
-        
+
         return None
 
     def update(self, action_left: Action, action_right: Action) -> tuple[str, str]:
@@ -169,7 +169,7 @@ class Game:
         self.action_right = Wait('right') if Error[1] else self.action_right
 
         self.__execute_actions()
-        
+
         self.gold['left'] += self.income['left']
         self.gold['right'] += self.income['right']
 
@@ -182,15 +182,21 @@ class Game:
             return WinLog
 
         return (ErrorCode[Error[0]], ErrorCode[Error[1]])
-    
+
     def get_path(self) -> list[tuple[int, int]]:
         return self._map.path
-    
+
     def get_obstacles(self) -> list[tuple[int, int]]:
         return self._map.obstacles.obstacles
-    
+
     def get_map_size(self) -> tuple[int, int]:
         return (self._map.MAP_SIZE_X, self._map.MAP_SIZE_Y)
+
+    def get_empty_cells(self):
+        non_empty_cells = self.get_obstacles() + self.get_path()
+        size_x, size_y = self.get_map_size()
+
+        return [(x,y) for x in range(size_x) for y in range(size_y) if (x,y) not in non_empty_cells]
 
     def get_soldiers(self) -> dict[str, list[Soldier]]:
         return {
@@ -212,9 +218,25 @@ class Game:
 
     def get_gold(self) -> dict[str, int]:
         return self.gold.copy()
-    
+
     def get_income(self) -> dict[str, int]:
         return self.income.copy()
+
+    def get_legal_moves(self, player: str) -> list[Action]:
+        moves = [Wait(player)]
+
+        # spawn soldier
+        for soldier_type in SOLDIERS_STATS:
+            if SOLDIERS_STATS[soldier_type]['cost'] <= self.gold[player]:
+                moves.append(SpawnSoldier(player, soldier_type))
+
+        # build
+        for building_type in COST:
+            if COST[building_type] <= self.gold[player]:
+                ActionClass = BuildFarm if building_type == 'farm' else BuildTurret
+                moves += [ActionClass(player, x, y) for x, y in self.get_empty_cells()]
+
+        return moves
 
     def generate_random_map(self, map_path, size_x = 10, size_y = 10) -> None:
         self._map.generate_random_map(map_path, size_x, size_y)
