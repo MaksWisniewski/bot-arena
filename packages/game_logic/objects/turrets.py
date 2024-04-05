@@ -1,11 +1,12 @@
 from .soldiers import Soldiers
+from packages.game_logic.stats import TURRET_STATS
 
 class Turret():
     def __init__(self, cords, id) -> None:
         self.cords = cords
-        self.attack = 10
+        self.attack = TURRET_STATS['attack']
         self.id = id
-        self.range = 3
+        self.range = TURRET_STATS['range']
 
     def _is_in_range(self, cords: tuple[int, int]) -> bool:
         return abs(self.cords[0] - cords[0]) + abs(self.cords[1] - cords[1]) <= self.range
@@ -24,10 +25,10 @@ class Turret():
             "attack": self.attack,
             "range": self.range
         }
-    
+
     def copy(self):
         return Turret(self.cords, self.id)
-    
+
     def get_coordinates(self):
         return self.cords
 
@@ -54,4 +55,3 @@ class Turrets():
         turrets_copy.turrets = [turret.copy() for turret in self.turrets]
         turrets_copy.next_id = self.next_id
         return turrets_copy
-        

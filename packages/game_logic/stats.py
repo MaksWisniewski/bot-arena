@@ -7,6 +7,11 @@ START_GOLD = 1000
 PASSIVE_GOLD = 10
 FARM_GOLD = 5
 
+TURRET_STATS = {
+    'attack': 10,
+    'range': 3
+}
+
 SOLDIERS_STATS = {
     'swordsman': {
         'max_hp': 600,
