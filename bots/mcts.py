@@ -1,10 +1,11 @@
-import sys, os, random
+import sys, os, random, json
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from bot_package.bot import Bot
 from bot_package.move import Move
 from packages.game_logic.game import Game
+from packages.simulator.serializer import Serializer
 
 class MCTS_Node:
     """
@@ -14,6 +15,10 @@ class MCTS_Node:
     - `games_played` - total amount of simulations that used this node
     - `games_won` - number of simulations in which our player won
     - `children` - dictionary that maps moves to corresponding child nodes
+
+    Methods:
+    - `score()`
+    - `is_leaf()`
     """
 
     def __init__(self):
@@ -32,6 +37,10 @@ class MCTS_Node:
         return 0 if self.games_played == 0 else self.games_won / self.games_played
 
 
+    def is_leaf(self) -> bool:
+        return bool(self.children)
+
+
 class MCTS_Bot(Bot):
     def preprocess(self) -> None:
         self.MCTS_root = MCTS_Node()
@@ -41,14 +50,23 @@ class MCTS_Bot(Bot):
         """
         Performs simulation and returns best move
         """
-        # TODO:
+        # DONE:
         # - create Game (need to add method for creating Game object from json state)
+        # TODO:
         # - go to leaf of the tree, choose nodes based on their scores
         #   (best or better - random with probabilities proportional to scores)
         # - get legal moves (and probably filter out some of them - like building towers far from the path)
         # - perform simulation (random game) for each of moves from previous step and create new nodes
         # - update node stats on the path to root
         # - return best move based on corresponding node's score (best or random with distribution based on scores)
+
+        game = Game(state=self.arena_properties)
+
+        serialized_game = Serializer.get_json(game)
+
+        print('self.arena_properties:\n', json.dumps(self.arena_properties), file=sys.stderr)
+        print('serialized:\n', serialized_game, file=sys.stderr)
+        print('Equal' if json.dumps(self.arena_properties) == serialized_game else 'Not equal', file=sys.stderr)
 
         return Move.Spawn('archer')
 

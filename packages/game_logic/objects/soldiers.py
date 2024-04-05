@@ -22,7 +22,7 @@ class Soldier():
             "hp": self.hp,
             "position": self.position
         }
-    
+
     def copy(self):
         return Soldier(self.id, self.position, SOLDIERS_STATS[self.name], self.name)
 
@@ -42,7 +42,7 @@ class Soldiers():
         """Sorts soldiers by position, where 0 is the closest to the ENEMY base.
         """
 
-        self.soldiers.sort(key=lambda soldier: soldier.position, 
+        self.soldiers.sort(key=lambda soldier: soldier.position,
                            reverse=True if self.side == 'left' else False)
 
     def __attack_soldier(self, soldier: Soldier, enemy_soldier: Soldier) -> None:
@@ -52,7 +52,7 @@ class Soldiers():
 
     def clear_dead(self) -> None:
         self.soldiers = list(filter(lambda soldier: soldier.hp > 0, self.soldiers))
-        
+
         ENEMY_BASE = -1 if self.side == 'right' else len(self.path)
         if any(soldier.position == ENEMY_BASE for soldier in self.soldiers):
             self.is_win = True
@@ -63,7 +63,7 @@ class Soldiers():
     def can_spawn(self) -> bool:
         MY_BASE = 0 if self.side == 'left' else len(self.path) - 1
         return all(soldier.position != MY_BASE for soldier in self.soldiers)
-        
+
     def fight(self, enemy_soldiers: 'Soldiers') -> None:
         for soldier in self.soldiers:
             soldier.did_move = False
@@ -84,10 +84,10 @@ class Soldiers():
                 return False
             self.__attack_soldier(left_first, right_first)
             return True
-        
+
         if not is_any_attack():
             return
-        
+
         def can_soldier_shoot(index: int) -> bool:
             for i in range(index, 0, -1):
                 if not is_near(self.soldiers[i], self.soldiers[i-1]):
@@ -95,7 +95,7 @@ class Soldiers():
                 if self.soldiers[i-1].did_move:
                     return True
             raise Exception('This should not happen')
-                    
+
         for i, soldier in enumerate(self.soldiers[1:], 1):
             if can_soldier_shoot(i) and distance(soldier, enemy_soldiers.soldiers[0]) <= soldier.range:
                 self.__attack_soldier(soldier, enemy_soldiers.soldiers[0])
@@ -109,7 +109,7 @@ class Soldiers():
                 continue
 
             new_position = soldier.position + (FORWARD if self.side == 'left' else BACKWARD)
-            
+
             my_positions = [soldier.position for soldier in self.soldiers]
 
             if new_position in my_positions:
@@ -117,13 +117,17 @@ class Soldiers():
                 continue
 
             soldier.position = new_position
-            
+
     def spawn(self, name='swordsman') -> None:
         if self.can_spawn():
             MY_BASE = 0 if self.side == 'left' else len(self.path) - 1
             new_soldier = Soldier(self.next_id, MY_BASE, SOLDIERS_STATS[name], name)
             self.soldiers.append(new_soldier)
             self.next_id += 1
+
+    def spawn_on_position(self, position, name) -> None:
+        self.soldiers.append(Soldier(self.next_id, position, SOLDIERS_STATS[name], name))
+        self.next_id += 1
 
     def __iter__(self):
         for soldier in self.soldiers:
@@ -135,4 +139,3 @@ class Soldiers():
         soldiers_copy.next_id = self.next_id
         soldiers_copy.is_win = self.is_win
         return soldiers_copy
-    

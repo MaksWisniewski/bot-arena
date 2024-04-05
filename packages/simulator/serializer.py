@@ -49,7 +49,7 @@ class Serializer:
 
         turrets_serialized = [turret.get_coordinates() for turret in turrets_data]
         farms_serialized = [farm.get_coordinates() for farm in farms_data]
-        units_serialized = [unit.get_position() for unit in units_data]
+        units_serialized = [[unit.get_position(), unit.name] for unit in units_data]
 
         player_data = {
             'buildings': {

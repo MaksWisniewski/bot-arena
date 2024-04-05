@@ -83,8 +83,8 @@ Values for `arena_properties` are expected in JSON format, as shown below:
                 ]
             },
             'units': [
-                [ux1, uy1],  # Unit position
-                [ux2, uy2],
+                [pos1, type1],  # Unit position and type
+                [pos2, type2],
                 # ...
             ],
             'gold': left_player_gold,  # Gold amount for the player on the left side

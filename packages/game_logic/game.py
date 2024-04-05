@@ -27,7 +27,7 @@ ErrorCode = {
 }
 
 class Game:
-    def __init__(self, map_path = None) -> None:
+    def __init__(self, map_path = None, state = None) -> None:
         map_path = os.path.join(MAPS_DIRECTORY, map_path) if map_path is not None else None
 
         self._map = Map(map_path)
@@ -57,8 +57,31 @@ class Game:
             'right': PASSIVE_GOLD
         }
 
+        if state is not None:
+            self.__load_state(state)
+
         self.action_left = Wait('left')
         self.action_right = Wait('right')
+
+    def __load_state(self, state) -> None:
+        self._map.load_from_dict(state['arena'])
+
+        players = state['players']
+        for player in players:
+            buildings = players[player]['buildings']
+            for turret_cords in buildings['turrets']:
+                self.turrets[player].spawn(turret_cords)
+
+            for farm_cords in buildings['farms']:
+                self.farms[player].spawn(farm_cords)
+
+            for unit_position, unit_type in players[player]['units']:
+                self.soldiers[player].spawn_on_position(unit_position, unit_type)
+
+            self.gold[player] = players[player]['gold']
+
+            self.income[player] = players[player]['income']
+
 
     def __update_soldiers(self) -> None:
         self.soldiers['left'].fight(self.soldiers['right'])

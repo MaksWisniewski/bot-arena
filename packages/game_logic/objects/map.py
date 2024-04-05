@@ -28,21 +28,29 @@ class Map():
         for cord in [tuple(pos) for pos in map_data['obstacles']]:
             self.obstacles.spawn(cord)
 
+    def load_from_dict(self, map_dict) -> None:
+        self.MAP_SIZE_X, self.MAP_SIZE_Y = map_dict['map_size']
+        self._start = (0, 0)
+        self._end = (MAP_SIZE_X - 1, MAP_SIZE_Y - 1)
+        self.path = list(map(tuple, map_dict['path']))
+        for pos in map_dict['obstacles']:
+            self.obstacles.spawn(tuple(pos))
+
     def __generate_path_old(self, pos) -> None:
         # generate path without loops using backtracking
         if pos in self.path:
             return False
         if pos == self._end:
             return True
-        
+
         if pos[0] < 0 or pos[0] >= MAP_SIZE_X or pos[1] < 0 or pos[1] >= MAP_SIZE_Y:
             return False
-        
+
         go_up = (pos[0], pos[1] + 1)
         go_down = (pos[0], pos[1] - 1)
         go_left = (pos[0] - 1, pos[1])
         go_right = (pos[0] + 1, pos[1])
-        
+
         neighbours = [go_up, go_down, go_left, go_right]
         neighbours_in_path = 0
         for neighbour in neighbours:
@@ -61,13 +69,13 @@ class Map():
             neighbours = [go_right, go_down]
             shuffle(neighbours)
             neighbours = neighbours + [go_up]
-        
+
         self.path.append(pos)
 
         for neighbour in neighbours:
             if self.__generate_path(neighbour):
                 return True
-            
+
         self.path.remove(pos)
         return False
 
@@ -87,10 +95,10 @@ class Map():
         def near_path(pos: tuple[int, int]) -> bool:
             return any([abs(pos[0] - x) <= 1 and abs(pos[1] - y) <= 1 for x, y in self.path])
 
-        not_path = [(x, y) for x in range(self.MAP_SIZE_X) 
-                    for y in range(self.MAP_SIZE_Y) 
+        not_path = [(x, y) for x in range(self.MAP_SIZE_X)
+                    for y in range(self.MAP_SIZE_Y)
                     if not near_path((x, y))]
-        
+
         obstacles_cords = []
 
         for _ in range(OBSTACLES_AMOUNT):

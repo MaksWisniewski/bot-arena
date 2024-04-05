@@ -25,14 +25,14 @@ class Maciek_Bot(Bot):
                 if abs(x - cords[0]) + abs(y - cords[1]) <= 3:
                     return True
             return False
-        
+
         self.tower_cords = list(filter(near_path, all_cords))
         self.farm_cords = list(filter(lambda x: not near_path(x), all_cords))
         self.tower_cords.sort(key=lambda x: abs(x[0] - self.my_base[0]) + abs(x[1] - self.my_base[1]))
 
         self.post_move_action()
 
-        
+
     def post_move_action(self) -> None:
         self.enemy_soldiers = self.arena_properties["players"]["left" if self.side == "right" else "right"]["units"]
         self.my_soldiers = self.arena_properties["players"][self.side]["units"]
@@ -42,10 +42,10 @@ class Maciek_Bot(Bot):
     def make_move(self):
 
         MY_BASE = 2 if self.side == 'left' else len(self.path) - 3
-        if any(soldier_position == MY_BASE for soldier_position in self.enemy_soldiers):
+        if any(soldier_position == MY_BASE for soldier_position, soldier_type in self.enemy_soldiers):
             if len(self.my_soldiers) < 3:
                 return Move.Spawn("swordsman")
-            
+
         if self.my_gold <= 250:
             return Move.Wait()
 
@@ -53,15 +53,15 @@ class Maciek_Bot(Bot):
             x, y = self.farm_cords[0]
             self.farm_cords = self.farm_cords[1:]
             return Move.Build.Farm(x, y)
-    
+
         if len(self.tower_cords) > 0:
             x, y = self.tower_cords[0]
             self.tower_cords = self.tower_cords[1:]
             return Move.Build.Turret(x, y)
 
 
-        return Move.Spawn("swordsman")          
-        
-        
+        return Move.Spawn("swordsman")
+
+
 while True:
     Maciek_Bot().run()
