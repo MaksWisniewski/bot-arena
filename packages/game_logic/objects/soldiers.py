@@ -24,7 +24,9 @@ class Soldier():
         }
 
     def copy(self):
-        return Soldier(self.id, self.position, SOLDIERS_STATS[self.name], self.name)
+        soldier_copy = Soldier(self.id, self.position, SOLDIERS_STATS[self.name], self.name)
+        soldier_copy.hp = self.hp
+        return soldier_copy
 
     def get_position(self):
         return self.position
