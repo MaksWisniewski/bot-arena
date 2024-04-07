@@ -125,8 +125,20 @@ class Soldiers():
             self.soldiers.append(new_soldier)
             self.next_id += 1
 
-    def spawn_on_position(self, position, name) -> None:
-        self.soldiers.append(Soldier(self.next_id, position, SOLDIERS_STATS[name], name))
+    def spawn_with_stats(self, stats: dict) -> None:
+        """
+        Takes stats in format:
+        ```
+        {
+            'position': int,
+            'type': str,
+            'hp': int
+        }
+        ```
+        """
+        new_soldier = Soldier(self.next_id, stats['position'], SOLDIERS_STATS[stats['type']], stats['type'])
+        new_soldier.hp = stats['hp']
+        self.soldiers.append(new_soldier)
         self.next_id += 1
 
     def __iter__(self):

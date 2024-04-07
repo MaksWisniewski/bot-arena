@@ -75,8 +75,8 @@ class Game:
             for farm_cords in buildings['farms']:
                 self.farms[player].spawn(farm_cords)
 
-            for unit_position, unit_type in players[player]['units']:
-                self.soldiers[player].spawn_on_position(unit_position, unit_type)
+            for unit_stats in players[player]['units']:
+                self.soldiers[player].spawn_with_stats(unit_stats)
 
             self.gold[player] = players[player]['gold']
 

@@ -42,7 +42,7 @@ class Maciek_Bot(Bot):
     def make_move(self):
 
         MY_BASE = 2 if self.side == 'left' else len(self.path) - 3
-        if any(soldier_position == MY_BASE for soldier_position, soldier_type in self.enemy_soldiers):
+        if any(soldier['position'] == MY_BASE for soldier in self.enemy_soldiers):
             if len(self.my_soldiers) < 3:
                 return Move.Spawn("swordsman")
 
