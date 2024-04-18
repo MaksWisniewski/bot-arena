@@ -66,7 +66,34 @@ Values for `arena_properties` are expected in JSON format, as shown below:
             [ox2, oy2],
             # ...
         ],
-        'map_size': [width, height]  # Map size
+        'map_size': [width, height],  # Map size
+        'stats': {
+            'soldiers': {
+                'swordsman': {
+                    'max_hp': 600,
+                    'damage': 100,
+                    'range': 1,
+                    'cost': 100,
+                },
+                'archer': {
+                    'max_hp': 300,
+                    'damage': 200,
+                    'range': 3,
+                    'cost': 150,
+                }
+            },
+            'buildings': {
+                'farm': {
+                    'gold': 5,
+                    'cost': 100
+                },
+                'turret': {
+                    'attack': 10,
+                    'range': 3,
+                    'cost': 200
+                }
+            }
+        }
     },
     'players': {
         'left': {
@@ -83,8 +110,11 @@ Values for `arena_properties` are expected in JSON format, as shown below:
                 ]
             },
             'units': [
-                [pos1, type1],  # Unit position and type
-                [pos2, type2],
+                {
+                    'position': p1,
+                    'type': t1,
+                    'hp': hp1
+                },
                 # ...
             ],
             'gold': left_player_gold,  # Gold amount for the player on the left side

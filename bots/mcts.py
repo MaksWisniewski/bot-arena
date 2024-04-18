@@ -1,4 +1,5 @@
-import sys, os, random, json
+import sys, os, json
+import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -6,6 +7,7 @@ from bot_package.bot import Bot
 from bot_package.move import Move
 from packages.game_logic.game import Game
 from packages.simulator.serializer import Serializer
+from packages.game_logic.actions import str_to_action
 
 class MCTS_Node:
     """
@@ -38,12 +40,29 @@ class MCTS_Node:
 
 
     def is_leaf(self) -> bool:
-        return bool(self.children)
+        return not bool(self.children)
+
+
+    def get_best_move(self) -> str:
+        """
+        Returns best move based on children scores
+        """
+        if self.is_leaf():
+            return None
+
+        probabilities = np.array([np.exp(self.children[move].score()) for move in self.children.keys()])
+        probabilities /= probabilities.sum()
+
+        return str(np.random.choice(list(self.children.keys()), p=probabilities))
 
 
 class MCTS_Bot(Bot):
     def preprocess(self) -> None:
         self.MCTS_root = MCTS_Node()
+        self.opponent_side = 'right' if self.side == 'left' else 'left'
+
+        print(self.side, file=sys.stderr)
+        print(self.arena_properties['arena'], file=sys.stderr)
 
 
     def simulate(self) -> str:
@@ -52,28 +71,93 @@ class MCTS_Bot(Bot):
         """
         # DONE:
         # - create Game (need to add method for creating Game object from json state)
-        # TODO:
         # - go to leaf of the tree, choose nodes based on their scores
-        #   (best or better - random with probabilities proportional to scores)
-        # - get legal moves (and probably filter out some of them - like building towers far from the path)
+        # - get legal moves
         # - perform simulation (random game) for each of moves from previous step and create new nodes
         # - update node stats on the path to root
-        # - return best move based on corresponding node's score (best or random with distribution based on scores)
+        # - return best move based on corresponding node's score
+        # TODO:
+        # - !!! find out what's so slow and optimize it !!!
+        # - rethink what should opponent's move be when choosing next node
+        # - rethink if the tree should be reinitialized before each move or if some nodes can be reused (for now they are reused)
+        # - filter legal moves (on large map there are lot of them - some should not be considered)
+        # - add heuristic for game state evaluation -> to evaluate unfinished simulations
+        # - improve score function (to prefer nodes that are visited most often)
+        # - use move timeout to choose number of simulations
+        # - maybe smarter move selection in simulations ?
 
         game = Game(state=self.arena_properties)
 
-        serialized_game = Serializer.get_json(game)
+        # print('gold: ', self.arena_properties['players'][self.side]['gold'], file=sys.stderr)
+        # print('farms: ', self.arena_properties['players']['left']['buildings']['farms'] + self.arena_properties['players']['right']['buildings']['farms'], file=sys.stderr)
+        # print('turrets: ', self.arena_properties['players']['left']['buildings']['turrets'] + self.arena_properties['players']['right']['buildings']['turrets'], file=sys.stderr)
+        # print('empty cells: ', game.get_empty_cells(), file=sys.stderr)
+        # print('legal moves: ', list(map(str, game.get_legal_moves(self.side))), file=sys.stderr)
 
-        print('self.arena_properties:\n', json.dumps(self.arena_properties), file=sys.stderr)
-        print('serialized:\n', serialized_game, file=sys.stderr)
-        print('Equal' if json.dumps(self.arena_properties) == serialized_game else 'Not equal', file=sys.stderr)
+        def update_game(my_move, opponent_move):
+            if self.side == 'left':
+                game.update(action_left=my_move,
+                            action_right=opponent_move)
+            else:
+                game.update(action_left=opponent_move,
+                            action_right=my_move)
 
-        return Move.Spawn('archer')
+        MAX_GAME_LENGTH = 50
+        NUM_OF_SIMULATIONS = 5
+
+        for _ in range(NUM_OF_SIMULATIONS):
+            # go to leaf
+            node = self.MCTS_root
+            path_to_root = [node]
+            while (not node.is_leaf()):
+                my_move = node.get_best_move()
+                update_game(my_move=str_to_action(my_move, self.side),
+                            opponent_move=game.get_random_move(self.opponent_side))
+                node = node.children[my_move]
+                path_to_root.append(node)
+
+            # get legal moves
+            legal_moves = game.get_legal_moves(self.side)
+            # at most 10 random moves
+            considered_moves = np.array(legal_moves)[np.random.choice(len(legal_moves), min(len(legal_moves), 10), replace=False)]
+            node.children = {str(move): MCTS_Node() for move in considered_moves}
+
+            # perform simulation for each move
+            for move in node.children.keys():
+                child_node = node.children[move]
+                child_node.games_played += 1
+
+                game_copy = game.copy()
+                for _ in range(MAX_GAME_LENGTH):
+                    move_result = game_copy.update(game_copy.get_random_move('left'),
+                                                game_copy.get_random_move('right'))
+                    if 'Left win' in move_result:
+                        node.children[move].games_won += int(self.side == 'left')
+                        break
+                    elif 'Right win' in move_result:
+                        node.children[move].games_won += int(self.side == 'right')
+                        break
+                    elif "Tie" in move_result:
+                        break
+
+            games_played = len(node.children.keys())
+            games_won = sum(node.children[move].games_won for move in node.children.keys())
+
+            # propagate update of node values
+            for node in path_to_root:
+                node.games_played += games_played
+                node.games_won += games_won
+
+        best_move = self.MCTS_root.get_best_move()
+        self.MCTS_root = self.MCTS_root.children[best_move]
+        return best_move
 
 
     def make_move(self) -> str:
         # perform simulation and chose the best move
-        return self.simulate()
+        best_move = self.simulate()
+        print('chosen move: ', best_move, file=sys.stderr)
+        return best_move
 
 
     def post_move_action(self) -> None:

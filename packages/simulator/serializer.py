@@ -1,6 +1,8 @@
 import json
 
 from packages.game_logic.game import Game
+from packages.game_logic.objects.soldiers import Soldier
+import packages.game_logic.stats as stats
 
 class Serializer:
     @staticmethod
@@ -37,7 +39,21 @@ class Serializer:
             },
             'path': path,
             'obstacles': obstacles,
-            'map_size': map_size
+            'map_size': map_size,
+            'stats': {
+                'soldiers': stats.SOLDIERS_STATS,
+                'buildings': {
+                    'farm': {
+                        'gold': stats.FARM_GOLD,
+                        'cost': stats.COST['farm']
+                    },
+                    'turret': {
+                        'attack': stats.TURRET_STATS['attack'],
+                        'range': stats.TURRET_STATS['range'],
+                        'cost': stats.COST['turret']
+                    }
+                }
+            }
         }
 
 
@@ -49,7 +65,7 @@ class Serializer:
 
         turrets_serialized = [turret.get_coordinates() for turret in turrets_data]
         farms_serialized = [farm.get_coordinates() for farm in farms_data]
-        units_serialized = [[unit.get_position(), unit.name] for unit in units_data]
+        units_serialized = [Serializer.serialize_unit(unit) for unit in units_data]
 
         player_data = {
             'buildings': {
@@ -61,6 +77,15 @@ class Serializer:
             'income': game.get_income()[player_side]
         }
         return player_data
+
+
+    @staticmethod
+    def serialize_unit(unit: Soldier) -> dict:
+        return {
+            'position': unit.get_position(),
+            'type': unit.name,
+            'hp': unit.hp
+        }
 
 
 if __name__ == '__main__':

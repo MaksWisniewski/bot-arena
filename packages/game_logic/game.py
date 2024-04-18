@@ -10,7 +10,7 @@ from .objects.turrets import Turrets, Turret
 from .objects.soldiers import Soldiers, Soldier
 from .objects.farms import Farms, Farm
 
-import os
+import os, random
 
 from packages import MAPS_DIRECTORY
 
@@ -75,8 +75,8 @@ class Game:
             for farm_cords in buildings['farms']:
                 self.farms[player].spawn(farm_cords)
 
-            for unit_position, unit_type in players[player]['units']:
-                self.soldiers[player].spawn_on_position(unit_position, unit_type)
+            for unit_stats in players[player]['units']:
+                self.soldiers[player].spawn_with_stats(unit_stats)
 
             self.gold[player] = players[player]['gold']
 
@@ -215,8 +215,17 @@ class Game:
     def get_map_size(self) -> tuple[int, int]:
         return (self._map.MAP_SIZE_X, self._map.MAP_SIZE_Y)
 
-    def get_empty_cells(self):
-        non_empty_cells = self.get_obstacles() + self.get_path()
+    def get_empty_cells(self) -> list[tuple[int, int]]:
+        path_cells = self.get_path()
+        obstacle_cells = [tuple(obstacle.cords) for obstacle in self.get_obstacles()]
+        non_empty_cells = obstacle_cells + path_cells
+
+        farms = self.get_farms()
+        turrets = self.get_turrets()
+        for player in ['left', 'right']:
+            non_empty_cells += [tuple(farm.get_coordinates()) for farm in farms[player]]
+            non_empty_cells += [tuple(turret.get_coordinates()) for turret in turrets[player]]
+
         size_x, size_y = self.get_map_size()
 
         return [(x,y) for x in range(size_x) for y in range(size_y) if (x,y) not in non_empty_cells]
@@ -260,6 +269,9 @@ class Game:
                 moves += [ActionClass(player, x, y) for x, y in self.get_empty_cells()]
 
         return moves
+
+    def get_random_move(self, player: str) -> Action:
+        return random.choice(self.get_legal_moves(player))
 
     def generate_random_map(self, map_path, size_x = 10, size_y = 10) -> None:
         self._map.generate_random_map(map_path, size_x, size_y)
