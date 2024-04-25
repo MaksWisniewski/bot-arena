@@ -179,6 +179,9 @@ class Game:
 
         return None
 
+    def is_win(self):
+        return self.__is_win()
+
     def update(self, action_left: Action, action_right: Action) -> tuple[str, str]:
         self.__update_soldiers()
         self.__shoot_turrets()
