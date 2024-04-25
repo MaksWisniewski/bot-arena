@@ -7,6 +7,12 @@ from bot_package.move import Move
 from packages.game_logic.game import Game
 from packages.simulator.serializer import Serializer
 
+from packages.game_logic.actions import Wait
+
+
+def negate_player(x):
+    return "right" if x == "left" else "left" if x == "right" else ""
+
 class MinMax_Node:
     """
     Stores information about MinMax tree node
@@ -34,43 +40,35 @@ class MinMax_Bot(Bot):
     def preprocess(self) -> None:
         self.MinMax_root = MinMax_Node()
 
+    def min_max_search(self, game, depth: int, _player: str) -> float:
+        def browse_moves(__maximizing_player:bool):
+            """search"""
+            value = float("-inf") if __maximizing_player else float("inf")
+            choose_function = max if __maximizing_player else min
 
-    def min_max_search(self, game, depth: int, maximizing_player: bool) -> float:
-        """
-        Implements the MinMax search algorithm
-        """
-        if depth == 0 or game.__is_win() not None:
+            legal_moves = game.get_legal_moves(_player)
+            for move in legal_moves:
+                game_cp = game.copy()
+
+                if _player == 'left': game_cp.update(move, Wait("right"))
+                else: game_cp.update(Wait("left"), move)
+
+                value = choose_function(value, self.min_max_search(game_cp, depth - 1, negate_player(_player)))
+            return value
+
+
+        print(game.__is_win())
+        if depth == 0 or game.__is_win() is not None:
             return self.evaluate(game)  
 
-        if maximizing_player:
-            value = float("-inf")
-            legal_moves = game.get_legal_moves()
-
-            
-            for move in legal_moves:
-
-                game.make_move(move)
-                value = max(value, self.min_max_search(game, depth - 1, False))
-                game.undo_last_move()
-            
-            return value
-        else:
-
-            value = float("inf")
-            legal_moves = game.get_legal_moves()
-
-            for move in legal_moves:
-                game.make_move(move)
-                value = min(value, self.min_max_search(game, depth - 1, True))
-                game.undo_last_move()
-            return value
+        return browse_moves((_player == self.side))
 
 
     def evaluate(self, game) -> float:
         """
         Evaluation function to estimate game state
         """
-        pass
+        return 2137
 
 
     def simulate(self) -> str:
@@ -80,17 +78,17 @@ class MinMax_Bot(Bot):
         game = Game(state=self.arena_properties)
         best_move = None
         best_value = float("-inf")
-        legal_moves = game.get_legal_moves()
+        legal_moves = game.get_legal_moves(self.side)
 
         for move in legal_moves:
             game_cp = game.copy()
 
             if self.side == 'left':
-                game_cp.make_move(move, Wait("right"))
+                game_cp.update(move, Wait("right"))
             else:
-                game_cp.make_move(Wait("left"), move)
+                game_cp.update(Wait("left"), move)
 
-            value = self.min_max_search(game_cp, depth=3, maximizing_player=False)
+            value = self.min_max_search(game_cp, 3, negate_player(self.side))
 
             if value > best_value:
                 best_value = value
