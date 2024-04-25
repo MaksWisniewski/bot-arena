@@ -39,19 +39,23 @@ class MinMax_Bot(Bot):
         """
         Implements the MinMax search algorithm
         """
-        if depth == 0 or game.is_game_over():
-            return self.evaluate(game)  # Evaluation function to estimate game state
+        if depth == 0 or game.__is_win() not None:
+            return self.evaluate(game)  
 
         if maximizing_player:
             value = float("-inf")
             legal_moves = game.get_legal_moves()
 
+            
             for move in legal_moves:
+
                 game.make_move(move)
                 value = max(value, self.min_max_search(game, depth - 1, False))
                 game.undo_last_move()
+            
             return value
         else:
+
             value = float("inf")
             legal_moves = game.get_legal_moves()
 
