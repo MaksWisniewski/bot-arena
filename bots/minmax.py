@@ -66,6 +66,8 @@ class MinMax_Bot(Bot):
         """
         answer = 0
 
+
+        # jesli wygranko to premiuj funkcje
         if game.is_win() is not None and 'Tie' not in game.is_win():
             am_i_left = ('left' == self.side)
             left_wins = 'Left win' in game.is_win()
@@ -75,6 +77,9 @@ class MinMax_Bot(Bot):
             else:
                 answer -= 199999
 
+
+        # liczymy pionki
+        
 
 
         return answer
