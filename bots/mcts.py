@@ -148,7 +148,7 @@ class MCTS_Bot(Bot):
     def make_move(self) -> str:
         # perform simulation and chose the best move
         best_move = self.simulate()
-        print('chosen move: ', best_move, file=sys.stderr)
+        print(f'MCTS: chosen move: {best_move}', file=sys.stderr)
         return best_move
 
 
