@@ -64,7 +64,20 @@ class MinMax_Bot(Bot):
         """
         Evaluation function to estimate game state
         """
-        return 2137
+        answer = 0
+
+        if game.is_win() is not None and 'Tie' not in game.is_win():
+            am_i_left = ('left' == self.side)
+            left_wins = 'Left win' in game.is_win()
+
+            if am_i_left == left_wins:
+                answer += 199999
+            else:
+                answer -= 199999
+
+
+
+        return answer
 
 
     def simulate(self) -> str:
