@@ -79,9 +79,14 @@ class MinMax_Bot(Bot):
         legal_moves = game.get_legal_moves()
 
         for move in legal_moves:
-            game.make_move(move)
-            value = self.min_max_search(game, depth=3, maximizing_player=False)
-            game.undo_last_move()
+            game_cp = game.copy()
+
+            if self.side == 'left':
+                game_cp.make_move(move, Wait("right"))
+            else:
+                game_cp.make_move(Wait("left"), move)
+
+            value = self.min_max_search(game_cp, depth=3, maximizing_player=False)
 
             if value > best_value:
                 best_value = value
