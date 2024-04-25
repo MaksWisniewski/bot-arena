@@ -2,3 +2,6 @@
 __pycache__
 .pytest_cache
 game_log*.txt
+
+logs/*
+!logs/example_log/
