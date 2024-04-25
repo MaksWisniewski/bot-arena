@@ -79,13 +79,13 @@ class MinMax_Bot(Bot):
 
 
         # liczymy pionki
-        
+
 
 
         return answer
 
 
-    def simulate(self) -> str:
+    def simulate(self, _depth = 5) -> str:
         """
         Performs MinMax search and returns the best move
         """
@@ -102,7 +102,7 @@ class MinMax_Bot(Bot):
             else:
                 game_cp.update(Wait("left"), move)
 
-            value = self.min_max_search(game_cp, 3, negate_player(self.side))
+            value = self.min_max_search(game_cp, _depth, negate_player(self.side))
 
             if value > best_value:
                 best_value = value
