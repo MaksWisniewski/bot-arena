@@ -1,12 +1,10 @@
-import sys, os, json
+import sys, os
 import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from bot_package.bot import Bot
-from bot_package.move import Move
 from packages.game_logic.game import Game
-from packages.simulator.serializer import Serializer
 from packages.game_logic.actions import str_to_action
 
 class MCTS_Node:
@@ -88,12 +86,6 @@ class MCTS_Bot(Bot):
 
         game = Game(state=self.arena_properties)
 
-        # print('gold: ', self.arena_properties['players'][self.side]['gold'], file=sys.stderr)
-        # print('farms: ', self.arena_properties['players']['left']['buildings']['farms'] + self.arena_properties['players']['right']['buildings']['farms'], file=sys.stderr)
-        # print('turrets: ', self.arena_properties['players']['left']['buildings']['turrets'] + self.arena_properties['players']['right']['buildings']['turrets'], file=sys.stderr)
-        # print('empty cells: ', game.get_empty_cells(), file=sys.stderr)
-        # print('legal moves: ', list(map(str, game.get_legal_moves(self.side))), file=sys.stderr)
-
         def update_game(my_move, opponent_move):
             if self.side == 'left':
                 game.update(action_left=my_move,
@@ -130,12 +122,12 @@ class MCTS_Bot(Bot):
                 game_copy = game.copy()
                 for _ in range(MAX_GAME_LENGTH):
                     move_result = game_copy.update(game_copy.get_random_move('left'),
-                                                game_copy.get_random_move('right'))
+                                                   game_copy.get_random_move('right'))
                     if 'Left win' in move_result:
-                        node.children[move].games_won += int(self.side == 'left')
+                        child_node.games_won += int(self.side == 'left')
                         break
                     elif 'Right win' in move_result:
-                        node.children[move].games_won += int(self.side == 'right')
+                        child_node.games_won += int(self.side == 'right')
                         break
                     elif "Tie" in move_result:
                         break

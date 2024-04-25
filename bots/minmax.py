@@ -1,12 +1,9 @@
-import sys, os, random, json
+import sys, os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from bot_package.bot import Bot
-from bot_package.move import Move
 from packages.game_logic.game import Game
-from packages.simulator.serializer import Serializer
-
 from packages.game_logic.actions import Wait
 
 
@@ -40,7 +37,7 @@ class MinMax_Bot(Bot):
     def preprocess(self) -> None:
         self.MinMax_root = MinMax_Node()
 
-    def min_max_search(self, game, depth: int, _player: str) -> float:
+    def min_max_search(self, game: Game, depth: int, _player: str) -> float:
         def browse_moves(__maximizing_player:bool):
             """search"""
             value = float("-inf") if __maximizing_player else float("inf")
@@ -57,9 +54,8 @@ class MinMax_Bot(Bot):
             return value
 
 
-        print(game.__is_win())
-        if depth == 0 or game.__is_win() is not None:
-            return self.evaluate(game)  
+        if depth == 0 or game.is_win() is not None:
+            return self.evaluate(game)
 
         return browse_moves((_player == self.side))
 

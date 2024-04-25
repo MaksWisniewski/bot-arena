@@ -1,0 +1,13 @@
+map:map.json
+player1:minmax.py
+player2:mcts.py
+W | F 0 3
+W | F 2 1
+W | S archer
+W | S archer
+W | T 0 1
+W | T 1 2
+W | T 1 3
+W | W
+W | W
+W | W
