@@ -1,13 +1,10 @@
 import sys, os
-import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from bot_package.bot import Bot
 from packages.game_logic.game import Game
 from packages.game_logic.actions import Wait
-
-from packages.simulator.serializer import Serializer
 
 
 def negate_player(x: str):
@@ -66,18 +63,6 @@ class MinMax_Bot(Bot):
         answer += self_income
         answer -= opponent_income
 
-        # turrets = game.get_turrets()
-        # farms = game.get_farms()
-        # soldiers = game.get_soldiers()
-        #
-        # answer += len(turrets[self.side]) * 10
-        # answer += len(farms[self.side]) * 7
-        # answer += len(soldiers[self.side]) * 3
-        #
-        # answer -= len(turrets[self.opponent_side]) * 10
-        # answer -= len(farms[self.opponent_side]) * 7
-        # answer -= len(soldiers[self.opponent_side]) * 3
-
         return answer
 
 
@@ -104,7 +89,7 @@ class MinMax_Bot(Bot):
                 best_value = value
                 best_move = move
 
-        print(f"MINMAX: best move: {best_move}", file=sys.stderr)
+        print(f"MONEY: best move: {best_move}", file=sys.stderr)
         return best_move
 
 

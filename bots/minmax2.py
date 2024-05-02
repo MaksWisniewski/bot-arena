@@ -1,13 +1,10 @@
 import sys, os
-import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from bot_package.bot import Bot
 from packages.game_logic.game import Game
 from packages.game_logic.actions import Wait
-
-from packages.simulator.serializer import Serializer
 
 
 def negate_player(x: str):
@@ -71,7 +68,7 @@ class MinMax_Bot(Bot):
         my_turrets = turrets[self.side]
         opponent_turrets = turrets[self.opponent_side]
 
-        end = 0;
+        end = 0
         start = game.get_path()[-1][0]
 
         if self.side == "left":
@@ -85,8 +82,6 @@ class MinMax_Bot(Bot):
         for opponent_turret in opponent_turrets:
             distance = abs(opponent_turret.cords[0] - start) + abs(opponent_turret.cords[1] - start)
             answer -= distance
-
-
 
         return answer
 
@@ -114,7 +109,7 @@ class MinMax_Bot(Bot):
                 best_value = value
                 best_move = move
 
-        print(f"MINMAX: best move: {best_move}", file=sys.stderr)
+        print(f"MINMAX2: best move: {best_move}", file=sys.stderr)
         return best_move
 
 

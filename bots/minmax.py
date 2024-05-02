@@ -1,13 +1,10 @@
 import sys, os
-import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from bot_package.bot import Bot
 from packages.game_logic.game import Game
 from packages.game_logic.actions import Wait
-
-from packages.simulator.serializer import Serializer
 
 
 def negate_player(x: str):
