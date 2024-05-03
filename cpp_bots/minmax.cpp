@@ -7,7 +7,7 @@ class MinMaxBot : public Bot
 {
     void preprocess() override
     {
-        std::cerr << std::format("[minmax.cpp] my side: {0}\narena:\n{1}\n", side == Side::left ? "left" : "right", arena_properties);
+        std::cerr << "path: " << arena_properties["arena"]["path"] << '\n';
     }
 
     std::string make_move() override

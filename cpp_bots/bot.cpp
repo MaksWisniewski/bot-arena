@@ -60,8 +60,7 @@ std::string read_line()
 
 void Bot::receive_arena_properties()
 {
-    // TODO: read json
-    arena_properties = read_line();
+    arena_properties = Json::parse(read_line());
 }
 
 void Bot::receive_status()

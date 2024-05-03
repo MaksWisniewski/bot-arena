@@ -1,6 +1,9 @@
 #pragma once
 
+#include <nlohmann/json.hpp>
 #include <string>
+
+using Json = nlohmann::json;
 
 class Bot
 {
@@ -29,5 +32,5 @@ protected:
     } side;
 
     std::string status;
-    std::string arena_properties;
+    Json arena_properties;
 };
