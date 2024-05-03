@@ -1,4 +1,4 @@
-#include "bot.hpp"
+#include "common/bot.hpp"
 
 #include <iostream>
 #include <format>

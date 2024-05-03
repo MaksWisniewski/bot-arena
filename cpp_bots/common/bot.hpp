@@ -1,9 +1,9 @@
 #pragma once
 
-#include <nlohmann/json.hpp>
-#include <string>
+#include "json.hpp"
+#include "side.hpp"
 
-using Json = nlohmann::json;
+#include <string>
 
 class Bot
 {
@@ -19,17 +19,13 @@ protected:
     void receive_arena_properties();
     void receive_status();
 
-    void send_message(const std::string& message);
+    void send_message(const std::string&);
 
     int game_timeout;
     int move_timeout;
     int ready_timeout;
 
-    enum class Side : bool
-    {
-        left,
-        right
-    } side;
+    Side side;
 
     std::string status;
     Json arena_properties;
