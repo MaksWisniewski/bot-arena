@@ -7,6 +7,8 @@ class Bot
 public:
     virtual void preprocess();
     virtual std::string make_move();
+    virtual void post_move_action();
+
     void run();
 
 protected:

@@ -11,6 +11,10 @@ std::string Bot::make_move()
     return "W";
 }
 
+void Bot::post_move_action()
+{
+}
+
 void Bot::run()
 {
     receive_game_properties();
@@ -31,6 +35,8 @@ void Bot::run()
         }
 
         receive_arena_properties();
+
+        post_move_action();
     }
 }
 
