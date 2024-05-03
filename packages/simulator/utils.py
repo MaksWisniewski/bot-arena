@@ -10,7 +10,7 @@ def get_run_command(file: str) -> list[str]:
         python_command = "python" if platform.system().lower() == "windows" else "python3"
         return [python_command, file]
 
-    elif ext == ".exe":  # Binary code
+    elif ext == ".exe" or ext == "":  # Binary code
         return [file]
     else:
         raise ValueError(f"Unsupported file type for running: {ext}")
@@ -23,4 +23,3 @@ def get_run_command(file: str) -> list[str]:
 #             subprocess.run(compile_command, check=True)
 #     except subprocess.CalledProcessError:
 #         raise RuntimeError("Error during compilation. Invalid command.")
-    
