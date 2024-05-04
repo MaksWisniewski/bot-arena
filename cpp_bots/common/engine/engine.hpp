@@ -1,7 +1,7 @@
 #pragma once
 
-#include "json.hpp"
-#include "side.hpp"
+#include "../json.hpp"
+#include "../side.hpp"
 
 class Engine
 {
