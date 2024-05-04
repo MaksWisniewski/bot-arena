@@ -8,7 +8,8 @@
 
 struct Player
 {
-    // Player(const Json&);
+    Player() = default;
+    Player(const Json&);
 
     std::vector<Building> farms;
     std::vector<Building> turrets;

@@ -1,10 +1,10 @@
 #include "game_parameters.hpp"
-#include <iostream>
 
 GameParameters::GameParameters(const Json& json) :
     soldiers{
         {Soldier::Type::swordsman, json["soldiers"]["swordsman"]},
-        {Soldier::Type::archer, json["soldiers"]["archer"]}},
+        {Soldier::Type::archer, json["soldiers"]["archer"]}
+    },
     farm{json["buildings"]["farm"]},
     turret{json["buildings"]["turret"]}
 {

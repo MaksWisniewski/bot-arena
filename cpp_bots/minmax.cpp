@@ -8,11 +8,11 @@ class MinMaxBot : public Bot
 {
     void preprocess() override
     {
-        const Engine engine{arena_properties, side};
     }
 
     std::string make_move() override
     {
+        const Engine engine{arena_properties, side};
         const auto move = Bot::make_move();
         std::cerr << std::format("[minmax.cpp] my move: {0}\n", move);
         return move;
