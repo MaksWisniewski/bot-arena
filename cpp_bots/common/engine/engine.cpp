@@ -5,7 +5,7 @@ Engine::Engine(const Json&, const Side)
     // TODO: initialize game state
 }
 
-void Engine::make_move(const std::string&)
+void Engine::make_move(const Move&)
 {
     // TODO: update game state
 }
