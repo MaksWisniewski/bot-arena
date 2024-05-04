@@ -8,7 +8,7 @@ BOTS_DIR=../bots
 
 add_build_path=$(addprefix $(BUILD_DIR)/, $(1))
 
-COMMON_SRCS=$(wildcard $(COMMON_DIR)/*.cpp $(wildcard $(COMMON_DIR)/**/*.cpp))
+COMMON_SRCS=$(shell find $(COMMON_DIR) -name "*.cpp")
 COMMON_OBJS=$(patsubst $(COMMON_DIR)/%.cpp, $(COMMON_DIR)/%.o, $(COMMON_SRCS))
 
 MINMAX_OBJS=minmax.o $(COMMON_OBJS)

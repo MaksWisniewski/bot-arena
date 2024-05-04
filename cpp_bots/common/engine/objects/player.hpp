@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../json.hpp"
 #include "building.hpp"
 #include "soldier.hpp"
 
@@ -7,6 +8,8 @@
 
 struct Player
 {
+    // Player(const Json&);
+
     std::vector<Building> farms;
     std::vector<Building> turrets;
     std::vector<Soldier> soldiers;

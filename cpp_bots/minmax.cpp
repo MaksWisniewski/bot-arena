@@ -8,7 +8,7 @@ class MinMaxBot : public Bot
 {
     void preprocess() override
     {
-        std::cerr << "path: " << arena_properties["arena"]["path"] << '\n';
+        const Engine engine{arena_properties, side};
     }
 
     std::string make_move() override
