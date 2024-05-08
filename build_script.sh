@@ -25,7 +25,7 @@ case $choice in
         ;;
     3)
         # Compile c++ bots
-        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make clean && make"
+        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make all"
         ;;
     4)
         # Clean c++ bots
