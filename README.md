@@ -1,3 +1,16 @@
+# *<b> Script `RUN.sh` Usage </b>*
+
+This script provides the following options:
+
+1. **Run Docker build command**: Builds a Docker image using the specified Dockerfile.
+2. **Run Shell in Docker container**: Launches shell in a Docker container based on the built image.
+3. **Compile C++ bots**: Compiles C++ bots located in the `cpp_bots` directory.
+4. **Clean C++ bots**: Cleans up compiled C++ bot files.
+5. **Run simulation**: Executes a simulation using the specified Python script.
+
+To use the script, run it and choose the desired option by entering the corresponding number.
+
+
 # <b> BOT ARENA </b>
 
 <p align="center">
@@ -153,17 +166,6 @@ Player can make an action of 3 types:
 ---
 
 # Additional info
-
-Save enviroment to file
-```bash
-conda list --explicit > bio-env.txt
-```
-
-Create enviroment from a text file
-```bash
-conda env create --file bio-env.txt
-```
-
 
 possible fix for conda enviroment, with radeon egpu
 ```bash
