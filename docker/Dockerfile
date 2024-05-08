@@ -1,5 +1,5 @@
 # Use a base image that has the necessary environment for your project
-FROM alpine
+FROM gcc:13.2
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -10,8 +10,11 @@ VOLUME /usr/src/app
 # Copy the contents of the test directory into the container
 COPY . .
 
+USER root
 # Install required packages
-RUN apk add --no-cache g++ make nlohmann-json
+RUN apt update
+RUN apt install nlohmann-json3-dev
+USER 1000
 
 # RUN echo "Additional commands go here"
 

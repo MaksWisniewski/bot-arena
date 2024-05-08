@@ -28,7 +28,7 @@ case $choice in
         docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make clean && make"
         ;;
     4)
-        # Compile c++ bots
+        # Clean c++ bots
         docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make clean"
         ;;
     *)
