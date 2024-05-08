@@ -8,6 +8,8 @@ echo "1. Run Docker build command"
 echo "2. Run Docker container"
 echo "3. Compile c++ bots"
 echo "4. Clean c++ bots"
+echo "5. Run sim"
+
 
 
 # Prompt user for option choice
@@ -21,7 +23,7 @@ case $choice in
         ;;
     2)
         # Run Docker container
-        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh
+        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" zsh
         ;;
     3)
         # Compile c++ bots
@@ -30,6 +32,10 @@ case $choice in
     4)
         # Clean c++ bots
         docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make clean"
+        ;;
+    5)
+        # Run sim
+        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" zsh -c "python3 main.py run-simulation"
         ;;
     *)
         echo "Invalid option. Please enter a valid number."
