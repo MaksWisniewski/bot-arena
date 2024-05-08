@@ -17,6 +17,7 @@ Soldier::Type string_to_soldier_type(const std::string& str)
 Soldier::Soldier(const Json& json) :
     type{string_to_soldier_type(json["type"])},
     hp{json["hp"]},
-    position{json["position"]}
+    position{json["position"]},
+    is_in_fight{false}
 {
 }

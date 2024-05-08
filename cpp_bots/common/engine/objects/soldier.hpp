@@ -15,4 +15,5 @@ struct Soldier
 
     int hp;
     int position;
+    bool is_in_fight;
 };

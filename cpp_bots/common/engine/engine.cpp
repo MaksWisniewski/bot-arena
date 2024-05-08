@@ -24,11 +24,39 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
 {
     last_moves = {left_move, right_move};
 
-    // TODO: compare python code with README.md -> possible differences !!!!!!!! (not good)
-
     // update soldiers
-        // fight
-        // move
+    // fight
+    for (auto& [side, player] : players)
+    {
+        // set is_in_fight to false for all soldiers
+        std::for_each(
+            player.soldiers.begin(),
+            player.soldiers.end(),
+            [](Soldier& soldier){ soldier.is_in_fight = false; });
+
+        auto& opponent_soldiers = players[other_side(side)].soldiers;
+        if (opponent_soldiers.empty())
+        {
+            continue;
+        }
+        auto& target = opponent_soldiers.front();
+
+        std::for_each(
+            player.soldiers.begin(),
+            player.soldiers.end(),
+            [this, &target, side](Soldier& soldier)
+            {
+                const auto& soldier_parameters = game_parameters.soldiers[soldier.type];
+                if (abs(soldier.position - target.position) <= soldier_parameters.range)
+                {
+                    soldier.is_in_fight = true;
+                    target.hp -= soldier_parameters.damage;
+                    std::cerr << side_to_string(side) << " soldier at " << soldier.position << " attacks "
+                              << side_to_string(other_side(side)) << " soldier at " << target.position << '\n';
+                }
+            });
+    }
+    // move
 
     // shoot turrets
     for (auto& [side, player] : players)
@@ -41,7 +69,8 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
             auto target = std::find_if(
                 opponent_soldiers.begin(),
                 opponent_soldiers.end(),
-                [this, &turret](const Soldier& soldier) {
+                [this, &turret](const Soldier& soldier)
+                {
                     return distance(turret.position, map.path[soldier.position]) <= game_parameters.turret.range;
                 });
 
