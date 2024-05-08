@@ -13,7 +13,7 @@ COPY . .
 USER root
 
 # Install required packages
-RUN apt update && apt install -y zsh nlohmann-json3-dev python3 python3-numpy python3-click python3-pygame python3-pip 
+RUN apt update && apt install -y zsh curl nlohmann-json3-dev python3 python3-numpy python3-click python3-pygame python3-pip 
 
 # Add a new user with user ID 1000 and set zsh as its shell
 RUN useradd -u 1000 -m -s $(which zsh) myuser
@@ -26,7 +26,7 @@ USER myuser
 #     usermod -s $(which zsh) 1000
 
 
-RUN echo 'echo "Welcome to Debian" && ls' >> ~/.zshrc
+RUN echo 'alias ls="ls --color=always" \n ls' >> ~/.zshrc
 
 # RUN echo "Additional commands go here"
 
