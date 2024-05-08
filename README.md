@@ -2,7 +2,7 @@
 
 This script provides the following options:
 
-1. **Run Docker build command**: Builds a Docker image using the specified Dockerfile.
+1. **Run Docker build command**: Builds a Docker image using the specified Dockerfile. <u>*This option is necessary to execute before any other option.*</u>
 2. **Run Shell in Docker container**: Launches shell in a Docker container based on the built image.
 3. **Compile C++ bots**: Compiles C++ bots located in the `cpp_bots` directory.
 4. **Clean C++ bots**: Cleans up compiled C++ bot files.
