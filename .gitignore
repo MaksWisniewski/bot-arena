@@ -12,3 +12,5 @@ game_log*.txt
 
 logs/*
 !logs/example_log/
+
+!Dockerfile
