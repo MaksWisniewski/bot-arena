@@ -8,15 +8,16 @@
 #include "objects/player.hpp"
 
 #include <unordered_map>
+#include <utility>
 
 class Engine
 {
 public:
-    Engine(const Json&, Side);
+    Engine(const Json&);
 
     using Move = std::string;
 
-    void make_move(const Move&);
+    void make_move(const Move& left_move, const Move& right_move);
     void undo_move();
 
     // TODO: game state getters
@@ -26,6 +27,5 @@ private:
     GameParameters game_parameters;
     std::unordered_map<Side, Player> players;
 
-    Move last_move;
-    Side player_to_move;
+    std::pair<Move, Move> last_moves;
 };

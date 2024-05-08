@@ -11,6 +11,7 @@ struct Player
     Player() = default;
     Player(const Json&);
 
+    // TODO: maybe consider using std::list for soldiers ???
     std::vector<Building> farms;
     std::vector<Building> turrets;
     std::vector<Soldier> soldiers;

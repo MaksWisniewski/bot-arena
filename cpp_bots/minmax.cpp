@@ -8,12 +8,18 @@ class MinMaxBot : public Bot
 {
     void preprocess() override
     {
+        std::cerr << "my side: " << side_to_string(side)
+                  << ", opponents side: " << side_to_string(other_side(side)) << '\n';
     }
 
     std::string make_move() override
     {
-        const Engine engine{arena_properties, side};
-        const auto move = Bot::make_move();
+        Engine engine{arena_properties};
+
+        const auto move = "S swordsman";
+
+        engine.make_move(move, "W");
+
         std::cerr << std::format("[minmax.cpp] my move: {0}\n", move);
         return move;
     }

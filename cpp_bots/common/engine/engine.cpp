@@ -2,70 +2,80 @@
 #include "objects/soldier.hpp"
 
 #include <iostream>
+#include <algorithm>
 
-Engine::Engine(const Json& game_state, const Side player_to_move) :
+Engine::Engine(const Json& game_state) :
     map{game_state["arena"]},
     game_parameters{game_state["arena"]["stats"]},
     players{
         {Side::left, game_state["players"]["left"]},
         {Side::right, game_state["players"]["right"]}
-    },
-    player_to_move{player_to_move}
+    }
 {
-    std::cerr << "map size: " << map.size.first << ' ' << map.size.second << '\n';
-    for (auto [x, y] : map.path)
-        std::cerr << '(' << x << ',' << y << ") ";
-    std::cerr << '\n';
-    for (auto [x, y] : map.obstacles)
-        std::cerr << '(' << x << ',' << y << ") ";
-    std::cerr << '\n';
-
-    std::cerr << "swordsman: " <<
-        game_parameters.soldiers[Soldier::Type::swordsman].max_hp << ' ' <<
-        game_parameters.soldiers[Soldier::Type::swordsman].damage << ' ' <<
-        game_parameters.soldiers[Soldier::Type::swordsman].range << ' ' <<
-        game_parameters.soldiers[Soldier::Type::swordsman].cost << '\n';
-    std::cerr << "archer: " <<
-        game_parameters.soldiers[Soldier::Type::archer].max_hp << ' ' <<
-        game_parameters.soldiers[Soldier::Type::archer].damage << ' ' <<
-        game_parameters.soldiers[Soldier::Type::archer].range << ' ' <<
-        game_parameters.soldiers[Soldier::Type::archer].cost << '\n';
-    std::cerr << "farm: " << game_parameters.farm.gold << ' ' << game_parameters.farm.cost << '\n';
-    std::cerr << "turret: " << game_parameters.turret.attack << ' ' << game_parameters.turret.range
-     << ' ' << game_parameters.turret.cost << '\n';
-
-    std::cerr << "left: " << players[Side::left].gold << ' ' << players[Side::left].income << '\n';
-    std::cerr << "left farms: ";
-    for (auto x : players[Side::left].farms)
-        std::cerr << '(' << x.position.first << ',' << x.position.second << ") ";
-    std::cerr << '\n';
-    std::cerr << "left turrets: ";
-    for (auto x : players[Side::left].turrets)
-        std::cerr << '(' << x.position.first << ',' << x.position.second << ") ";
-    std::cerr << '\n';
-    std::cerr << "left soldiers: ";
-    for (auto x : players[Side::left].soldiers)
-        std::cerr << '(' << (int)x.type << ',' << x.hp << ',' << x.position << ") ";
-    std::cerr << '\n';
-
-    std::cerr << "right: " << players[Side::right].gold << ' ' << players[Side::right].income << '\n';
-    std::cerr << "right farms: ";
-    for (auto x : players[Side::right].farms)
-        std::cerr << '(' << x.position.first << ',' << x.position.second << ") ";
-    std::cerr << '\n';
-    std::cerr << "right turrets: ";
-    for (auto x : players[Side::right].turrets)
-        std::cerr << '(' << x.position.first << ',' << x.position.second << ") ";
-    std::cerr << '\n';
-    std::cerr << "right soldiers: ";
-    for (auto x : players[Side::right].soldiers)
-        std::cerr << '(' << (int)x.type << ',' << x.hp << ',' << x.position << ") ";
-    std::cerr << '\n';
 }
 
-void Engine::make_move(const Move&)
+int distance(const std::pair<int, int>& x, const std::pair<int, int>& y)
 {
-    // TODO: update game state
+    return std::abs(x.first- y.first) + std::abs(x.second - y.second);
+}
+
+void Engine::make_move(const Move& left_move, const Move& right_move)
+{
+    last_moves = {left_move, right_move};
+
+    // TODO: compare python code with README.md -> possible differences !!!!!!!! (not good)
+
+    // update soldiers
+        // fight
+        // move
+
+    // shoot turrets
+    for (auto& [side, player] : players)
+    {
+        auto& opponent_soldiers = players[other_side(side)].soldiers;
+        for (auto& turret : player.turrets)
+        {
+            // choose target
+            // assumption: soldiers are sorted in ascending order by their distance to the opponent's base
+            auto target = std::find_if(
+                opponent_soldiers.begin(),
+                opponent_soldiers.end(),
+                [this, &turret](const Soldier& soldier) {
+                    return distance(turret.position, map.path[soldier.position]) <= game_parameters.turret.range;
+                });
+
+            if (target == opponent_soldiers.end())
+            {
+                continue;
+            }
+
+            std::cerr << "[turret at " << turret.position.first << ',' << turret.position.second
+                        << "] Chosen target: " << target-> position
+                        << " with distance " << distance(turret.position, map.path[target->position]) << '\n';
+            // shoot
+            target->hp -= game_parameters.turret.attack;
+        }
+    }
+
+    // clear dead soldiers
+    for (auto& [side, player] : players)
+    {
+        auto& soldiers = player.soldiers;
+        std::cerr << side_to_string(side) << " soldiers before: " << soldiers.size();
+        soldiers.erase(
+            std::remove_if(
+                soldiers.begin(),
+                soldiers.end(),
+                [](const Soldier& soldier){ return soldier.hp <= 0; }),
+            soldiers.end());
+        std::cerr << ", after: " << soldiers.size() << '\n';
+    }
+
+    // execute player actions
+
+    // produce gold
+
+    // update income
 }
 
 void Engine::undo_move()
