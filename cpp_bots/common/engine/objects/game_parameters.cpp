@@ -6,7 +6,8 @@ GameParameters::GameParameters(const Json& json) :
         {Soldier::Type::archer, json["soldiers"]["archer"]}
     },
     farm{json["buildings"]["farm"]},
-    turret{json["buildings"]["turret"]}
+    turret{json["buildings"]["turret"]},
+    passive_gold{json["passive_gold"]}
 {
 }
 

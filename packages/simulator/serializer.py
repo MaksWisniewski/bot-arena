@@ -52,7 +52,8 @@ class Serializer:
                         'range': stats.TURRET_STATS['range'],
                         'cost': stats.COST['turret']
                     }
-                }
+                },
+                "passive_gold": stats.PASSIVE_GOLD
             }
         }
 

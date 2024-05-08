@@ -38,4 +38,6 @@ struct GameParameters
         int range;
         int cost;
     } turret;
+
+    int passive_gold;
 };

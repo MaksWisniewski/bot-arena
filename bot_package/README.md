@@ -92,7 +92,8 @@ Values for `arena_properties` are expected in JSON format, as shown below:
                     'range': 3,
                     'cost': 200
                 }
-            }
+            },
+            'passive_gold': 10
         }
     },
     'players': {

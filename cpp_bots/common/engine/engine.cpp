@@ -12,6 +12,7 @@ Engine::Engine(const Json& game_state) :
         {Side::right, game_state["players"]["right"]}
     }
 {
+    std::cerr << "passive_gold: " << game_parameters.passive_gold << "\n";
 }
 
 int distance(const std::pair<int, int>& x, const std::pair<int, int>& y)
@@ -61,21 +62,31 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
     for (auto& [side, player] : players)
     {
         auto& soldiers = player.soldiers;
+
         std::cerr << side_to_string(side) << " soldiers before: " << soldiers.size();
+
         soldiers.erase(
             std::remove_if(
                 soldiers.begin(),
                 soldiers.end(),
                 [](const Soldier& soldier){ return soldier.hp <= 0; }),
             soldiers.end());
+
         std::cerr << ", after: " << soldiers.size() << '\n';
     }
 
     // execute player actions
 
-    // produce gold
+    // produce gold and update income
+    for (auto& [side, player] : players)
+    {
+        std::cerr << side_to_string(side) << " gold, income before: " << player.gold << ' ' << player.income;
 
-    // update income
+        player.gold += player.income;
+        player.income = player.farms.size() * game_parameters.farm.gold + game_parameters.passive_gold;
+
+        std::cerr << "; after: " << player.gold << ' ' << player.income << '\n';
+    }
 }
 
 void Engine::undo_move()
