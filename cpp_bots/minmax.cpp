@@ -16,6 +16,9 @@ class MinMaxBot : public Bot
     {
         Engine engine{arena_properties};
 
+        // const auto move = side == Side::left ? "T 3 1" : "F 3 1";
+        // const auto move = "T 3 1";
+        // const auto move = "F 3 1";
         const auto move = "S swordsman";
 
         engine.make_move(move, "W");

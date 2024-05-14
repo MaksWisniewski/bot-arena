@@ -96,7 +96,9 @@ class Game:
 
     def __handle_actions_error(self) -> tuple[int, int]:
         def check_build_place(action: Action) -> int:
-            if self.gold[action.side] < COST['turret']:
+            if isinstance(action, BuildTurret) and self.gold[action.side] < COST['turret']:
+                return -1
+            if isinstance(action, BuildFarm) and self.gold[action.side] < COST['farm']:
                 return -1
             if action.cords[0] < 0 or action.cords[0] >= self._map.MAP_SIZE_X or action.cords[1] < 0 or action.cords[1] >= self._map.MAP_SIZE_Y:
                 return -4
@@ -124,16 +126,13 @@ class Game:
                 return -5
             return 0
 
-        # if same build place
-        if isinstance(self.action_left, BuildTurret) and isinstance(self.action_right, BuildTurret):
-            if self.action_left.cords == self.action_right.cords:
-                return (-3, -3)
-
-        left_error = None
-        right_error = None
-
         left_error = check_build_place(self.action_left) if isinstance(self.action_left, BuildAction) else 0
         right_error = check_build_place(self.action_right) if isinstance(self.action_right, BuildAction) else 0
+
+        # if both can build and same build place
+        if (left_error, right_error) == (0, 0) and isinstance(self.action_left, BuildAction) and isinstance(self.action_right, BuildAction):
+            if self.action_left.cords == self.action_right.cords:
+                return (-3, -3)
 
         left_error = check_spawn_soldier(self.action_left) if isinstance(self.action_left, SpawnSoldier) else left_error
         right_error = check_spawn_soldier(self.action_right) if isinstance(self.action_right, SpawnSoldier) else right_error

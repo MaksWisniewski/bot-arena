@@ -30,7 +30,7 @@ from game_logic import Game
 
 Game class is responsible for the game state and [rules](#rules). Each call to `Game.update` updates the game state including:
 - [Soldiers](#soldier)
-- [Turrets](#turret) 
+- [Turrets](#turret)
 - [Farms](#farm)
 
 and returns a tuple of two strings representing the game [result](#ErrorCode) for each side.
@@ -127,7 +127,7 @@ if (ErrorCode[0], ErrorCode[0]) == game_response print("Action Succesful")
 The game is turn-based. Each turn, each player can perform one action. The game ends when one of the players soldiers reaches the end of the path.
 
 ### Map
-The map is a generated randomly grid where each cell can contain one of the following: empty, obstacle, farm, turret, soldier. 
+The map is a generated randomly grid where each cell can contain one of the following: empty, obstacle, farm, turret, soldier. On the map there is a path, on which soldiers can walk and fight.
 
 ### Actions
 Each turn, each player can perform one of the following actions:
@@ -138,17 +138,19 @@ Each turn, each player can perform one of the following actions:
 
 ### Turn
 Turn consists of the following steps:
-- Additional income is added to each player
-- Turrets and soldiers are [choosing their targets](#targeting)
-- Turrets and soldiers are attacking their targets
+- Soldiers are [choosing their targets](#targeting) and attacking them
 - Soldiers are moving forward if are not in combat
+- Turrets are [choosing their targets](#targeting) and attacking them
+- Dead soldiers are removed from the map
 - Players actions are performed
 - Players gold is updated based on their income
+- Players income is updated based on the number of farms they have built
 
 #### Targeting
-Soldiers are choosing their targets based on their range. If there are multiple targets in range, the closest one is chosen. 
+Soldiers are choosing their targets based on their range. If there are multiple targets in range, the closest one is chosen.
 
 Turrets are choosing their targets based on their range. If there are multiple targets in range, the one closest to the end of the path is chosen.
 
-
-
+#### Edge cases
+- it can happen that two opposite soldiers are on the same cell
+- **Confilct**: when both players try to build building on the same cell and both can (have enough gold) then **no building is built**
