@@ -24,11 +24,23 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
 {
     last_moves = {left_move, right_move};
 
-    // update soldiers
-    // fight
+    fight_soldiers();
+    move_soldiers();
+    shoot_turrets();
+    clear_dead_soldiers();
+    execute_player_action();
+    update_gold_and_income();
+}
+
+void Engine::undo_move()
+{
+    // TODO: update game state - undo last move
+}
+
+void Engine::fight_soldiers()
+{
     for (auto& [side, player] : players)
     {
-        // set is_in_fight to false for all soldiers
         std::for_each(
             player.soldiers.begin(),
             player.soldiers.end(),
@@ -56,7 +68,10 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
                 }
             });
     }
-    // move
+}
+
+void Engine::move_soldiers()
+{
     for (auto& [side, player] : players)
     {
         int step = side == Side::left ? 1 : -1;
@@ -82,8 +97,10 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
             }
         }
     }
+}
 
-    // shoot turrets
+void Engine::shoot_turrets()
+{
     for (auto& [side, player] : players)
     {
         auto& opponent_soldiers = players[other_side(side)].soldiers;
@@ -111,8 +128,10 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
             target->hp -= game_parameters.turret.attack;
         }
     }
+}
 
-    // clear dead soldiers
+void Engine::clear_dead_soldiers()
+{
     for (auto& [side, player] : players)
     {
         auto& soldiers = player.soldiers;
@@ -128,44 +147,6 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
 
         std::cerr << ", after: " << soldiers.size() << '\n';
     }
-
-    // execute player actions
-
-    // produce gold and update income
-    for (auto& [side, player] : players)
-    {
-        std::cerr << side_to_string(side) << " gold, income before: " << player.gold << ' ' << player.income;
-
-        player.gold += player.income;
-        player.income = player.farms.size() * game_parameters.farm.gold + game_parameters.passive_gold;
-
-        std::cerr << "; after: " << player.gold << ' ' << player.income << '\n';
-    }
-}
-
-void Engine::undo_move()
-{
-    // TODO: update game state - undo last move
-}
-
-void Engine::fight_soldiers()
-{
-
-}
-
-void Engine::move_soldiers()
-{
-
-}
-
-void Engine::shoot_turrets()
-{
-
-}
-
-void Engine::clear_dead_soldiers()
-{
-
 }
 
 void Engine::execute_player_action()
@@ -175,5 +156,13 @@ void Engine::execute_player_action()
 
 void Engine::update_gold_and_income()
 {
+    for (auto& [side, player] : players)
+    {
+        std::cerr << side_to_string(side) << " gold, income before: " << player.gold << ' ' << player.income;
 
+        player.gold += player.income;
+        player.income = player.farms.size() * game_parameters.farm.gold + game_parameters.passive_gold;
+
+        std::cerr << "; after: " << player.gold << ' ' << player.income << '\n';
+    }
 }
