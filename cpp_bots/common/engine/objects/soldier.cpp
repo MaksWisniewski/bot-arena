@@ -21,3 +21,19 @@ Soldier::Soldier(const Json& json) :
     is_in_fight{false}
 {
 }
+
+Soldier::Soldier(Type type, int hp, int position) :
+    type{type},
+    hp{hp},
+    position{position},
+    is_in_fight{false}
+{
+}
+
+Soldier::Soldier(const std::string& type, int hp, int position) :
+    type{string_to_soldier_type(type)},
+    hp{hp},
+    position{position},
+    is_in_fight{false}
+{
+}

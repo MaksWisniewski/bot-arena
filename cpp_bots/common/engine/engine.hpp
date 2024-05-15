@@ -15,9 +15,7 @@ class Engine
 public:
     Engine(const Json&);
 
-    using Move = std::string;
-
-    void make_move(const Move& left_move, const Move& right_move);
+    void make_move(const std::string& left_move, const std::string& right_move);
     void undo_move();
 
     // TODO: game state getters
@@ -27,12 +25,17 @@ private:
     void move_soldiers();
     void shoot_turrets();
     void clear_dead_soldiers();
-    void execute_player_action();
+    void execute_player_actions(const std::string&, const std::string&);
     void update_gold_and_income();
+
+    void execute_action(Side, const std::string&);
+    void build_farm(Side, const std::string&);
+    void build_turret(Side, const std::string&);
+    void spawn_soldier(Side, const std::string&);
 
     Map map;
     GameParameters game_parameters;
     std::unordered_map<Side, Player> players;
 
-    std::pair<Move, Move> last_moves;
+    std::pair<std::string, std::string> last_moves;
 };

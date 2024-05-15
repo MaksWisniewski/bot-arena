@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <sstream>
 
 Engine::Engine(const Json& game_state) :
     map{game_state["arena"]},
@@ -20,7 +21,7 @@ int distance(const std::pair<int, int>& x, const std::pair<int, int>& y)
     return std::abs(x.first- y.first) + std::abs(x.second - y.second);
 }
 
-void Engine::make_move(const Move& left_move, const Move& right_move)
+void Engine::make_move(const std::string& left_move, const std::string& right_move)
 {
     last_moves = {left_move, right_move};
 
@@ -28,7 +29,7 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
     move_soldiers();
     shoot_turrets();
     clear_dead_soldiers();
-    execute_player_action();
+    execute_player_actions(left_move, right_move);
     update_gold_and_income();
 }
 
@@ -149,11 +150,6 @@ void Engine::clear_dead_soldiers()
     }
 }
 
-void Engine::execute_player_action()
-{
-    // TODO
-}
-
 void Engine::update_gold_and_income()
 {
     for (auto& [side, player] : players)
@@ -165,4 +161,100 @@ void Engine::update_gold_and_income()
 
         std::cerr << "; after: " << player.gold << ' ' << player.income << '\n';
     }
+}
+
+std::pair<int, int> parse_builiding_position(const std::string& position_string)
+{
+    int x, y;
+    std::stringstream stream{position_string};
+    stream >> x >> y;
+    return {x, y};
+}
+
+void Engine::execute_player_actions(const std::string& left_move, const std::string& right_move)
+{
+    auto wants_to_and_can_build =
+        [this](const Side side, const std::string& move)
+        {
+            return (move.front() == 'F' and players[side].gold >= game_parameters.farm.cost) or
+                   (move.front() == 'T' and players[side].gold >= game_parameters.turret.cost);
+        };
+
+    if (wants_to_and_can_build(Side::left, left_move) and wants_to_and_can_build(Side::right, right_move) and
+        parse_builiding_position(left_move.substr(2)) == parse_builiding_position(right_move.substr(2)))
+    {
+        return;
+    }
+
+    execute_action(Side::left, left_move);
+    execute_action(Side::right, right_move);
+}
+
+void Engine::execute_action(const Side side, const std::string& action)
+{
+    if (action.front() == 'W')
+    {
+        return;
+    }
+
+    const auto action_parameters = action.substr(2);
+    switch (action.front())
+    {
+        case 'F': return build_farm(side, action_parameters);
+        case 'T': return build_turret(side, action_parameters);
+        case 'S': return spawn_soldier(side, action_parameters);
+        default : return;
+    }
+}
+
+void Engine::build_farm(const Side side, const std::string& position)
+{
+    // TODO: check if empty cell
+    auto& player = players[side];
+
+    if (player.gold < game_parameters.farm.cost)
+    {
+        return;
+    }
+
+    player.gold -= game_parameters.farm.cost;
+    player.farms.push_back(Building{parse_builiding_position(position)});
+
+    std::cerr << side_to_string(side) << " build farm at " << player.farms.back().position.first << ' ' << player.farms.back().position.second << '\n';
+}
+
+void Engine::build_turret(const Side side, const std::string& position)
+{
+    // TODO: check if empty cell
+    auto& player = players[side];
+
+    if (player.gold < game_parameters.turret.cost)
+    {
+        return;
+    }
+
+    player.gold -= game_parameters.turret.cost;
+    player.turrets.push_back(Building{parse_builiding_position(position)});
+
+    std::cerr << side_to_string(side) << " build turret at " << player.turrets.back().position.first << ' ' << player.turrets.back().position.second << '\n';
+}
+
+void Engine::spawn_soldier(const Side side, const std::string& type)
+{
+    auto& player = players[side];
+    const auto soldier_type = string_to_soldier_type(type);
+    const auto soldier_parameters = game_parameters.soldiers[soldier_type];
+
+    if (player.gold < soldier_parameters.cost)
+    {
+        return;
+    }
+
+    const int position = side == Side::left ? 0 : map.path.size() - 1;
+    const Soldier soldier{soldier_type, soldier_parameters.max_hp, position};
+
+    player.gold -= soldier_parameters.cost;
+    player.soldiers.push_back(soldier);
+
+    std::cerr << side_to_string(side) << " spawn soldier at " << player.soldiers.back().position << '\n';
 }
