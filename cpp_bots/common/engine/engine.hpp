@@ -23,6 +23,13 @@ public:
     // TODO: game state getters
 
 private:
+    void fight_soldiers();
+    void move_soldiers();
+    void shoot_turrets();
+    void clear_dead_soldiers();
+    void execute_player_action();
+    void update_gold_and_income();
+
     Map map;
     GameParameters game_parameters;
     std::unordered_map<Side, Player> players;

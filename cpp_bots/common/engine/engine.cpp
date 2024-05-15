@@ -57,6 +57,31 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
             });
     }
     // move
+    for (auto& [side, player] : players)
+    {
+        int step = side == Side::left ? 1 : -1;
+        for (auto i = 0u; i < player.soldiers.size(); i++)
+        {
+            auto& soldier = player.soldiers[i];
+            if (soldier.is_in_fight)
+            {
+                std::cerr << side_to_string(side) << " soldier at " << soldier.position << " not moved - is in fight\n";
+                continue;
+            }
+
+            int new_position = soldier.position + step;
+            if (i == 0 or new_position != player.soldiers[i-1].position)
+            {
+                std::cerr << side_to_string(side) << " soldier moved from " << soldier.position
+                          << " to " << new_position << '\n';
+                soldier.position = new_position;
+            }
+            else
+            {
+                std::cerr << side_to_string(side) << " soldier at " << soldier.position << " not moved - is blocked\n";
+            }
+        }
+    }
 
     // shoot turrets
     for (auto& [side, player] : players)
@@ -121,4 +146,34 @@ void Engine::make_move(const Move& left_move, const Move& right_move)
 void Engine::undo_move()
 {
     // TODO: update game state - undo last move
+}
+
+void Engine::fight_soldiers()
+{
+
+}
+
+void Engine::move_soldiers()
+{
+
+}
+
+void Engine::shoot_turrets()
+{
+
+}
+
+void Engine::clear_dead_soldiers()
+{
+
+}
+
+void Engine::execute_player_action()
+{
+    // TODO
+}
+
+void Engine::update_gold_and_income()
+{
+
 }
