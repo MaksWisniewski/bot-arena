@@ -4,6 +4,8 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
+#include <unordered_set>
+#include <format>
 
 Engine::Engine(const Json& game_state) :
     map{game_state["arena"]},
@@ -35,7 +37,97 @@ void Engine::make_move(const std::string& left_move, const std::string& right_mo
 
 void Engine::undo_move()
 {
+    #warning Engine::undo_move not implemented
     // TODO: update game state - undo last move
+}
+
+std::vector<std::string> Engine::get_legal_moves(const Side side)
+{
+    std::vector<std::string> legal_moves{"W"};
+
+    const auto& player = players[side];
+
+    const int base = side == Side::left ? 0 : map.path.size() - 1;
+    for (auto& [type, parameters] : game_parameters.soldiers)
+    {
+        // TODO: check if base is empty - not trivial because soldiers move first and then player actions are performed
+        // checking this would require to simulate part of a turn - not really efficient
+        // -> it is easier not to check it, hopefully this would not harm us that much
+        if (parameters.cost <= player.gold /*and (player.soldiers.empty() or player.soldiers.back().position != base)*/)
+        {
+            legal_moves.push_back("S " + soldier_type_to_string(type));
+        }
+    }
+
+    const auto empty_cells = get_empty_cells();
+    if (game_parameters.farm.cost <= player.gold)
+    {
+        for (auto& empty_cell : empty_cells)
+        {
+            legal_moves.push_back(std::format("F {0} {1}", empty_cell.first, empty_cell.second));
+        }
+    }
+
+    if (game_parameters.turret.cost <= player.gold)
+    {
+        for (auto& empty_cell : empty_cells)
+        {
+            legal_moves.push_back(std::format("T {0} {1}", empty_cell.first, empty_cell.second));
+        }
+    }
+
+    return legal_moves;
+}
+
+struct pair_hash
+{
+    std::size_t operator () (const std::pair<int, int> &p) const
+    {
+        return (static_cast<std::size_t>(p.first) << 32) | static_cast<std::size_t>(p.second);
+    }
+};
+
+std::vector<std::pair<int, int>> Engine::get_empty_cells()
+{
+    std::unordered_set<std::pair<int, int>, pair_hash> non_empty_cells;
+    non_empty_cells.insert(map.path.begin(), map.path.end());
+    non_empty_cells.insert(map.obstacles.begin(), map.obstacles.end());
+
+    for (auto& [side, player] : players)
+    {
+        non_empty_cells.insert(player.farms.begin(), player.farms.end());
+        non_empty_cells.insert(player.turrets.begin(), player.turrets.end());
+    }
+
+    std::vector<std::pair<int, int>> empty_cells{};
+    for (int x = 0; x < map.size.first; x++)
+    {
+        for (int y = 0; y < map.size.second; y++)
+        {
+            const std::pair<int, int> cell{x,y};
+            if (not non_empty_cells.contains(cell))
+            {
+                empty_cells.push_back(cell);
+            }
+        }
+    }
+
+    return empty_cells;
+}
+
+std::vector<Building> Engine::get_farms(const Side side)
+{
+    return players[side].farms;
+}
+
+std::vector<Building> Engine::get_turrets(const Side side)
+{
+    return players[side].turrets;
+}
+
+std::vector<Soldier> Engine::get_soldiers(const Side side)
+{
+    return players[side].soldiers;
 }
 
 void Engine::fight_soldiers()
@@ -251,6 +343,11 @@ void Engine::spawn_soldier(const Side side, const std::string& type)
     }
 
     const int position = side == Side::left ? 0 : map.path.size() - 1;
+    if (not player.soldiers.empty() and player.soldiers.back().position == position)
+    {
+        return;
+    }
+
     const Soldier soldier{soldier_type, soldier_parameters.max_hp, position};
 
     player.gold -= soldier_parameters.cost;

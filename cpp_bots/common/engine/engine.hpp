@@ -18,7 +18,12 @@ public:
     void make_move(const std::string& left_move, const std::string& right_move);
     void undo_move();
 
-    // TODO: game state getters
+    std::vector<std::string> get_legal_moves(Side);
+
+    std::vector<std::pair<int, int>> get_empty_cells();
+    std::vector<Building> get_farms(Side);
+    std::vector<Building> get_turrets(Side);
+    std::vector<Soldier> get_soldiers(Side);
 
 private:
     void fight_soldiers();

@@ -16,6 +16,15 @@ class MinMaxBot : public Bot
     {
         Engine engine{arena_properties};
 
+        const auto legal_moves = engine.get_legal_moves(side);
+
+        std::cerr << "legal moves: ";
+        for (auto move : legal_moves)
+        {
+            std::cerr << move << ", ";
+        }
+        std::cerr << '\n';
+
         // const auto move = side == Side::left ? "T 3 1" : "F 3 1";
         // const auto move = "T 3 1";
         // const auto move = "F 3 1";

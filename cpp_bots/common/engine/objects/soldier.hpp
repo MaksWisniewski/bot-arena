@@ -23,3 +23,4 @@ struct Soldier
 };
 
 Soldier::Type string_to_soldier_type(const std::string&);
+std::string soldier_type_to_string(Soldier::Type);
