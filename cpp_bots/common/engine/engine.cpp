@@ -14,7 +14,7 @@ Engine::Engine(const Json& game_state) :
         {Side::right, game_state["players"]["right"]}
     }
 {
-    std::cerr << "passive_gold: " << game_parameters.passive_gold << "\n";
+    // std::cerr << "passive_gold: " << game_parameters.passive_gold << "\n";
 }
 
 void Engine::make_move(const std::string& left_move, const std::string& right_move)
@@ -33,6 +33,19 @@ void Engine::undo_move()
 {
     #warning Engine::undo_move not implemented
     // TODO: update game state - undo last move
+}
+
+bool Engine::isWin ()
+{
+    return isWin(Side::left) || isWin(Side::right);
+}
+
+bool Engine::isWin(Side side)
+{
+    int enemyBase = Side::right == side ? -1 : map.path.size();
+    auto &soliders = players[side].soldiers;
+    
+    return !soliders.empty() && soliders.front().position == enemyBase;
 }
 
 std::vector<std::string> Engine::get_legal_moves(const Side side)
@@ -142,8 +155,8 @@ void Engine::fight_soldiers()
                 {
                     soldier.is_in_fight = true;
                     target.hp -= soldier_parameters.damage;
-                    std::cerr << side_to_string(side) << " soldier at " << soldier.position << " attacks "
-                              << side_to_string(other_side(side)) << " soldier at " << target.position << '\n';
+                    // std::cerr << side_to_string(side) << " soldier at " << soldier.position << " attacks "
+                    //           << side_to_string(other_side(side)) << " soldier at " << target.position << '\n';
                 }
             });
     }
@@ -159,20 +172,20 @@ void Engine::move_soldiers()
             auto& soldier = player.soldiers[i];
             if (soldier.is_in_fight)
             {
-                std::cerr << side_to_string(side) << " soldier at " << soldier.position << " not moved - is in fight\n";
+                // std::cerr << side_to_string(side) << " soldier at " << soldier.position << " not moved - is in fight\n";
                 continue;
             }
 
             int new_position = soldier.position + step;
             if (i == 0 or new_position != player.soldiers[i-1].position)
             {
-                std::cerr << side_to_string(side) << " soldier moved from " << soldier.position
-                          << " to " << new_position << '\n';
+                // std::cerr << side_to_string(side) << " soldier moved from " << soldier.position
+                //           << " to " << new_position << '\n';
                 soldier.position = new_position;
             }
             else
             {
-                std::cerr << side_to_string(side) << " soldier at " << soldier.position << " not moved - is blocked\n";
+                // std::cerr << side_to_string(side) << " soldier at " << soldier.position << " not moved - is blocked\n";
             }
         }
     }
@@ -200,9 +213,9 @@ void Engine::shoot_turrets()
                 continue;
             }
 
-            std::cerr << "[turret at " << turret.position.first << ',' << turret.position.second
-                        << "] Chosen target: " << target-> position
-                        << " with distance " << distance(turret.position, map.path[target->position]) << '\n';
+            // std::cerr << "[turret at " << turret.position.first << ',' << turret.position.second
+            //             << "] Chosen target: " << target-> position
+            //             << " with distance " << distance(turret.position, map.path[target->position]) << '\n';
             // shoot
             target->hp -= game_parameters.turret.attack;
         }
@@ -215,7 +228,7 @@ void Engine::clear_dead_soldiers()
     {
         auto& soldiers = player.soldiers;
 
-        std::cerr << side_to_string(side) << " soldiers before: " << soldiers.size();
+        // std::cerr << side_to_string(side) << " soldiers before: " << soldiers.size();
 
         soldiers.erase(
             std::remove_if(
@@ -224,7 +237,7 @@ void Engine::clear_dead_soldiers()
                 [](const Soldier& soldier){ return soldier.hp <= 0; }),
             soldiers.end());
 
-        std::cerr << ", after: " << soldiers.size() << '\n';
+        // std::cerr << ", after: " << soldiers.size() << '\n';
     }
 }
 
@@ -232,12 +245,12 @@ void Engine::update_gold_and_income()
 {
     for (auto& [side, player] : players)
     {
-        std::cerr << side_to_string(side) << " gold, income before: " << player.gold << ' ' << player.income;
+        // std::cerr << side_to_string(side) << " gold, income before: " << player.gold << ' ' << player.income;
 
         player.gold += player.income;
         player.income = player.farms.size() * game_parameters.farm.gold + game_parameters.passive_gold;
 
-        std::cerr << "; after: " << player.gold << ' ' << player.income << '\n';
+        // std::cerr << "; after: " << player.gold << ' ' << player.income << '\n';
     }
 }
 
@@ -290,7 +303,7 @@ void Engine::build_farm(const Side side, const std::string& position)
     player.gold -= game_parameters.farm.cost;
     player.farms.push_back(Building{parse_builiding_position(position)});
 
-    std::cerr << side_to_string(side) << " build farm at " << player.farms.back().position.first << ' ' << player.farms.back().position.second << '\n';
+    // std::cerr << side_to_string(side) << " build farm at " << player.farms.back().position.first << ' ' << player.farms.back().position.second << '\n';
 }
 
 void Engine::build_turret(const Side side, const std::string& position)
@@ -306,7 +319,7 @@ void Engine::build_turret(const Side side, const std::string& position)
     player.gold -= game_parameters.turret.cost;
     player.turrets.push_back(Building{parse_builiding_position(position)});
 
-    std::cerr << side_to_string(side) << " build turret at " << player.turrets.back().position.first << ' ' << player.turrets.back().position.second << '\n';
+    // std::cerr << side_to_string(side) << " build turret at " << player.turrets.back().position.first << ' ' << player.turrets.back().position.second << '\n';
 }
 
 void Engine::spawn_soldier(const Side side, const std::string& type)
@@ -331,5 +344,5 @@ void Engine::spawn_soldier(const Side side, const std::string& type)
     player.gold -= soldier_parameters.cost;
     player.soldiers.push_back(soldier);
 
-    std::cerr << side_to_string(side) << " spawn soldier at " << player.soldiers.back().position << '\n';
+    // std::cerr << side_to_string(side) << " spawn soldier at " << player.soldiers.back().position << '\n';
 }

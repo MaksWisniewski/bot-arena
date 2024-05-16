@@ -16,6 +16,8 @@ public:
 
     void make_move(const std::string& left_move, const std::string& right_move);
     void undo_move();
+    bool isWin();
+    bool isWin(Side);
 
     std::vector<std::string> get_legal_moves(Side);
 
