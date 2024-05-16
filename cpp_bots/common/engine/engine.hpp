@@ -8,7 +8,6 @@
 #include "objects/player.hpp"
 
 #include <unordered_map>
-#include <utility>
 
 class Engine
 {

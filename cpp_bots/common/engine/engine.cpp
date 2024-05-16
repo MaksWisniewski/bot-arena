@@ -1,11 +1,10 @@
 #include "engine.hpp"
-#include "objects/soldier.hpp"
+#include "utils.hpp"
 
 #include <iostream>
-#include <algorithm>
-#include <sstream>
-#include <unordered_set>
 #include <format>
+#include <unordered_set>
+#include <algorithm>
 
 Engine::Engine(const Json& game_state) :
     map{game_state["arena"]},
@@ -16,11 +15,6 @@ Engine::Engine(const Json& game_state) :
     }
 {
     std::cerr << "passive_gold: " << game_parameters.passive_gold << "\n";
-}
-
-int distance(const std::pair<int, int>& x, const std::pair<int, int>& y)
-{
-    return std::abs(x.first- y.first) + std::abs(x.second - y.second);
 }
 
 void Engine::make_move(const std::string& left_move, const std::string& right_move)
@@ -78,14 +72,6 @@ std::vector<std::string> Engine::get_legal_moves(const Side side)
 
     return legal_moves;
 }
-
-struct pair_hash
-{
-    std::size_t operator () (const std::pair<int, int> &p) const
-    {
-        return (static_cast<std::size_t>(p.first) << 32) | static_cast<std::size_t>(p.second);
-    }
-};
 
 std::vector<std::pair<int, int>> Engine::get_empty_cells()
 {
@@ -253,14 +239,6 @@ void Engine::update_gold_and_income()
 
         std::cerr << "; after: " << player.gold << ' ' << player.income << '\n';
     }
-}
-
-std::pair<int, int> parse_builiding_position(const std::string& position_string)
-{
-    int x, y;
-    std::stringstream stream{position_string};
-    stream >> x >> y;
-    return {x, y};
 }
 
 void Engine::execute_player_actions(const std::string& left_move, const std::string& right_move)
