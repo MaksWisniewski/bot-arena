@@ -7,16 +7,21 @@
 #include <climits>
 #include <algorithm>
 
-const int MAXDEPTH = 3;
+const int MAXDEPTH = 5;
 
 class MinMaxBot : public Bot
-{
+{   
+    public:
+    Eval eval;
+    MinMaxBot(Eval _eval) : eval(_eval) {};
+
     int64_t search(Engine &engine, Side side, int depth=MAXDEPTH, int64_t alpha=LLONG_MIN, int64_t beta=LLONG_MAX)
     {
-        if(depth == 0 || engine.isWin())    return Eval(engine);
+        if(depth == 0 || engine.isWin())    return eval(engine, this->side);
 
         bool isMaximizingPlayer = side == this->side;
         auto moves = engine.get_legal_moves(side);
+        std::random_shuffle(moves.begin(), moves.end());
 
         if(isMaximizingPlayer)
         {
@@ -58,12 +63,13 @@ class MinMaxBot : public Bot
         } 
     }
 
-
     std::string make_move() override
     {
         Engine engine{arena_properties};
 
-        const auto legal_moves = engine.get_legal_moves(side);
+        auto legal_moves = engine.get_legal_moves(side);
+        std::random_shuffle(legal_moves.begin(), legal_moves.end());
+
         std::string bestMove = "";
         int64_t bestResult = LLONG_MIN; 
 
@@ -84,13 +90,13 @@ class MinMaxBot : public Bot
             }
         }
 
-        // std::cerr << std::format("[minmax.cpp] my move: {0}\n", move);
+        std::cerr << std::format("[minmax.cpp] my move: {0}\n", bestMove);
         return bestMove;
     }
 };
 
 int main()
 {
-    MinMaxBot bot;
+    MinMaxBot bot(Eval_1{});
     bot.run();
 }

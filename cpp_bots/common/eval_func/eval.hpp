@@ -3,6 +3,16 @@
 
 #include "../engine/engine.hpp"
 
-// TODO: zrobic klase abstrakcyjna
+// klasa abstrakcyjna
+class Eval 
+{
+    public:
+        using Type = int64_t;
+        virtual Type operator() (Engine &engine, Side mySide) const;
+};
 
-long long Eval(const Engine&);
+class Eval_1 : public Eval
+{
+    public:
+        Type operator() (Engine &engine, Side mySide) const override;
+};
