@@ -44,6 +44,20 @@ pip3 install pygame click numpy
 **or Recomended**
 *use docker via RUN.sh*
 
+### Working versions
+```
+Python 3.12.2
+
+Package    Version
+---------- -------
+click      8.1.7
+numpy      1.26.4
+pip        23.3.1
+pygame     2.5.2
+setuptools 68.2.2
+wheel      0.41.2
+```
+
 ### Activation
 1. Go to the root folder of the project in terminal.
 2. Start the app with "py main.py" instuction.
