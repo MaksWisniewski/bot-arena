@@ -35,17 +35,17 @@ void Engine::undo_move()
     // TODO: update game state - undo last move
 }
 
-bool Engine::isWin ()
+bool Engine::isWin()
 {
-    return isWin(Side::left) || isWin(Side::right);
+    return isWin(Side::left) or isWin(Side::right);
 }
 
-bool Engine::isWin(Side side)
+bool Engine::isWin(const Side side)
 {
     int enemyBase = Side::right == side ? -1 : map.path.size();
     auto &soliders = players[side].soldiers;
-    
-    return !soliders.empty() && soliders.front().position == enemyBase;
+
+    return not soliders.empty() and soliders.front().position == enemyBase;
 }
 
 std::vector<std::string> Engine::get_legal_moves(const Side side)

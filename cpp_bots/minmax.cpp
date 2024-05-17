@@ -1,6 +1,6 @@
 #include "common/bot/bot.hpp"
 #include "common/engine/engine.hpp"
-#include "common/eval_func/eval.hpp" 
+#include "common/eval_func/eval.hpp"
 
 #include <iostream>
 #include <format>
@@ -10,14 +10,16 @@
 const int MAXDEPTH = 5;
 
 class MinMaxBot : public Bot
-{   
-    public:
-    Eval eval;
-    MinMaxBot(Eval _eval) : eval(_eval) {};
+{
+public:
+    Eval& eval;
 
-    int64_t search(Engine &engine, Side side, int depth=MAXDEPTH, int64_t alpha=LLONG_MIN, int64_t beta=LLONG_MAX)
+    MinMaxBot(Eval& _eval) : eval(_eval) {};
+
+    Eval::Type search(Engine &engine, Side side, int depth=MAXDEPTH, Eval::Type alpha=LLONG_MIN, Eval::Type beta=LLONG_MAX)
     {
-        if(depth == 0 || engine.isWin())    return eval(engine, this->side);
+        if(depth == 0 || engine.isWin())
+            return eval(engine, this->side);
 
         bool isMaximizingPlayer = side == this->side;
         auto moves = engine.get_legal_moves(side);
@@ -25,11 +27,11 @@ class MinMaxBot : public Bot
 
         if(isMaximizingPlayer)
         {
-            int64_t result = LLONG_MIN;
+            Eval::Type result = LLONG_MIN;
 
             for(auto &mov : moves)
             {
-                Engine temp_engine = engine; // kopia engina                
+                Engine temp_engine = engine; // kopia engina
                 if(side == Side::left)
                     temp_engine.make_move(mov, "W");
                 else
@@ -44,11 +46,11 @@ class MinMaxBot : public Bot
         }
         else
         {
-            int64_t result = LLONG_MAX;
+            Eval::Type result = LLONG_MAX;
 
             for(auto &mov : moves)
             {
-                Engine temp_engine = engine; // kopia engina                
+                Engine temp_engine = engine; // kopia engina
                 if(side == Side::left)
                     temp_engine.make_move(mov, "W");
                 else
@@ -60,7 +62,7 @@ class MinMaxBot : public Bot
                 beta = std::min(beta, result);
             }
             return result;
-        } 
+        }
     }
 
     std::string make_move() override
@@ -71,7 +73,7 @@ class MinMaxBot : public Bot
         std::random_shuffle(legal_moves.begin(), legal_moves.end());
 
         std::string bestMove = "";
-        int64_t bestResult = LLONG_MIN; 
+        Eval::Type bestResult = LLONG_MIN;
 
         for(auto &move : legal_moves)
         {
@@ -83,7 +85,7 @@ class MinMaxBot : public Bot
 
             auto result = search(temp_engine, other_side(side));
 
-            if(result > bestResult) 
+            if(result > bestResult)
             {
                 bestMove = move;
                 bestResult = result;
@@ -97,6 +99,7 @@ class MinMaxBot : public Bot
 
 int main()
 {
-    MinMaxBot bot(Eval_1{});
+    Eval_1 eval{};
+    MinMaxBot bot{eval};
     bot.run();
 }
