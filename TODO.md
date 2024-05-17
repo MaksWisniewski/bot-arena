@@ -26,11 +26,7 @@ python main.py run-simulation --b1 minmax.py --b2 alpha_beta.py --map map.json -
 - funkcja `Soldiers.move` nie sprawdza czy na polu stoi pionek przeciwnika - dwa pionki mogą stać na jednym polu
 - powyższe raz występuje a raz nie :D
 
-
-# engine::isWin()
-
 # minmax bierze czas?
 
 # dokumentacja xddd?
 
-# 3 minmax,cpp dziala wolno?
