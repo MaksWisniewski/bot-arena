@@ -18,16 +18,13 @@ To use the script, run it and choose the desired option by entering the correspo
 </p>
 
 ## Contents
-- [Few words about project](#few-words-about-project)
 - [How to use?](#how-to-use)
 - [How does the program work?](#how-does-the-program-work)
 - [Projects structure](#projects-structure)
 - [Creating maps](#creating-maps)
 - [Creating bots](#creating-bots)
-- [What is log? (baby don't hurt me)](#what-is-log)
+- [What is log?](#what-is-log)
 
-## Few words about project
-"Bot arena" is a group project implemented under the "Innovative Projects by Nokia", which main goal was to create an environment where users can watch and test performance and efficiency of bots written by them.
 
 ## How to use?
 
@@ -61,6 +58,7 @@ wheel      0.41.2
 ### Activation
 1. Go to the root folder of the project in terminal.
 2. Start the app with "py main.py" instuction.
+3. Or use bash script `RUN.sh`
 
 ### Usage
 The program consists of 2 scenes where user can set up a simulation and a scene, where he can watch and analyze the bots' performance. Each scene consists of windows with different functionalities.
