@@ -32,9 +32,14 @@ To use the script, run it and choose the desired option by entering the correspo
 ## How to use?
 
 ### Installation
+
 1. Download [python interpreter](https://www.python.org/downloads/).
-2. Download external pygame module with "pip install pygame".
-3. Download the [repository](https://github.com/BartoszKruszewski/bot-arena.git) or clone it with "git clone https://github.com/BartoszKruszewski/bot-arena.git".
+2. Download python modules
+```
+pip3 install pygame click numpy
+```
+3. `git clone https://github.com/MaksWisniewski/bot-arena/` 
+4. Download gcc13.
 
 ### Activation
 1. Go to the root folder of the project in terminal.
