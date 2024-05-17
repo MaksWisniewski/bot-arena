@@ -40,6 +40,7 @@ pip3 install pygame click numpy
 ```
 3. `git clone https://github.com/MaksWisniewski/bot-arena/` 
 4. Download gcc13.
+5. Intall cpp library `https://github.com/nlohmann/json`
 **or Recomended**
 *use docker via RUN.sh*
 
