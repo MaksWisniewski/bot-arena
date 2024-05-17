@@ -40,6 +40,8 @@ pip3 install pygame click numpy
 ```
 3. `git clone https://github.com/MaksWisniewski/bot-arena/` 
 4. Download gcc13.
+**or Recomended**
+*use docker via RUN.sh*
 
 ### Activation
 1. Go to the root folder of the project in terminal.
