@@ -16,4 +16,4 @@ logs/*
 !docker/Dockerfile
 !docker/
 !Dockerfile
-!old_Dockerfile
+!alpine_Dockerfile
