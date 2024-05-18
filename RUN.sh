@@ -8,6 +8,23 @@ if [ "$1" = "run-simulation" ] || [ "$1" = "--sim" ]; then
     exit 0
 fi
 
+if [ "$1" = "compile" ] || [ "$1" = "--compile" ]; then
+    shift
+    docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c 'cd cpp_bots && make "$@"' -- "$@"
+    exit 0
+fi
+
+if [ "$1" = "clean" ] || [ "$1" = "--clean" ]; then
+    shift
+    docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make clean"
+    exit 0
+fi
+
+if [ "$1" = "build-docker" ] || [ "$1" = "--build-docker" ]; then
+    docker build -t "$image_name" -f docker/Dockerfile .
+    exit 0
+fi
+
 # Display available options
 echo "Available Options:"
 echo "1. Run Docker build command"

@@ -30,3 +30,4 @@ python main.py run-simulation --b1 minmax.py --b2 alpha_beta.py --map map.json -
 
 # dokumentacja xddd?
 
+# const metody w engine -> żeby dało się zrobic `const Engine`

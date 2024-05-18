@@ -100,6 +100,9 @@ public:
 int main()
 {
     Eval_1 eval{};
-    MinMaxBot bot{eval};
-    bot.run();
+    for (;;)
+    {
+        MinMaxBot bot{eval};
+        bot.run();
+    }
 }
