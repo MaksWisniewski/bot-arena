@@ -1,5 +1,5 @@
-# Use the specified Alpine-based image
-FROM frolvlad/alpine-gxx
+# Use a base image that has the necessary environment for your project
+FROM gcc:13.2
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -13,10 +13,10 @@ COPY . .
 USER root
 
 # Install required packages
-RUN apk update && apk add --no-cache zsh curl nlohmann-json make
+RUN apt update && apt install -y zsh curl nlohmann-json3-dev python3 python3-numpy python3-click python3-pygame python3-pip 
 
 # Add a new user with user ID 1000 and set zsh as its shell
-RUN adduser -u 1000 -D -s /bin/zsh myuser
+RUN useradd -u 1000 -m -s $(which zsh) myuser
 
 USER myuser
 
@@ -24,6 +24,7 @@ USER myuser
 # # Change default shell to zsh for user 1000
 # RUN chsh -s $(which zsh) && \
 #     usermod -s $(which zsh) 1000
+
 
 RUN echo 'alias ls="ls --color=always" \n ls' >> ~/.zshrc
 
