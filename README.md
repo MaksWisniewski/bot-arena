@@ -1,5 +1,6 @@
 # *<b> Script `RUN.sh` Usage </b>*
 
+## Interactive mode
 This script provides the following options:
 
 1. **Run Docker build command**: Builds a Docker image using the specified Dockerfile. <u>*This option is necessary to execute before any other option.*</u>
@@ -10,6 +11,11 @@ This script provides the following options:
 
 To use the script, run it and choose the desired option by entering the corresponding number.
 
+## Run simulation
+You can also use `RUN.sh` script to run simulation by running it with `run-simulation` or `--sim` option and providing simulation arguments as for `main.py`.
+
+### Example usage:
+```./RUN.sh --sim --b1 minmax --b2 random_bot.py --map map5x5.json```
 
 # <b> BOT ARENA </b>
 
@@ -35,7 +41,7 @@ To use the script, run it and choose the desired option by entering the correspo
 ```
 pip3 install pygame click numpy
 ```
-3. `git clone https://github.com/MaksWisniewski/bot-arena/` 
+3. `git clone https://github.com/MaksWisniewski/bot-arena/`
 4. Download gcc13.
 5. Intall cpp library `https://github.com/nlohmann/json`
 **or Recomended**
@@ -113,7 +119,7 @@ Allows user to analyze the performance of each bot based on the log that has bee
         - eye icon - Option to see where tiles that are occupied by obstacles
         - pointer icon - Displays a little red dot indicating each objects real position.
         - grid icon - Shows a grid that marks where the tiles are.
-        
+
 <p align="center">
   <img src="ReadmeAssets/Analyzing scene.png" alt="Image unavailable">
 </p>
