@@ -2,8 +2,10 @@
 
 #include <algorithm>
 #include <iostream>
+#include <random>
+#include <cmath>
 
-MCTSNode::MCTSNode(const Side side) : side(side), games_played(0), games_won(0)
+MCTSNode::MCTSNode(const Side side, const MCTSNode* parent) : side(side), games_played(0), games_won(0), parent(parent)
 {
 }
 
@@ -14,9 +16,7 @@ MCTSNode::Result MCTSNode::update(Engine& engine, const Side my_side, int max_si
         return expand(engine, my_side, max_simulation_length);
     }
 
-    const auto move = get_best_move();
-
-    std::cerr << "MCTS: chosen child node: " << move << '\n';
+    const auto move = select_move();
 
     if (side == Side::left)
     {
@@ -45,6 +45,18 @@ std::string MCTSNode::get_best_move() const
     auto compare =
         [](const auto& x, const auto& y)
         {
+            return x.second.games_played < y.second.games_played;
+        };
+
+    // TODO: consider adding some randomness here
+    return std::max_element(children.begin(), children.end(), compare)->first;
+}
+
+std::string MCTSNode::select_move() const
+{
+    auto compare =
+        [](const auto& x, const auto& y)
+        {
             return x.second.score() < y.second.score();
         };
 
@@ -54,10 +66,18 @@ std::string MCTSNode::get_best_move() const
 
 MCTSNode::Result MCTSNode::expand(const Engine& engine, const Side my_side, int max_simulation_length)
 {
-    std::cerr << "MCTS: expanding node\n";
+    if (engine.isWin())
+    {
+        const auto result = engine.isWin(my_side);
 
+        games_played++;
+        games_won += result;
+
+        return {.games_played = 1, .games_won = result};
+    }
+
+    // TODO: filter out some moves
     const auto legal_moves = engine.get_legal_moves(side);
-
     Result result{.games_played = static_cast<int>(legal_moves.size()), .games_won = 0};
 
     for (auto& move: legal_moves)
@@ -72,12 +92,8 @@ MCTSNode::Result MCTSNode::expand(const Engine& engine, const Side my_side, int 
             child_engine.make_move("W", move);
         }
 
-        MCTSNode child{other_side(side)};
-
-        std::cerr << "MCTS: simulating game for child node: " << move << '\n';
-
+        MCTSNode child{other_side(side), this};
         result.games_won += child.simulate(child_engine, my_side, max_simulation_length);
-
         children.insert({move, child});
     }
 
@@ -85,6 +101,16 @@ MCTSNode::Result MCTSNode::expand(const Engine& engine, const Side my_side, int 
     games_won += result.games_won;
 
     return result;
+}
+
+std::string get_random_move(const std::vector<std::string>& moves)
+{
+    // TODO: consider non-uniform distribution
+    std::mt19937 generator(static_cast<unsigned>(std::time(nullptr)));
+    std::uniform_int_distribution<std::size_t> distribution(0, moves.size() - 1);
+
+    std::size_t randomIndex = distribution(generator);
+    return moves[randomIndex];
 }
 
 bool MCTSNode::simulate(Engine& engine, const Side my_side, int max_simulation_length)
@@ -96,9 +122,8 @@ bool MCTSNode::simulate(Engine& engine, const Side my_side, int max_simulation_l
             break;
         }
 
-        // TODO: random
-        const auto left_move = engine.get_legal_moves(Side::left).front();
-        const auto right_move = engine.get_legal_moves(Side::right).front();
+        const auto left_move = get_random_move(engine.get_legal_moves(Side::left));
+        const auto right_move = get_random_move(engine.get_legal_moves(Side::right));
 
         engine.make_move(left_move, right_move);
     }
@@ -109,15 +134,15 @@ bool MCTSNode::simulate(Engine& engine, const Side my_side, int max_simulation_l
     games_played++;
     games_won += result;
 
-    std::cerr << "MCTS: simulation result: " << side_to_string(result ? my_side : other_side(my_side)) << " won\n";
-
     return result;
 }
 
 double MCTSNode::score() const
 {
-    // TODO: implement better score function
-    return games_played == 0 ? 0.0 : static_cast<double>(games_won) / games_played;
+    return static_cast<double>(games_won) / games_played + std::sqrt(2.0 * std::log(parent->games_played) / games_played);
+
+    // return games_played;
+    // return games_played == 0 ? 0.0 : static_cast<double>(games_won) / games_played;
 }
 
 bool MCTSNode::is_leaf() const
