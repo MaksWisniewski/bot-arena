@@ -14,17 +14,19 @@ class Engine
 public:
     Engine(const Json&);
 
+    // TODO:
+    // - more getters for state
     void make_move(const std::string& left_move, const std::string& right_move);
     void undo_move();
-    bool isWin();
-    bool isWin(Side);
+    bool isWin() const;
+    bool isWin(Side) const;
 
-    std::vector<std::string> get_legal_moves(Side);
+    std::vector<std::string> get_legal_moves(Side) const;
 
-    std::vector<std::pair<int, int>> get_empty_cells();
-    std::vector<Building> get_farms(Side);
-    std::vector<Building> get_turrets(Side);
-    std::vector<Soldier> get_soldiers(Side);
+    std::vector<std::pair<int, int>> get_empty_cells() const;
+    std::vector<Building> get_farms(Side) const;
+    std::vector<Building> get_turrets(Side) const;
+    std::vector<Soldier> get_soldiers(Side) const;
 
 private:
     void fight_soldiers();

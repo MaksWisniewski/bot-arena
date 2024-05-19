@@ -35,24 +35,24 @@ void Engine::undo_move()
     // TODO: update game state - undo last move
 }
 
-bool Engine::isWin()
+bool Engine::isWin() const
 {
     return isWin(Side::left) or isWin(Side::right);
 }
 
-bool Engine::isWin(const Side side)
+bool Engine::isWin(const Side side) const
 {
-    int enemyBase = Side::right == side ? -1 : map.path.size();
-    auto &soliders = players[side].soldiers;
+    const int enemyBase = Side::right == side ? -1 : map.path.size();
+    const auto& soliders = players.at(side).soldiers;
 
     return not soliders.empty() and soliders.front().position == enemyBase;
 }
 
-std::vector<std::string> Engine::get_legal_moves(const Side side)
+std::vector<std::string> Engine::get_legal_moves(const Side side) const
 {
     std::vector<std::string> legal_moves{"W"};
 
-    const auto& player = players[side];
+    const auto& player = players.at(side);
 
     const int base = side == Side::left ? 0 : map.path.size() - 1;
     for (auto& [type, parameters] : game_parameters.soldiers)
@@ -86,7 +86,7 @@ std::vector<std::string> Engine::get_legal_moves(const Side side)
     return legal_moves;
 }
 
-std::vector<std::pair<int, int>> Engine::get_empty_cells()
+std::vector<std::pair<int, int>> Engine::get_empty_cells() const
 {
     std::unordered_set<std::pair<int, int>, pair_hash> non_empty_cells;
     non_empty_cells.insert(map.path.begin(), map.path.end());
@@ -114,19 +114,19 @@ std::vector<std::pair<int, int>> Engine::get_empty_cells()
     return empty_cells;
 }
 
-std::vector<Building> Engine::get_farms(const Side side)
+std::vector<Building> Engine::get_farms(const Side side) const
 {
-    return players[side].farms;
+    return players.at(side).farms;
 }
 
-std::vector<Building> Engine::get_turrets(const Side side)
+std::vector<Building> Engine::get_turrets(const Side side) const
 {
-    return players[side].turrets;
+    return players.at(side).turrets;
 }
 
-std::vector<Soldier> Engine::get_soldiers(const Side side)
+std::vector<Soldier> Engine::get_soldiers(const Side side) const
 {
-    return players[side].soldiers;
+    return players.at(side).soldiers;
 }
 
 void Engine::fight_soldiers()
@@ -259,8 +259,8 @@ void Engine::execute_player_actions(const std::string& left_move, const std::str
     auto wants_to_and_can_build =
         [this](const Side side, const std::string& move)
         {
-            return (move.front() == 'F' and players[side].gold >= game_parameters.farm.cost) or
-                   (move.front() == 'T' and players[side].gold >= game_parameters.turret.cost);
+            return (move.front() == 'F' and players.at(side).gold >= game_parameters.farm.cost) or
+                   (move.front() == 'T' and players.at(side).gold >= game_parameters.turret.cost);
         };
 
     if (wants_to_and_can_build(Side::left, left_move) and wants_to_and_can_build(Side::right, right_move) and
@@ -293,7 +293,7 @@ void Engine::execute_action(const Side side, const std::string& action)
 void Engine::build_farm(const Side side, const std::string& position)
 {
     // TODO: check if empty cell
-    auto& player = players[side];
+    auto& player = players.at(side);
 
     if (player.gold < game_parameters.farm.cost)
     {
@@ -309,7 +309,7 @@ void Engine::build_farm(const Side side, const std::string& position)
 void Engine::build_turret(const Side side, const std::string& position)
 {
     // TODO: check if empty cell
-    auto& player = players[side];
+    auto& player = players.at(side);
 
     if (player.gold < game_parameters.turret.cost)
     {
@@ -324,7 +324,7 @@ void Engine::build_turret(const Side side, const std::string& position)
 
 void Engine::spawn_soldier(const Side side, const std::string& type)
 {
-    auto& player = players[side];
+    auto& player = players.at(side);
     const auto soldier_type = string_to_soldier_type(type);
     const auto soldier_parameters = game_parameters.soldiers[soldier_type];
 

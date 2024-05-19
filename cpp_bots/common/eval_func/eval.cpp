@@ -1,6 +1,6 @@
 #include "eval.hpp"
 
-Eval::Type Eval_1::operator() (Engine& engine, const Side mySide) const {
+Eval::Type Eval_1::operator() (const Engine& engine, const Side mySide) const {
     Type result = 0;
 
     if(engine.isWin(mySide))

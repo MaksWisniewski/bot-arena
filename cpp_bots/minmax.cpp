@@ -16,7 +16,7 @@ public:
 
     MinMaxBot(Eval& _eval) : eval(_eval) {};
 
-    Eval::Type search(Engine &engine, Side side, int depth=MAXDEPTH, Eval::Type alpha=LLONG_MIN, Eval::Type beta=LLONG_MAX)
+    Eval::Type search(const Engine& engine, Side side, int depth=MAXDEPTH, Eval::Type alpha=LLONG_MIN, Eval::Type beta=LLONG_MAX)
     {
         if(depth == 0 || engine.isWin())
             return eval(engine, this->side);
