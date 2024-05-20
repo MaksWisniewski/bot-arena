@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include "../common/eval_func/eval.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -128,8 +129,13 @@ bool MCTSNode::simulate(Engine& engine, const Side my_side, int max_simulation_l
         engine.make_move(left_move, right_move);
     }
 
-    // TODO: use evaluation function to check who wins
-    const auto result = engine.isWin(my_side);
+    // TODO:
+    // - dependency injection
+    // - evaluate only once (?)
+    const Eval_1 evaluate;
+    const auto result = evaluate(engine, my_side) > evaluate(engine, other_side(my_side));
+
+    // const auto result = engine.isWin(my_side);
 
     games_played++;
     games_won += result;
