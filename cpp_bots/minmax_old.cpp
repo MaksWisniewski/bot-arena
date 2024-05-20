@@ -1,6 +1,3 @@
-// itearative Deepening
-// warning moze byc tak ze potrzebne jest splamietyywanie?
-
 #include "common/bot/bot.hpp"
 #include "common/engine/engine.hpp"
 #include "common/eval_func/eval.hpp"
@@ -68,33 +65,6 @@ public:
         }
     }
 
-    // std::string make_move() override
-    // {
-    //     Engine engine{arena_properties};
-
-    //     auto legal_moves = engine.get_legal_moves(side);
-    //     std::random_shuffle(legal_moves.begin(), legal_moves.end());
-
-    //     std::string bestMove = "";
-    //     Eval::Type bestResult = LLONG_MIN;
-
-    //     for(auto &move : legal_moves)
-    //     {
-    //         Engine temp_engine = engine;
-    //         if(side == Side::left)
-    //             temp_engine.make_move(move, "W");
-    //         else
-    //             temp_engine.make_move("W", move);
-
-    //         auto result = search(temp_engine, other_side(side));
-
-    //         if(result > bestResult)
-    //         {
-    //             bestMove = move;
-    //             bestResult = result;
-    //         }
-    //     }
-
     std::string make_move() override
     {
         Engine engine{arena_properties};
@@ -105,23 +75,20 @@ public:
         std::string bestMove = "";
         Eval::Type bestResult = LLONG_MIN;
 
-        for (int depth = 1; depth <= MAXDEPTH; ++depth)
+        for(auto &move : legal_moves)
         {
-            for (auto &move : legal_moves)
+            Engine temp_engine = engine;
+            if(side == Side::left)
+                temp_engine.make_move(move, "W");
+            else
+                temp_engine.make_move("W", move);
+
+            auto result = search(temp_engine, other_side(side));
+
+            if(result > bestResult)
             {
-                Engine temp_engine = engine;
-                if (side == Side::left)
-                    temp_engine.make_move(move, "W");
-                else
-                    temp_engine.make_move("W", move);
-
-                auto result = search(temp_engine, other_side(side), depth, LLONG_MIN, LLONG_MAX);
-
-                if (result > bestResult)
-                {
-                    bestMove = move;
-                    bestResult = result;
-                }
+                bestMove = move;
+                bestResult = result;
             }
         }
 
