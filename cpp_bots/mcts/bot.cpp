@@ -24,7 +24,7 @@ public:
 
         int number_of_simulations = 0;
         // TODO: fix milliseconds(1000)
-        while (std::chrono::high_resolution_clock::now() < max_time - std::chrono::milliseconds{1000})
+        while (std::chrono::high_resolution_clock::now() < max_time - std::chrono::milliseconds{2000})
         {
             root.update(engine, side, max_simulation_length);
             number_of_simulations++;
@@ -44,7 +44,7 @@ public:
         Engine engine{arena_properties};
 
         int number_of_simulations = 0;
-        while (std::chrono::high_resolution_clock::now() < max_time - mean_simulation_duration)
+        while (std::chrono::high_resolution_clock::now() < max_time - 2 * mean_simulation_duration)
         {
             root.update(engine, side, max_simulation_length);
             number_of_simulations++;

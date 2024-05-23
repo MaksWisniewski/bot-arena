@@ -31,5 +31,11 @@ bool is_useless(const std::string& move, const Path& path)
         return true;
     }
 
+    static bool useless_farm = true;
+    if (move.front() == 'F')
+    {
+        return useless_farm ^= 1;
+    }
+
     return false;
 }

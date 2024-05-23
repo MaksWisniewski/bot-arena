@@ -85,7 +85,6 @@ MCTSNode::Result MCTSNode::expand(const Engine& engine, const Side my_side, int 
 
     for (auto& move: legal_moves)
     {
-        // nie poprawia na mapie 5x5, na większych daje znacznie więcej
         if (is_useless(move, path))
         {
             continue;
