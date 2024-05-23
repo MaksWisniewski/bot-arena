@@ -1,0 +1,7 @@
+map:map10x10.json
+player1:random_bot.py
+player2:mcts
+F 2 2 | S swordsman
+T 9 6 | F 5 7
+T 0 9 | F 2 5
+W | F 4 7

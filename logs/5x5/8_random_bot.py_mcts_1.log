@@ -1,0 +1,23 @@
+map:map5x5.json
+player1:random_bot.py
+player2:mcts
+W | S archer
+W | F 4 3
+F 4 0 | F 1 1
+S archer | S archer
+T 3 1 | F 3 0
+F 4 4 | S archer
+S swordsman | S archer
+W | S swordsman
+W | F 1 2
+W | W
+F 0 2 | W
+S swordsman | W
+T 2 1 | S archer
+S archer | W
+S archer | W
+W | F 3 2
+T 2 2 | W
+T 1 4 | W
+T 1 0 | F 3 3
+T 1 2 | W

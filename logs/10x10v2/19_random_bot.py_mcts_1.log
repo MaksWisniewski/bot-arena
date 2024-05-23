@@ -1,0 +1,30 @@
+map:map10x10.json
+player1:random_bot.py
+player2:mcts
+S archer | S archer
+T 0 3 | F 2 2
+W | S swordsman
+T 0 8 | S archer
+T 3 4 | F 0 2
+W | S archer
+W | F 7 8
+W | S archer
+W | F 7 5
+T 4 0 | W
+W | W
+S archer | F 8 8
+W | W
+F 4 5 | W
+F 1 4 | F 5 4
+S archer | W
+W | W
+W | F 3 3
+F 1 8 | W
+W | F 7 6
+S archer | W
+F 2 9 | F 4 7
+F 7 0 | W
+F 8 0 | F 6 8
+W | W
+W | F 4 3
+F 4 5 | W

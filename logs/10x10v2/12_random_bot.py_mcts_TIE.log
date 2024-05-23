@@ -1,0 +1,4 @@
+map:map10x10.json
+player1:random_bot.py
+player2:mcts
+W | S swordsman
