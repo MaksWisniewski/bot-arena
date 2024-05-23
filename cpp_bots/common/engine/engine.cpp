@@ -114,6 +114,11 @@ std::vector<std::pair<int, int>> Engine::get_empty_cells() const
     return empty_cells;
 }
 
+std::vector<std::pair<int, int>> Engine::get_path() const
+{
+    return map.path;
+}
+
 std::vector<Building> Engine::get_farms(const Side side) const
 {
     return players.at(side).farms;

@@ -24,6 +24,8 @@ public:
     std::vector<std::string> get_legal_moves(Side) const;
 
     std::vector<std::pair<int, int>> get_empty_cells() const;
+    std::vector<std::pair<int, int>> get_path() const;
+
     std::vector<Building> get_farms(Side) const;
     std::vector<Building> get_turrets(Side) const;
     std::vector<Soldier> get_soldiers(Side) const;

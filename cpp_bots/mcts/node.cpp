@@ -1,8 +1,8 @@
 #include "node.hpp"
+#include "../common/optimizations/is_useless.hpp"
 #include "../common/eval_func/eval.hpp"
 
 #include <algorithm>
-#include <iostream>
 #include <random>
 #include <cmath>
 
@@ -77,12 +77,20 @@ MCTSNode::Result MCTSNode::expand(const Engine& engine, const Side my_side, int 
         return {.games_played = 1, .games_won = result};
     }
 
-    // TODO: filter out some moves
     const auto legal_moves = engine.get_legal_moves(side);
     Result result{.games_played = static_cast<int>(legal_moves.size()), .games_won = 0};
 
+    const auto p = engine.get_path();
+    const Path path{p.begin(), p.end()};
+
     for (auto& move: legal_moves)
     {
+        // nie poprawia na mapie 5x5, na większych daje znacznie więcej
+        if (is_useless(move, path))
+        {
+            continue;
+        }
+
         Engine child_engine{engine};
         if (side == Side::left)
         {

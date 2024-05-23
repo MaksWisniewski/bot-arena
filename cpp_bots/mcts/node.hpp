@@ -8,7 +8,7 @@
 class MCTSNode
 {
 public:
-    static constexpr int default_max_simulation_length = 150;
+    static constexpr int default_max_simulation_length = 100;
 
     MCTSNode(Side, const MCTSNode* parent = nullptr);
 
