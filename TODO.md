@@ -7,6 +7,10 @@ gra do konca nie jest turowa, a boty minmax, alpha_beta sztucznie robią z gry g
 
 # MCTS - multithreading + optymalizacja pozwalająca zagrać jakkolwiek na mapie 15x15
 
+# MINMAX - spamietywanie stanów + iterative deepening z estymacją czasu (bez sprawdzania czasu ID nie ma sensu)
+
+# Inne warunki końca gry - na większych mapach gra między sensownymi botami się nie kończy
+
 # timeouty są zepsute
 - silnik w pytonie jest tak wolny, że podane timeouty nie są zgodne z prawdą (sam silnik zjada sporą ich część)
 przez co bot timeoutuje, próbując maksymalnie wykorzystać dany mu czas
