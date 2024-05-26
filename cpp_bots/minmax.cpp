@@ -4,6 +4,7 @@
 #include "common/bot/bot.hpp"
 #include "common/engine/engine.hpp"
 #include "common/eval_func/eval.hpp"
+// #include "common/optimizations/is_useless.hpp"
 
 #include <iostream>
 #include <format>
@@ -28,17 +29,25 @@ public:
         auto moves = engine.get_legal_moves(side);
         std::random_shuffle(moves.begin(), moves.end());
 
+        // const auto p = engine.get_path();
+        // const Path path{p.begin(), p.end()};
+
         if(isMaximizingPlayer)
         {
             Eval::Type result = LLONG_MIN;
 
-            for(auto &mov : moves)
+            for(auto &move : moves)
             {
+                // if (is_useless(move, path))
+                // {
+                //     continue;
+                // }
+
                 Engine temp_engine = engine; // kopia engina
                 if(side == Side::left)
-                    temp_engine.make_move(mov, "W");
+                    temp_engine.make_move(move, "W");
                 else
-                    temp_engine.make_move("W", mov);
+                    temp_engine.make_move("W", move);
 
                 result = std::max(result, search(temp_engine, other_side(side), depth-1, alpha, beta));
 
@@ -51,13 +60,18 @@ public:
         {
             Eval::Type result = LLONG_MAX;
 
-            for(auto &mov : moves)
+            for(auto &move : moves)
             {
+                // if (is_useless(move, path))
+                // {
+                //     continue;
+                // }
+
                 Engine temp_engine = engine; // kopia engina
                 if(side == Side::left)
-                    temp_engine.make_move(mov, "W");
+                    temp_engine.make_move(move, "W");
                 else
-                    temp_engine.make_move("W", mov);
+                    temp_engine.make_move("W", move);
 
                 result = std::min(result, search(temp_engine, other_side(side), depth-1, alpha, beta));
 
@@ -68,33 +82,6 @@ public:
         }
     }
 
-    // std::string make_move() override
-    // {
-    //     Engine engine{arena_properties};
-
-    //     auto legal_moves = engine.get_legal_moves(side);
-    //     std::random_shuffle(legal_moves.begin(), legal_moves.end());
-
-    //     std::string bestMove = "";
-    //     Eval::Type bestResult = LLONG_MIN;
-
-    //     for(auto &move : legal_moves)
-    //     {
-    //         Engine temp_engine = engine;
-    //         if(side == Side::left)
-    //             temp_engine.make_move(move, "W");
-    //         else
-    //             temp_engine.make_move("W", move);
-
-    //         auto result = search(temp_engine, other_side(side));
-
-    //         if(result > bestResult)
-    //         {
-    //             bestMove = move;
-    //             bestResult = result;
-    //         }
-    //     }
-
     std::string make_move() override
     {
         Engine engine{arena_properties};
@@ -102,20 +89,28 @@ public:
         auto legal_moves = engine.get_legal_moves(side);
         std::random_shuffle(legal_moves.begin(), legal_moves.end());
 
+        // const auto p = engine.get_path();
+        // const Path path{p.begin(), p.end()};
+
         std::string bestMove = "";
         Eval::Type bestResult = LLONG_MIN;
 
-        for (int depth = 1; depth <= MAXDEPTH; ++depth)
-        {
+        // for (int depth = 1; depth <= MAXDEPTH; ++depth)
+        // {
             for (auto &move : legal_moves)
             {
+                // if (is_useless(move, path))
+                // {
+                //     continue;
+                // }
+
                 Engine temp_engine = engine;
                 if (side == Side::left)
                     temp_engine.make_move(move, "W");
                 else
                     temp_engine.make_move("W", move);
 
-                auto result = search(temp_engine, other_side(side), depth, LLONG_MIN, LLONG_MAX);
+                auto result = search(temp_engine, other_side(side)); //, depth, LLONG_MIN, LLONG_MAX);
 
                 if (result > bestResult)
                 {
@@ -123,7 +118,7 @@ public:
                     bestResult = result;
                 }
             }
-        }
+        // }
 
         std::cerr << std::format("[minmax.cpp] my move: {0}\n", bestMove);
         return bestMove;

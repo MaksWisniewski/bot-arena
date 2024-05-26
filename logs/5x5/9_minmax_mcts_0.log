@@ -1,0 +1,51 @@
+map:map5x5.json
+player1:minmax
+player2:mcts
+F 3 1 | W
+F 1 1 | S archer
+F 3 2 | S archer
+F 0 1 | S archer
+F 4 3 | S archer
+F 1 3 | F 3 0
+S archer | S archer
+F 3 3 | F 1 4
+S swordsman | S swordsman
+S archer | W
+F 1 2 | W
+S swordsman | S swordsman
+W | W
+S archer | W
+W | W
+W | W
+S swordsman | W
+W | S swordsman
+S archer | W
+W | W
+S swordsman | W
+W | S swordsman
+W | W
+S archer | W
+W | W
+S swordsman | W
+S archer | W
+S swordsman | S swordsman
+S archer | W
+W | W
+S swordsman | W
+S swordsman | W
+S archer | W
+W | S swordsman
+S swordsman | W
+S swordsman | W
+W | W
+S swordsman | S swordsman
+W | W
+S swordsman | W
+W | W
+W | W
+S archer | W
+W | S swordsman
+S swordsman | W
+W | W
+S swordsman | W
+W | S swordsman

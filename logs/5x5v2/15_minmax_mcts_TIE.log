@@ -1,0 +1,4 @@
+map:map5x5.json
+player1:minmax
+player2:mcts
+F 0 1 | F 0 1
