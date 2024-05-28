@@ -11,7 +11,6 @@ __pycache__
 game_log*.txt
 
 logs/*
-!logs/example_log/
 
 !docker/Dockerfile
 !docker/
