@@ -15,16 +15,17 @@ public:
         std::cerr << std::format("[mcts] running with max simulation length: {0}\n", max_simulation_length);
     }
 
+    // TODO: fix it or get rid of it as it causes ready timeout
     void preprocess() override
     {
-        const auto max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{ready_timeout};
+        const auto max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{ready_timeout} - std::chrono::milliseconds{2000};
 
         MCTSNode root{side};
         Engine engine{arena_properties};
 
         int number_of_simulations = 0;
         // TODO: fix milliseconds(1000)
-        while (std::chrono::high_resolution_clock::now() < max_time - std::chrono::milliseconds{2000})
+        while (std::chrono::high_resolution_clock::now() < max_time)
         {
             root.update(engine, side, max_simulation_length);
             number_of_simulations++;
@@ -38,14 +39,15 @@ public:
 
     std::string make_move() override
     {
-        const auto max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{move_timeout};
+        const auto max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{move_timeout} - 2 * mean_simulation_duration;
 
         MCTSNode root{side};
         Engine engine{arena_properties};
 
         int number_of_simulations = 0;
-        while (std::chrono::high_resolution_clock::now() < max_time - 2 * mean_simulation_duration)
+        while (std::chrono::high_resolution_clock::now() < max_time)
         {
+            // TODO: check timeout during simulation, not only before starting it (as in minmax)
             root.update(engine, side, max_simulation_length);
             number_of_simulations++;
         }

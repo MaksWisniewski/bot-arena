@@ -10,18 +10,23 @@
 #include <format>
 #include <climits>
 #include <algorithm>
+#include <chrono>
 
 const int MAXDEPTH = 5;
 
 class MinMaxBot : public Bot
 {
 public:
-    Eval& eval;
-
     MinMaxBot(Eval& _eval) : eval(_eval) {};
 
     Eval::Type search(const Engine& engine, Side side, int depth=MAXDEPTH, Eval::Type alpha=LLONG_MIN, Eval::Type beta=LLONG_MAX)
     {
+        if (std::chrono::high_resolution_clock::now() >= max_time)
+        {
+            is_timeout = true;
+            return 0;
+        }
+
         if(depth == 0 || engine.isWin())
             return eval(engine, this->side);
 
@@ -42,6 +47,11 @@ public:
                 // {
                 //     continue;
                 // }
+
+                if (is_timeout)
+                {
+                    return 0;
+                }
 
                 Engine temp_engine = engine; // kopia engina
                 if(side == Side::left)
@@ -67,6 +77,11 @@ public:
                 //     continue;
                 // }
 
+                if (is_timeout)
+                {
+                    return 0;
+                }
+
                 Engine temp_engine = engine; // kopia engina
                 if(side == Side::left)
                     temp_engine.make_move(move, "W");
@@ -84,6 +99,10 @@ public:
 
     std::string make_move() override
     {
+        // TODO: probably can be done better
+        max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{move_timeout} - std::chrono::milliseconds{100};
+        is_timeout = false;
+
         Engine engine{arena_properties};
 
         auto legal_moves = engine.get_legal_moves(side);
@@ -92,11 +111,14 @@ public:
         // const auto p = engine.get_path();
         // const Path path{p.begin(), p.end()};
 
-        std::string bestMove = "";
-        Eval::Type bestResult = LLONG_MIN;
+        std::string bestMove = "W";
 
-        // for (int depth = 1; depth <= MAXDEPTH; ++depth)
-        // {
+        int depth;
+        for (depth = 0; not is_timeout; depth++)
+        {
+            std::string tmpBestMove = "";
+            Eval::Type tmpBestResult = LLONG_MIN;
+
             for (auto &move : legal_moves)
             {
                 // if (is_useless(move, path))
@@ -104,25 +126,38 @@ public:
                 //     continue;
                 // }
 
+                if (is_timeout)
+                {
+                    std::cerr << std::format("[minmax] serached for max depth {0}, best move: {1}\n", depth, bestMove);
+                    return bestMove;
+                }
+
                 Engine temp_engine = engine;
                 if (side == Side::left)
                     temp_engine.make_move(move, "W");
                 else
                     temp_engine.make_move("W", move);
 
-                auto result = search(temp_engine, other_side(side)); //, depth, LLONG_MIN, LLONG_MAX);
+                auto result = search(temp_engine, other_side(side), depth);
 
-                if (result > bestResult)
+                if (result > tmpBestResult)
                 {
-                    bestMove = move;
-                    bestResult = result;
+                    tmpBestMove = move;
+                    tmpBestResult = result;
                 }
             }
-        // }
 
-        std::cerr << std::format("[minmax.cpp] my move: {0}\n", bestMove);
+            bestMove = tmpBestMove;
+        }
+
+        std::cerr << std::format("[minmax] serached for max depth {0}, best move: {1}\n", depth, bestMove);
         return bestMove;
     }
+
+private:
+    Eval& eval;
+    std::chrono::system_clock::time_point max_time;
+    bool is_timeout;
 };
 
 int main()

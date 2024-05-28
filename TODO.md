@@ -6,6 +6,9 @@ gra do konca nie jest turowa, a boty minmax, alpha_beta sztucznie robią z gry g
 # dokumentacja xddd?
 
 # MCTS - multithreading + optymalizacja pozwalająca zagrać jakkolwiek na mapie 15x15
+- Może sprawdzać czy minął jakiś ustalony procent timeoutu?
+- sprawdzać timeout nie tylko przed symulacją ale także w jej trakcie (podobnie jak w minmax)
+    - wtedy może można sie pozbyć tego preprocesingu (ready timeout jest skopany i pada)
 
 # MINMAX - spamietywanie stanów + iterative deepening z estymacją czasu (bez sprawdzania czasu ID nie ma sensu)
 
