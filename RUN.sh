@@ -1,5 +1,4 @@
 image_name="bot_area_image"
-
 if [ "$1" = "run-simulation" ] || [ "$1" = "--sim" ]; then
     shift
     docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py run-simulation "$@"
