@@ -15,3 +15,9 @@ class Eval_1 : public Eval
 public:
     Type operator() (const Engine&, Side) const override;
 };
+
+class Eval_2 : public Eval
+{
+public:
+    Type operator() (const Engine&, Side) const override;
+};
