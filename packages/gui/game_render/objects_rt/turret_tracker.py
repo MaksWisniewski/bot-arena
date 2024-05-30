@@ -8,9 +8,9 @@ from .object_tracker import ObjectTracker
 class TurretTracker(ObjectTracker):
     def get_new_object(self, logic_object, side: str) -> ObjectRT:
         if side == "left":
-            name = "turrent_blue"
+            name = "turret_blue"
         else:
-            name = "turrent_red"
+            name = "turret_red"
         return TurretRT(
             Vector2(logic_object.cords),
             logic_object.id,
