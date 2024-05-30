@@ -20,6 +20,9 @@ class SimConfig:
         self.move_timeout = move_timeout
         self.game_timeout = game_timeout
 
+    def toList(self):
+        return list(self.__dict__.values())
+
     def serialize(self):
         return json.dumps(
             self,
@@ -27,9 +30,15 @@ class SimConfig:
             sort_keys=True,
             indent=4)
 
-    def toList(self):
-        return list(self.__dict__.values())
+    def toFile(self, path):
+        with open(path, 'w') as outfile:
+            outfile.write(self.serialize())
 
     @classmethod
     def deserialize(cls, serialized):
         return cls(**json.loads(serialized))
+
+    @classmethod
+    def fromFile(cls, path):
+        with open(path, "r") as file:
+            return cls.deserialize(file)
