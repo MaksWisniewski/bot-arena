@@ -7,10 +7,14 @@ from .object_tracker import ObjectTracker
 
 class TurretTracker(ObjectTracker):
     def get_new_object(self, logic_object, side: str) -> ObjectRT:
+        if side == "left":
+            name = "turrent_blue"
+        else:
+            name = "turrent_red"
         return TurretRT(
             Vector2(logic_object.cords),
             logic_object.id,
-            'turret',
+            name,
             side,
             logic_object.__dict__()
         )
