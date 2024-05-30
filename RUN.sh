@@ -1,5 +1,3 @@
-#!/bin/bash
-
 image_name="bot_area_image"
 
 if [ "$1" = "run-simulation" ] || [ "$1" = "--sim" ]; then
