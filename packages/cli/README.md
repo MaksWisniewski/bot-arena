@@ -10,8 +10,8 @@ Contains constants used in **CLI**.
 
 Entry point of command line interface.
 
- ❗  CLI tested ONLY while being run from `RUN.sh` from project root.  |
-|-----------------------------------------|
+| ❗CLI tested ONLY while being run from `RUN.sh` from project root.|
+|-------------------------------------------------------------------|
 
 
 ### `cli_commands/`
@@ -21,6 +21,7 @@ Click library uses a huge amount of decorators in function options declaration h
 ### `cli_commands/run_simulation.py`
 
 Runs a simulation and saves config to temporary file _file name in constant_ `SIMFILE_LAST`.
+Simulation is run using [`SimConfig`](/packages/simulator#`sim_config.py`) object.
 
 ### `cli_commands/rerun_simulation.py`
 
