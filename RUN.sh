@@ -2,30 +2,30 @@ image_name="bot_area_image"
 
 if [ "$1" = "run-simulation" ] || [ "$1" = "--sim" ]; then
     shift
-    docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" python3 main.py run-simulation "$@"
+    docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py run-simulation "$@"
     exit $?
 fi
 
 if [ "$1" = "rerun-simulation" ] || [ "$1" = "--sim-r" ]; then
-    docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" python3 main.py rerun-simulation
+    docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py rerun-simulation
     exit $?
 fi
 
 if [ "$1" = "run-simulation-from-config" ] || [ "$1" = "--sim-c" ]; then
     shift
-    docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" python3 main.py run-simulation-from-config "$@"
+    docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py run-simulation-from-config "$@"
     exit $?
 fi
 
 if [ "$1" = "compile" ] || [ "$1" = "--compile" ]; then
     shift
-    docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c 'cd cpp_bots && make "$@"' -- "$@"
+    docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" sh -c 'cd cpp_bots && make "$@"' -- "$@"
     exit $?
 fi
 
 if [ "$1" = "clean" ] || [ "$1" = "--clean" ]; then
     shift
-    docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make clean"
+    docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" sh -c "cd cpp_bots && make clean"
     exit $?
 fi
 
@@ -57,23 +57,23 @@ case $choice in
         ;;
     2)
         # Run Docker container
-        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" zsh
+        docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" zsh
         ;;
     3)
         # Compile c++ bots
-        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make all"
+        docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" sh -c "cd cpp_bots && make all"
         ;;
     4)
         # Clean c++ bots
-        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c "cd cpp_bots && make clean"
+        docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" sh -c "cd cpp_bots && make clean"
         ;;
     5)
         # Run sim
-        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" python3 main.py run-simulation
+        docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py run-simulation
         ;;
     6)
         # Run sim for minmax and random on 5x5
-        docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" python3 main.py run-simulation --b1 minmax --b2 random_bot.py --map map5x5.json
+        docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py run-simulation --b1 minmax --b2 random_bot.py --map map5x5.json
         ;;
     *)
         echo "Invalid option. Please enter a valid number."
