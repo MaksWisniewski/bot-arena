@@ -6,10 +6,13 @@ from .serializer import Serializer
 from .log_maker import LogMaker
 from packages.game_logic.game import Game, ErrorCode
 from packages.game_logic.actions import Wait, BuildFarm, BuildTurret, SpawnSoldier
+from packages.simulator.sim_config import SimConfig
+
 
 # Define a custom exception for incorrect moves
 class WrongMove(Exception):
     pass
+
 
 # Function to convert a string into a corresponding action object
 def str_to_action(str, player):
@@ -26,10 +29,10 @@ def str_to_action(str, player):
     else:
         raise WrongMove
 
-# Main function for playing multiple games
-def play(name1, name2, num_games, map_name, log_name="logs",
-        ready_timeout=100, move_timeout=100, game_timeout=600):
 
+# Main function for playing multiple games
+def play(bot_left, bot_right, games, map_name, log_name="logs",
+         ready_timeout=100, move_timeout=100, game_timeout=600):
     # Dictionary to store player instances
     p = {}
 
@@ -41,8 +44,8 @@ def play(name1, name2, num_games, map_name, log_name="logs",
         if not p:
             for player in p.values():
                 player.kill()
-            p[0] = Bot(name1)
-            p[1] = Bot(name2)
+            p[0] = Bot(bot_left)
+            p[1] = Bot(bot_right)
 
         for i, player in enumerate(p.values()):
             # Send settings to bots
@@ -56,7 +59,7 @@ def play(name1, name2, num_games, map_name, log_name="logs",
     results = []
 
     # Function to determine the winner of a game based on the player's state
-    def determine(dict : dict[int, bool]):
+    def determine(dict: dict[int, bool]):
         if not dict[p[0]] and not dict[p[1]]:
             return 'TIE'
         elif not dict[p[0]]:
@@ -87,7 +90,7 @@ def play(name1, name2, num_games, map_name, log_name="logs",
                 break
         else:
             print(__name__, "end by ready timeout", file=sys.stderr)
-            log_maker.save("TIE", map_name, name1, name2)
+            log_maker.save("TIE", map_name, bot_left, bot_right)
             return determine(is_ready)
 
         # Play the game until timeout
@@ -101,8 +104,9 @@ def play(name1, name2, num_games, map_name, log_name="logs",
                 if all(action.values()):
                     break
             else:
-                print(__name__, f"end by {'game' if move_end_time == game_end_time else 'move'} timeout", file=sys.stderr)
-                log_maker.save("TIE", map_name, name1, name2)
+                print(__name__, f"end by {'game' if move_end_time == game_end_time else 'move'} timeout",
+                      file=sys.stderr)
+                log_maker.save("TIE", map_name, bot_left, bot_right)
                 return determine(action)
 
             # Add actions to the log
@@ -124,13 +128,13 @@ def play(name1, name2, num_games, map_name, log_name="logs",
 
             # Check for game end conditions and save the log
             if response[0] == ErrorCode[1]:
-                log_maker.save("0", map_name, name1, name2)
+                log_maker.save("0", map_name, bot_left, bot_right)
                 return 0
             elif response[0] == ErrorCode[2]:
-                log_maker.save("1", map_name, name1, name2)
+                log_maker.save("1", map_name, bot_left, bot_right)
                 return 1
             elif "Tie" in response:
-                log_maker.save("TIE", map_name, name1, name2)
+                log_maker.save("TIE", map_name, bot_left, bot_right)
                 print(__name__, "end by tie", file=sys.stderr)
                 return 'TIE'
 
@@ -145,8 +149,8 @@ def play(name1, name2, num_games, map_name, log_name="logs",
 
     # Play the specified number of games
     LogMaker.clear(log_name)
-    for i in range(num_games):
-        yield(play_game(log_name, str(i), map_name))
+    for i in range(games):
+        yield (play_game(log_name, str(i), map_name))
         for player in p.values():
             player.put('END')
 
@@ -155,3 +159,7 @@ def play(name1, name2, num_games, map_name, log_name="logs",
         player.put('BYE')
         player.kill()
     return results
+
+
+def playSimulation(config: SimConfig):
+    return play(**config.__dict__)
