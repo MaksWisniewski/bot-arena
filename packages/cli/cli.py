@@ -1,13 +1,14 @@
+
+
 import sys, os
 from pathlib import Path
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import click
 import packages
 
-from packages.simulator.api import playSimulation
 from packages.gui.main import Main
 from packages.simulator.sim_config import SimConfig
-
+from packages.cli.simulate import simulate
 
 BOTS = os.listdir(packages.BOTS_DIRECTORY)
 MAPS = os.listdir(packages.MAPS_DIRECTORY)
@@ -17,6 +18,7 @@ MAPS_STR = SEPARATOR + SEPARATOR.join(MAPS)
 
 CONFIGS_DIR = str(Path(__file__).parent.parent.parent) + "/configs/"
 SIMFILE_LAST = CONFIGS_DIR + "simulations/last.json"
+
 
 @click.command()
 @click.option("--b1",
@@ -42,7 +44,6 @@ def run_simulation(
         ready_timeout,
         move_timeout,
         game_timeout):
-
     config = SimConfig(
         bot_left=b1,
         bot_right=b2,
@@ -51,14 +52,16 @@ def run_simulation(
         games=games,
         ready_timeout=ready_timeout,
         move_timeout=move_timeout,
-        game_timeout=move_timeout)
+        game_timeout=game_timeout)
 
-    simulations = playSimulation(config)
     config.toFile(SIMFILE_LAST)
+    simulate(config)
 
-    for i, simulation in enumerate(simulations):
-        print(f'[ {i + 1} / {games} ] > {simulation}')
-    print("After simulation")
+
+@click.command()
+def rerun_simulation():
+    config = SimConfig.fromFile(SIMFILE_LAST)
+    simulate(config)
 
 
 @click.command()
@@ -71,6 +74,7 @@ def cli(): pass
 
 
 cli.add_command(run_simulation)
+cli.add_command(rerun_simulation)
 cli.add_command(run_gui)
 
 if __name__ == "__main__":
