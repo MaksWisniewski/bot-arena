@@ -7,10 +7,14 @@ from .object_tracker import ObjectTracker
 
 class FarmTracker(ObjectTracker):
     def get_new_object(self, logic_object: Farm, side: str) -> ObjectRT:
+        if side == "left":
+            name = "farm_blue"
+        else:
+            name = "farm_red"
         return FarmRT(
             Vector2(logic_object.cords),
             logic_object.id,
-            'farm',
+            name,
             side,
             logic_object.__dict__()
         )
