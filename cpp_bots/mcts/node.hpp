@@ -3,6 +3,7 @@
 #include "../common/engine/engine.hpp"
 
 #include <string>
+#include <chrono>
 #include <unordered_map>
 
 class MCTSNode
@@ -18,7 +19,12 @@ public:
         int games_won;
     };
 
-    Result update(Engine&, Side, int max_simulation_length = default_max_simulation_length);
+    Result update(
+        Engine&,
+        Side,
+        const std::chrono::system_clock::time_point& max_time,
+        bool& is_timeout,
+        int max_simulation_length = default_max_simulation_length);
 
     // used to get best move after performing simulations
     std::string get_best_move() const;
@@ -27,7 +33,12 @@ private:
     // used to select the node to expand while performing simulations
     std::string select_move() const;
 
-    Result expand(const Engine&, Side, int max_simulation_length);
+    Result expand(
+        const Engine&,
+        Side,
+        const std::chrono::system_clock::time_point& max_time,
+        bool& is_timeout,
+        int max_simulation_length);
 
     // returns true if simulation ended with win for given side
     bool simulate(Engine&, Side, int max_simulation_length);

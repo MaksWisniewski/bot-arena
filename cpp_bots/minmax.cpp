@@ -100,7 +100,7 @@ public:
     std::string make_move() override
     {
         // TODO: probably can be done better
-        max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{move_timeout} - std::chrono::milliseconds{100};
+        max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{move_timeout} - std::chrono::milliseconds{25};
         is_timeout = false;
 
         Engine engine{arena_properties};
@@ -128,7 +128,7 @@ public:
 
                 if (is_timeout)
                 {
-                    std::cerr << std::format("[minmax] serached for max depth {0}, best move: {1}\n", depth, bestMove);
+                    std::cerr << std::format("[minmax] searched for max depth {0}, best move: {1}\n", depth, bestMove);
                     return bestMove;
                 }
 
@@ -150,7 +150,7 @@ public:
             bestMove = tmpBestMove;
         }
 
-        std::cerr << std::format("[minmax] serached for max depth {0}, best move: {1}\n", depth, bestMove);
+        std::cerr << std::format("[minmax] searched for max depth {0}, best move: {1}\n", depth, bestMove);
         return bestMove;
     }
 

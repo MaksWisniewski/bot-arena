@@ -10,11 +10,16 @@ MCTSNode::MCTSNode(const Side side, const MCTSNode* parent) : side(side), games_
 {
 }
 
-MCTSNode::Result MCTSNode::update(Engine& engine, const Side my_side, int max_simulation_length)
+MCTSNode::Result MCTSNode::update(
+    Engine& engine,
+    const Side my_side,
+    const std::chrono::system_clock::time_point& max_time,
+    bool& is_timeout,
+    int max_simulation_length)
 {
     if (is_leaf())
     {
-        return expand(engine, my_side, max_simulation_length);
+        return expand(engine, my_side, max_time, is_timeout, max_simulation_length);
     }
 
     const auto move = select_move();
@@ -28,7 +33,7 @@ MCTSNode::Result MCTSNode::update(Engine& engine, const Side my_side, int max_si
         engine.make_move("W", move);
     }
 
-    const auto result = children.at(move).update(engine, my_side, max_simulation_length);
+    const auto result = children.at(move).update(engine, my_side, max_time, is_timeout, max_simulation_length);
 
     games_played += result.games_played;
     games_won += result.games_won;
@@ -65,8 +70,19 @@ std::string MCTSNode::select_move() const
     return std::max_element(children.begin(), children.end(), compare)->first;
 }
 
-MCTSNode::Result MCTSNode::expand(const Engine& engine, const Side my_side, int max_simulation_length)
+MCTSNode::Result MCTSNode::expand(
+    const Engine& engine,
+    const Side my_side,
+    const std::chrono::system_clock::time_point& max_time,
+    bool& is_timeout,
+    int max_simulation_length)
 {
+    if (std::chrono::high_resolution_clock::now() >= max_time)
+    {
+        is_timeout = true;
+        return {0, 0};
+    }
+
     if (engine.isWin())
     {
         const auto result = engine.isWin(my_side);
@@ -85,6 +101,12 @@ MCTSNode::Result MCTSNode::expand(const Engine& engine, const Side my_side, int 
 
     for (auto& move: legal_moves)
     {
+        if (std::chrono::high_resolution_clock::now() >= max_time)
+        {
+            is_timeout = true;
+            break;
+        }
+
         if (is_useless(move, path))
         {
             continue;

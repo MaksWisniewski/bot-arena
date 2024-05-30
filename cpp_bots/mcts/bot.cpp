@@ -3,7 +3,6 @@
 #include "node.hpp"
 
 #include <iostream>
-#include <chrono>
 #include <format>
 
 class MCTSBot : public Bot
@@ -15,41 +14,18 @@ public:
         std::cerr << std::format("[mcts] running with max simulation length: {0}\n", max_simulation_length);
     }
 
-    // TODO: fix it or get rid of it as it causes ready timeout
-    void preprocess() override
-    {
-        const auto max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{ready_timeout} - std::chrono::milliseconds{2000};
-
-        MCTSNode root{side};
-        Engine engine{arena_properties};
-
-        int number_of_simulations = 0;
-        // TODO: fix milliseconds(1000)
-        while (std::chrono::high_resolution_clock::now() < max_time)
-        {
-            root.update(engine, side, max_simulation_length);
-            number_of_simulations++;
-        }
-
-        mean_simulation_duration = std::chrono::duration<double>{static_cast<double>(ready_timeout) / number_of_simulations};
-
-        std::cerr << std::format("[mcts]: performed {0} simulations in {1} seconds\n", number_of_simulations, ready_timeout);
-        std::cerr << std::format("[mcts]: mean simulation time: {0}\n", mean_simulation_duration);
-    }
-
     std::string make_move() override
     {
-        const auto max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{move_timeout} - 2 * mean_simulation_duration;
+        const auto max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{move_timeout} - std::chrono::milliseconds{25};
+        bool is_timeout{false};
 
         MCTSNode root{side};
         Engine engine{arena_properties};
 
-        int number_of_simulations = 0;
-        while (std::chrono::high_resolution_clock::now() < max_time)
+        int number_of_simulations;
+        for (number_of_simulations = 0; not is_timeout; number_of_simulations++)
         {
-            // TODO: check timeout during simulation, not only before starting it (as in minmax)
-            root.update(engine, side, max_simulation_length);
-            number_of_simulations++;
+            root.update(engine, side, max_time, is_timeout, max_simulation_length);
         }
 
         const auto move = root.get_best_move();
@@ -61,7 +37,6 @@ public:
 
 private:
     int max_simulation_length;
-    std::chrono::duration<double> mean_simulation_duration;
 };
 
 int main()
