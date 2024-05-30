@@ -13,10 +13,15 @@ class SoldierTracker(ObjectTracker):
         SoldierRT.path = path
     
     def get_new_object(self, logic_object: Soldier, side: str) -> ObjectRT:
+        if side == "left":
+            name = logic_object.name + "_blue"
+        else:
+            name = logic_object.name + "_red"
         return SoldierRT(
             logic_object.id,
             logic_object.position,
-            logic_object.name,
+            # logic_object.name,
+            name,
             side,
             logic_object.__dict__()
         )
