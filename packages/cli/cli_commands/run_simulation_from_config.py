@@ -8,7 +8,7 @@ from packages.simulator.sim_config import SimConfig
 @click.option("--config",
               prompt=f'Select one of configurations:{SIM_CONFIGS_STR}\n',
               help='Simulation config file')
-def run_simulation_from_config(sim_config):
+def run_simulation_from_config(config):
     try:
         config = SimConfig.fromFile(f'{SIM_CONFIGS_DIR}/{sim_config}')
     except:
