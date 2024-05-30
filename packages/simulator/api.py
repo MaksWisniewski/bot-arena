@@ -101,7 +101,7 @@ def play(name1, name2, num_games, map_name, log_name="logs",
                 if all(action.values()):
                     break
             else:
-                print(__name__, "end by move timeout", file=sys.stderr)
+                print(__name__, f"end by {'game' if move_end_time == game_end_time else 'move'} timeout", file=sys.stderr)
                 log_maker.save("TIE", map_name, name1, name2)
                 return determine(action)
 
