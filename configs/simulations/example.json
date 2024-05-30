@@ -1,0 +1,10 @@
+{
+    "bot_left": "minmax",
+    "bot_right": "mcts",
+    "game_timeout": 600,
+    "games": 1,
+    "log_name": "temp",
+    "map_name": "map15x15.json",
+    "move_timeout": 10,
+    "ready_timeout": 10
+}
