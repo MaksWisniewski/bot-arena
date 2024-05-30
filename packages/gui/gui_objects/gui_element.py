@@ -39,10 +39,17 @@ class GUIElement(GUIobject, ABC):
             )
         else:
             surf.fill(background_color)
+        if self.properties.get('side', None) == "left":
+            temp = self.properties.get('text_color', GUI_COLORS['left_bot_name'])
+        elif self.properties.get('side', None) == "right":
+            temp = self.properties.get('text_color', GUI_COLORS['right_bot_name'])
+        else:
+            temp = self.properties.get('text_color', GUI_COLORS['text'])
         text = self.font.render(
             self.properties.get('text', ""),
             True,
-            self.properties.get('text_color', GUI_COLORS['text']))
+            # self.properties.get('text_color', GUI_COLORS['text']))
+            temp)
         surf.blit(text, (
             (self.real_size.x - text.get_size()[0]) // 2,
             (self.real_size.y - text.get_size()[1]) // 2,
