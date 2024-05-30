@@ -5,16 +5,16 @@ COST = {
 
 START_GOLD = 1000
 PASSIVE_GOLD = 10
-FARM_GOLD = 5
+FARM_GOLD = 2
 
 TURRET_STATS = {
-    'attack': 10,
+    'attack': 100,
     'range': 3
 }
 
 SOLDIERS_STATS = {
     'swordsman': {
-        'max_hp': 600,
+        'max_hp': 500,
         'damage': 100,
         'range': 1,
         'cost': 100,
