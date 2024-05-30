@@ -28,4 +28,4 @@ Runs simulation from config file `SIMFILE_LAST`.
 
 ### `cli_commands/run_simulation_from_config.py`
 
-Allows user to run simulation from any config file stored in [`configs/simulations`](/config/simulations)
+Allows user to run simulation from any config file stored in [`configs/simulations`](/configs/simulations)
