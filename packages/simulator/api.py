@@ -144,6 +144,9 @@ def play(bot_left, bot_right, games, map_name, log_name="logs",
             for player in p.values():
                 player.put(actions)
                 player.put(game_data)
+        else:
+            print(__name__, f"end by game timeout", file=sys.stderr)
+            log_maker.save("TIE", map_name, bot_left, bot_right)
 
         return "TIE"
 
