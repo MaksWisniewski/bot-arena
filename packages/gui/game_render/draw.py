@@ -61,9 +61,9 @@ class Draw:
             self.__health_bar(object)
 
         elif object.__class__ == FarmRT:
-            texture = self.__assets["farms"]["farm"]
+            texture = self.__assets["farms"][object.name]
         elif object.__class__ == TurretRT:
-            texture = self.__assets["turrets"]["turret"]
+            texture = self.__assets["turrets"][object.name]
         elif object.__class__ == ObstacleRT:
             texture = self.__assets["obstacles"]["obstacle_" + object.name]
         else:
