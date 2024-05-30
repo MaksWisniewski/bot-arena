@@ -41,4 +41,4 @@ class SimConfig:
     @classmethod
     def fromFile(cls, path):
         with open(path, "r") as file:
-            return cls.deserialize(file)
+            return cls.deserialize(file.read())
