@@ -29,12 +29,12 @@ def str_to_action(str, player):
 # Main function for playing multiple games
 def play(name1, name2, num_games, map_name, log_name="logs",
         ready_timeout=100, move_timeout=100, game_timeout=600):
-        
+
     # Dictionary to store player instances
     p = {}
 
     # Initialize the game object
-    game = Game(map_name) 
+    game = Game(map_name)
 
     # Function to reset the game state and initialize players if not already done
     def reset():
@@ -67,9 +67,9 @@ def play(name1, name2, num_games, map_name, log_name="logs",
     # Function to play a single game
     def play_game(log_name, log_number, map_name):
         # Initialize the game and log maker
-        game = Game(map_name) 
+        game = Game(map_name)
         log_maker = LogMaker(log_name, log_number)
-        reset()  
+        reset()
 
         # Set timeout values
         ready_end_time = time.time() + ready_timeout
@@ -89,24 +89,25 @@ def play(name1, name2, num_games, map_name, log_name="logs",
             print(__name__, "end by ready timeout", file=sys.stderr)
             log_maker.save("TIE", map_name, name1, name2)
             return determine(is_ready)
-            
+
         # Play the game until timeout
         while time.time() < game_end_time:
             action = {player: None for player in p.values()}
-            move_end_time = time.time() + move_timeout
-            while time.time() < move_end_time <= game_end_time:
+            move_end_time = min(time.time() + move_timeout, game_end_time)
+            while time.time() < move_end_time:
                 for player in p.values():
-                    action[player] = player.get()
+                    if not action[player]:
+                        action[player] = player.get()
                 if all(action.values()):
                     break
             else:
                 print(__name__, "end by move timeout", file=sys.stderr)
                 log_maker.save("TIE", map_name, name1, name2)
                 return determine(action)
-            
+
             # Add actions to the log
             log_maker.add_actions(*action.values())
-            
+
             try:
                 action[p[0]] = str_to_action(action[p[0]], 0)
             except WrongMove:
@@ -117,7 +118,7 @@ def play(name1, name2, num_games, map_name, log_name="logs",
             except WrongMove:
                 print(__name__, "end by wrong move", file=sys.stderr)
                 return 0
-            
+
             # Update the game state and get the response
             response = game.update(action[p[0]], action[p[1]])
 
@@ -132,7 +133,7 @@ def play(name1, name2, num_games, map_name, log_name="logs",
                 log_maker.save("TIE", map_name, name1, name2)
                 print(__name__, "end by tie", file=sys.stderr)
                 return 'TIE'
-            
+
             # Send game data to players
             game_data = Serializer.get_json(game)
             actions = f"{action[p[0]]} | {action[p[1]]}"
