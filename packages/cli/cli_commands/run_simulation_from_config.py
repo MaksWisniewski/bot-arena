@@ -10,8 +10,8 @@ from packages.simulator.sim_config import SimConfig
               help='Simulation config file')
 def run_simulation_from_config(config):
     try:
-        config = SimConfig.fromFile(f'{SIM_CONFIGS_DIR}/{sim_config}')
+        red_config = SimConfig.fromFile(f'{SIM_CONFIGS_DIR}/{config}')
     except:
-        raise LookupError(f"Failed to load config file {sim_config}")
+        raise LookupError(f"Failed to load config file {config}")
 
-    simulate(config)
+    simulate(red_config)
