@@ -1,6 +1,6 @@
 import click
 from packages.cli import *
-from packages.cli.simulate import simulate
+from packages.cli.utils.simulate import simulate
 from packages.simulator.sim_config import SimConfig
 
 
