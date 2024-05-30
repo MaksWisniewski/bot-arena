@@ -5,7 +5,7 @@ from packages.simulator.sim_config import SimConfig
 
 
 @click.command()
-@click.option("--sim_config",
+@click.option("--config",
               prompt=f'Select one of configurations:{SIM_CONFIGS_STR}\n',
               help='Simulation config file')
 def run_simulation_from_config(sim_config):
