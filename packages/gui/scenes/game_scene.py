@@ -43,8 +43,8 @@ class GameSceneManager(AbstractSceneManager):
                 icon = 'game',
             ),
             StatsDisplay([
-                Text((0.1, 0.4), (0.1, 0.15), "Left"),
-                Text((0.1, 0.75), (0.1, 0.15), "Right"),
+                Text((0.1, 0.4), (0.1, 0.15), "Left", side = "left"),
+                Text((0.1, 0.75), (0.1, 0.15), "Right", side = "right"),
                 Text((0.3, 0.05), (0.15, 0.15), "income"),
                 Text((0.6, 0.05), (0.15, 0.15), "gold"),
                 
