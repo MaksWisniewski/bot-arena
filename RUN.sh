@@ -11,6 +11,12 @@ if [ "$1" = "rerun-simulation" ] || [ "$1" = "--sim-r" ]; then
     exit $?
 fi
 
+if [ "$1" = "run-simulation-from-config" ] || [ "$1" = "--sim-c" ]; then
+    shift
+    docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" python3 main.py run-simulation-from-config "$@"
+    exit $?
+fi
+
 if [ "$1" = "compile" ] || [ "$1" = "--compile" ]; then
     shift
     docker run --rm -v "$(pwd):/usr/src/app" -it "$image_name" sh -c 'cd cpp_bots && make "$@"' -- "$@"

@@ -1,5 +1,3 @@
-
-
 import sys, os
 from pathlib import Path
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -10,14 +8,19 @@ from packages.gui.main import Main
 from packages.simulator.sim_config import SimConfig
 from packages.cli.simulate import simulate
 
+CONFIGS_DIR = str(Path(__file__).parent.parent.parent) + "/configs/"
+SIM_CONFIGS_DIR = CONFIGS_DIR + "simulations"
+SIMFILE_LAST = SIM_CONFIGS_DIR + "last"
+
 BOTS = os.listdir(packages.BOTS_DIRECTORY)
 MAPS = os.listdir(packages.MAPS_DIRECTORY)
+SIM_CONFIGS = os.listdir(SIM_CONFIGS_DIR)
+
 SEPARATOR = "\n\t> "
+
 BOTS_STR = SEPARATOR + SEPARATOR.join(BOTS)
 MAPS_STR = SEPARATOR + SEPARATOR.join(MAPS)
-
-CONFIGS_DIR = str(Path(__file__).parent.parent.parent) + "/configs/"
-SIMFILE_LAST = CONFIGS_DIR + "simulations/last.json"
+SIM_CONFIGS_STR = SEPARATOR + SEPARATOR.join(SIM_CONFIGS)
 
 
 @click.command()
@@ -65,6 +68,19 @@ def rerun_simulation():
 
 
 @click.command()
+@click.option("--sim_config",
+              prompt=f'Select one of configurations:{SIM_CONFIGS_STR}\n',
+              help='Simulation config file')
+def run_simulation_from_config(sim_config):
+    try:
+        config = SimConfig.fromFile(sim_config)
+    except:
+        raise LookupError(f"Failed to load config file {sim_config}")
+
+    simulate(config)
+
+
+@click.command()
 def run_gui():
     Main()
 
@@ -75,6 +91,7 @@ def cli(): pass
 
 cli.add_command(run_simulation)
 cli.add_command(rerun_simulation)
+cli.add_command(run_simulation_from_config)
 cli.add_command(run_gui)
 
 if __name__ == "__main__":
