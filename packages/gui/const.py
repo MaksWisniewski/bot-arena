@@ -40,6 +40,8 @@ GUI_COLORS = {
     'background2': (30, 31, 35),
     'window_border': (32, 33, 37),
     'text': (146, 147, 151),
+    'left_bot_name': (0, 0, 255),
+    'right_bot_name': (255, 0, 0),
     'active': (51, 206, 252),
     'blocked': (30, 31, 35),
     'none': (0, 0, 0, 0),
