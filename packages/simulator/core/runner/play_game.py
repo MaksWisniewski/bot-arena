@@ -7,6 +7,7 @@ from packages.simulator.core.runner.wait_players_ready import wait_players_ready
 from packages.simulator.core.runner.play_game_till_timeout import play_game_till_timeout
 from packages.simulator.core.runner.reset import reset
 
+
 # Function to play a single game
 def play_game(
         log_name,
@@ -27,3 +28,24 @@ def play_game(
     if ready_res:
         return ready_res
     return play_game_till_timeout(game_end_time, player_instances, log_maker, config, game)
+
+
+def play_game_isolated(config, idx):
+    player_instances = {}
+    results = []
+    LogMaker.clear(config.log_name)
+
+    play_game(
+        config.log_name,
+        str(idx),
+        config.map_name,
+        player_instances,
+        config)
+
+    for player in player_instances.values():
+        player.put('END')
+
+    for player in player_instances.values():
+        player.put('BYE')
+        player.kill()
+    return results

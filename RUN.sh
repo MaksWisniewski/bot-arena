@@ -10,6 +10,11 @@ if [ "$1" = "rerun-simulation" ] || [ "$1" = "--sim-r" ]; then
     exit $?
 fi
 
+if [ "$1" = "concurrent-rerun-simulation" ] || [ "$1" = "--csim-r" ]; then
+    docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py concurrent-rerun-simulation
+    exit $?
+fi
+
 if [ "$1" = "run-simulation-from-config" ] || [ "$1" = "--sim-c" ]; then
     shift
     docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py run-simulation-from-config "$@"

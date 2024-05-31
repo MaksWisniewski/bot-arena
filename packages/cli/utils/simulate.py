@@ -1,5 +1,5 @@
 from packages.simulator.api.sim_config import SimConfig
-from packages.simulator.api.playSimulation import playSimulation
+from packages.simulator.api.playSimulation import playSimulation, playSimulationConcurrent
 
 
 def simulate(config: SimConfig):
@@ -7,4 +7,13 @@ def simulate(config: SimConfig):
 
     for i, simulation in enumerate(simulations):
         print(f'[ {i + 1} / {config.games} ] > {simulation}')
+    print("After simulation")
+
+
+def concurrentSimulate(config: SimConfig):
+    simulations = playSimulationConcurrent(config)
+
+    for i, simulation in enumerate(simulations):
+        print(f'[ {i + 1} / {config.games} ] > {simulation}')
+
     print("After simulation")
