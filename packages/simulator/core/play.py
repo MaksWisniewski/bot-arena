@@ -3,10 +3,6 @@ from packages.simulator.core.runner.play_game import play_game
 from packages.simulator.core.log_maker import LogMaker
 
 
-
-
-
-
 # Main function for playing multiple games
 def play(config: SimConfig):
     player_instances = {}
@@ -28,3 +24,4 @@ def play(config: SimConfig):
         player.put('BYE')
         player.kill()
     return results
+
