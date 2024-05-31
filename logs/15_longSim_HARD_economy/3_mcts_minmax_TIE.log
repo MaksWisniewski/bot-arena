@@ -1,0 +1,183 @@
+map:map15x15.json
+player1:mcts
+player2:minmax
+F 4 0 | F 7 4
+F 2 2 | F 5 0
+F 6 1 | F 14 4
+F 4 9 | F 9 12
+F 7 2 | F 6 0
+W | W
+W | W
+W | W
+W | S swordsman
+S swordsman | W
+W | W
+W | W
+W | W
+W | S swordsman
+S swordsman | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | W
+W | W
+W | S swordsman
+W | W
+W | W
+W | S swordsman
+W | W
+S swordsman | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | W
+W | S swordsman
+W | W
+W | W
+W | W
+S swordsman | W
+W | S swordsman
+W | W
+W | W
+W | W
+S swordsman | W
+W | W
+W | W
+W | S swordsman
+W | W
+W | W
+S swordsman | W
+W | W
+W | S swordsman
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+W | W
+W | S swordsman
+S swordsman | W
+W | W
+W | W
+W | W
+W | S swordsman
+S swordsman | W
+W | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+W | S swordsman
+W | W
+S swordsman | W
+W | W
+W | W
+W | W
+S swordsman | W
+W | W
+W | W
+W | W
+W | S swordsman
+W | S swordsman
+W | W
+W | W
+S swordsman | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+S swordsman | W
+W | W
+W | S swordsman
+W | W
+W | W
+W | W
+W | S swordsman
+W | W
+S swordsman | W
+W | W
+W | W
+W | S swordsman
+W | W
+W | W
+S swordsman | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | W
+W | S swordsman
+W | W
+W | W
+W | W
+S swordsman | W
+W | W
+W | S swordsman
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+W | W
