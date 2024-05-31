@@ -1,0 +1,43 @@
+map:map15x15.json
+player1:mcts
+player2:minmax
+F 3 0 | F 7 4
+F 0 1 | F 3 7
+S archer | F 10 6
+F 3 13 | F 1 1
+F 2 11 | T 2 2
+W | W
+W | W
+W | W
+W | S swordsman
+S swordsman | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | W
+W | W
+W | W
+W | S swordsman
+W | W
+W | W
+W | S swordsman
+S swordsman | W
+W | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
+W | W
+W | W
+W | W
+W | W
+W | W
+S swordsman | W
+W | S swordsman
+W | W
+W | W
+W | W
+W | W
+S swordsman | S swordsman
