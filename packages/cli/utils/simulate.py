@@ -1,5 +1,5 @@
-from packages.simulator.sim_config import SimConfig
-from packages.simulator.api import playSimulation
+from packages.simulator.api.sim_config import SimConfig
+from packages.simulator.api.playSimulation import playSimulation
 
 
 def simulate(config: SimConfig):

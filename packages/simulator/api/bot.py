@@ -5,7 +5,8 @@ import time
 import os
 
 from packages import BOTS_DIRECTORY
-from packages.simulator.utils import get_run_command
+from packages.simulator.core.get_run_command import get_run_command
+
 
 class Bot:
     def __init__(self, file):
@@ -21,7 +22,7 @@ class Bot:
         for thread in self.threads:
             thread.setDaemon(True)
             thread.start()
-        
+
         self.total_time = 0
         self.start_time = None
 
@@ -67,16 +68,8 @@ class Bot:
             self.start_time = time.time()
         return self.out_queue.put(item)
 
-
     def kill(self):
         self.process.kill()
         for thread in self.threads:
             thread.join()
         # may not work
-
-
-
-
-
-
-    

@@ -1,7 +1,7 @@
 import click
 from packages.cli import *
 from packages.cli.utils.simulate import simulate
-from packages.simulator.sim_config import SimConfig
+from packages.simulator.api.sim_config import SimConfig
 
 
 @click.command()
@@ -16,9 +16,9 @@ from packages.simulator.sim_config import SimConfig
               help='Map for simulation')
 @click.option("--log_name", default="temp", help='Name of log file')
 @click.option("--games", default=1, help='Number of games to simulate')
-@click.option("--ready_timeout", default=10)
-@click.option("--move_timeout", default=10)
-@click.option("--game_timeout", default=600)
+@click.option("--ready_timeout", default=5)
+@click.option("--move_timeout", default=2)
+@click.option("--game_timeout", default=60)
 def run_simulation(
         b1,
         b2,
