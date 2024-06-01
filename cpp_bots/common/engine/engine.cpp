@@ -119,6 +119,11 @@ std::vector<std::pair<int, int>> Engine::get_path() const
     return map.path;
 }
 
+GameParameters Engine::get_game_parameters() const
+{
+    return game_parameters;
+}
+
 std::vector<Building> Engine::get_farms(const Side side) const
 {
     return players.at(side).farms;
@@ -132,6 +137,16 @@ std::vector<Building> Engine::get_turrets(const Side side) const
 std::vector<Soldier> Engine::get_soldiers(const Side side) const
 {
     return players.at(side).soldiers;
+}
+
+int Engine::get_gold(const Side side) const
+{
+    return players.at(side).gold;
+}
+
+int Engine::get_income(const Side side) const
+{
+    return players.at(side).income;
 }
 
 void Engine::fight_soldiers()
