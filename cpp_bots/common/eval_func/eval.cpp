@@ -40,8 +40,8 @@ Eval::Type Eval_2::operator() (const Engine& engine, const Side mySide) const {
     result += engine.get_soldiers(mySide).size() * 160;
     result -= engine.get_soldiers(other_side(mySide)).size() * 300;
 
-    result += engine.get_turrets(mySide).size() * 200;
-    result -= engine.get_turrets(other_side(mySide)).size() * 200;
+    result += engine.get_turrets(mySide).size() * 800;
+    result -= engine.get_turrets(other_side(mySide)).size() * 800;
 
 	result += engine.get_legal_moves(mySide).size() * 100;
 	result -= engine.get_legal_moves(other_side(mySide)).size() * 100;

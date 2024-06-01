@@ -1,0 +1,3 @@
+map:map15x15.json
+player1:mcts
+player2:minmax
