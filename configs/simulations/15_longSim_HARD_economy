@@ -1,0 +1,10 @@
+{
+    "bot_left": "mcts",
+    "bot_right": "minmax",
+    "game_timeout": 16800,
+    "games": 4,
+    "log_name": "15_longSim_HARD_economy3",
+    "map_name": "map15x15.json",
+    "move_timeout": 90,
+    "ready_timeout": 90
+}
