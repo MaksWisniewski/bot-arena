@@ -23,6 +23,7 @@ public:
 
     std::vector<std::pair<int, int>> get_empty_cells() const;
     std::vector<std::pair<int, int>> get_path() const;
+    std::pair<int, int> get_map_size() const;
 
     GameParameters get_game_parameters() const;
 

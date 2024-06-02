@@ -2,7 +2,7 @@
 
 int distance(const std::pair<int, int>& x, const std::pair<int, int>& y)
 {
-    return std::abs(x.first- y.first) + std::abs(x.second - y.second);
+    return std::abs(x.first - y.first) + std::abs(x.second - y.second);
 }
 
 std::size_t pair_hash::operator()(const std::pair<int, int> &p) const

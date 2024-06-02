@@ -162,7 +162,8 @@ private:
 
 int main()
 {
-    Eval_1 eval{};
+    // Eval_1 eval{};
+    BetterEval eval{};
     for (;;)
     {
         MinMaxBot bot{eval};

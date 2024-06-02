@@ -1,22 +1,20 @@
 # Uwaga:
 gra do konca nie jest turowa, a boty minmax, alpha_beta sztucznie robią z gry grę turową
 
-# minmax bierze czas?
-
-# dokumentacja xddd?
-
-# MCTS - multithreading + optymalizacja pozwalająca zagrać jakkolwiek na mapie 15x15
-- Może sprawdzać czy minął jakiś ustalony procent timeoutu?
-- sprawdzać timeout nie tylko przed symulacją ale także w jej trakcie (podobnie jak w minmax)
-    - wtedy może można sie pozbyć tego preprocesingu (ready timeout jest skopany i pada)
-
-# MINMAX - spamietywanie stanów + iterative deepening z estymacją czasu (bez sprawdzania czasu ID nie ma sensu)
-
 # Inne warunki końca gry - na większych mapach gra między sensownymi botami się nie kończy
 
-# timeouty są zepsute
-- silnik w pytonie jest tak wolny, że podane timeouty nie są zgodne z prawdą (sam silnik zjada sporą ich część)
-przez co bot timeoutuje, próbując maksymalnie wykorzystać dany mu czas
--> mcts nie jest w stanie grać na mapie 15x15, na 10x10 śmiga
-- najbardziej zepsuty jest ready timeout
-- coś sie psuje z tym jak sie puszcza więcej gier oraz jak sie da move timeout wiekszy niż 1 (xd)
+# MCTS - czy filtrowanie ruchów ma sens? (jeśli tak to czy jest dobrze napisane?)
+trzeba inaczej filtrować farmy
+
+# MCTS - lepsze losowanie w symulacjach
+może też z filtrowaniem ruchów jak wyżej?
+
+# stats.py
+jak mocna powinna być wieża?
+
+# eval
+- dobrać odpowiednie wagi (eksperymentalnie)
+- wagi zależne od parametrów gry, np.:
+    - wieży od jej kosztu/ataku lub nawet ilości wież
+    - farmy od jej koszty/obecnego dochodu/ilości golda
+    - żołnierza od odległości od bazy/hp/rodzaju/kosztu/...

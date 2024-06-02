@@ -1,8 +1,10 @@
 #include "eval.hpp"
-#include <string>
+#include "../optimizations/is_useless.hpp" // for Path - maybe it should be extracted
 
-int eval_mobility(const Engine& engine, const Side side);
-int eval_control(const Engine& engine, const Side side);
+#include <algorithm>
+
+Eval::Type eval_mobility(const Engine&, const Side);
+Eval::Type eval_control(const Engine&, const Side);
 
 Eval::Type Eval_1::operator() (const Engine& engine, const Side mySide) const {
     Type result = 0;
@@ -55,7 +57,7 @@ Eval::Type Eval_2::operator() (const Engine& engine, const Side mySide) const {
     return result;
 }
 
-int eval_mobility(const Engine& engine, const Side side)
+Eval::Type eval_mobility(const Engine& engine, const Side side)
 {
     auto legal_moves = engine.get_legal_moves(side);
 
@@ -89,7 +91,7 @@ int eval_mobility(const Engine& engine, const Side side)
     return mobility_score;
 }
 
-int eval_control(const Engine& engine, const Side side)
+Eval::Type eval_control(const Engine& engine, const Side side)
 {
     const auto& soldiers = engine.get_soldiers(side);
 
@@ -112,4 +114,77 @@ int eval_control(const Engine& engine, const Side side)
     }
 
     return control_score;
+}
+
+/*---------------------------------- BetterEval ----------------------------------*/
+
+Eval::Type eval_income(const Engine& engine, const Side side)
+{
+    const auto game_parameters = engine.get_game_parameters();
+    const auto max_cost = std::max({
+        game_parameters.farm.cost,
+        game_parameters.turret.cost,
+        game_parameters.soldiers.at(Soldier::Type::swordsman).cost,
+        game_parameters.soldiers.at(Soldier::Type::archer).cost});
+
+    const auto income = std::min(engine.get_income(side), max_cost);
+
+    return income * (2 * max_cost - income) / 6;
+}
+
+Eval::Type eval_turrets(const Engine& engine, const Side side)
+{
+    Eval::Type result = 0;
+
+    const auto p = engine.get_path();
+    const Path path{p.begin(), p.end()};
+
+    const auto game_parameters = engine.get_game_parameters();
+    const auto range = game_parameters.turret.range;
+    const auto attack = game_parameters.turret.attack;
+
+    for (auto& turret : engine.get_turrets(side))
+    {
+        for (int x = -range; x <= range; x++)
+        {
+            for (int y = -range; y <= range; y++)
+            {
+                if (path.contains({turret.position.first + x, turret.position.second + y}))
+                {
+                    result += attack;
+                    // result++;
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+Eval::Type BetterEval::operator() (const Engine& engine, const Side mySide) const {
+
+    const auto otherSide = other_side(mySide);
+
+    if(engine.isWin(mySide))
+    {
+        return 1LL << 30;
+    }
+    else if(engine.isWin(otherSide))
+    {
+        return -(1LL << 30);
+    }
+
+    Type result = 0;
+
+    // TODO: * jakieś wagi (?)
+    result += eval_income(engine, mySide);
+    result -= eval_income(engine, otherSide);
+
+    result += eval_control(engine, mySide);
+    result -= eval_control(engine, otherSide);
+
+    result += eval_turrets(engine, mySide);
+    result -= eval_turrets(engine, otherSide);
+
+    return result;
 }

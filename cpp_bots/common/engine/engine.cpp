@@ -119,6 +119,11 @@ std::vector<std::pair<int, int>> Engine::get_path() const
     return map.path;
 }
 
+std::pair<int, int> Engine::get_map_size() const
+{
+    return map.size;
+}
+
 GameParameters Engine::get_game_parameters() const
 {
     return game_parameters;
