@@ -8,7 +8,7 @@ PASSIVE_GOLD = 10
 FARM_GOLD = 8
 
 TURRET_STATS = {
-    'attack': 75,
+    'attack': 100,
     'range': 3
 }
 

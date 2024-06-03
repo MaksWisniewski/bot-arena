@@ -18,3 +18,5 @@ jak mocna powinna być wieża?
     - wieży od jej kosztu/ataku lub nawet ilości wież
     - farmy od jej koszty/obecnego dochodu/ilości golda
     - żołnierza od odległości od bazy/hp/rodzaju/kosztu/...
+
+# Wizualizacja w czasie rzeczywistym podczas symulacji (?)

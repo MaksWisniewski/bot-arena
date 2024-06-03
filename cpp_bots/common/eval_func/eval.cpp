@@ -127,9 +127,17 @@ Eval::Type eval_income(const Engine& engine, const Side side)
         game_parameters.soldiers.at(Soldier::Type::swordsman).cost,
         game_parameters.soldiers.at(Soldier::Type::archer).cost});
 
-    const auto income = std::min(engine.get_income(side), max_cost);
+    const auto min_cost = std::min({
+        game_parameters.farm.cost,
+        game_parameters.turret.cost,
+        game_parameters.soldiers.at(Soldier::Type::swordsman).cost,
+        game_parameters.soldiers.at(Soldier::Type::archer).cost});
 
-    return income * (2 * max_cost - income) / 6;
+    const auto income = std::min(engine.get_income(side), max_cost);
+    const auto map_size = engine.get_map_size();
+
+    auto result = income * (2 * max_cost - income) * std::sqrt(map_size.first * map_size.second) / min_cost;
+    return result;
 }
 
 Eval::Type eval_turrets(const Engine& engine, const Side side)
@@ -152,13 +160,13 @@ Eval::Type eval_turrets(const Engine& engine, const Side side)
                 if (path.contains({turret.position.first + x, turret.position.second + y}))
                 {
                     result += attack;
-                    // result++;
                 }
             }
         }
     }
 
-    return result;
+    const auto map_size = engine.get_map_size();
+    return result / std::sqrt(map_size.first + map_size.second);
 }
 
 Eval::Type BetterEval::operator() (const Engine& engine, const Side mySide) const {
