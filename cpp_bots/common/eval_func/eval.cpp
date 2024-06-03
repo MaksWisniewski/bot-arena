@@ -2,6 +2,7 @@
 #include "../optimizations/is_useless.hpp" // for Path - maybe it should be extracted
 
 #include <algorithm>
+#include <iostream>
 
 Eval::Type eval_mobility(const Engine&, const Side);
 Eval::Type eval_control(const Engine&, const Side);
@@ -136,7 +137,8 @@ Eval::Type eval_income(const Engine& engine, const Side side)
     const auto income = std::min(engine.get_income(side), max_cost);
     const auto map_size = engine.get_map_size();
 
-    auto result = income * (2 * max_cost - income) * std::sqrt(map_size.first * map_size.second) / min_cost;
+    auto result = income * (2 * max_cost - income) * std::sqrt(map_size.first + map_size.second) / min_cost;
+    // std::cerr << "income: " << result << '\n';
     return result;
 }
 
@@ -166,7 +168,9 @@ Eval::Type eval_turrets(const Engine& engine, const Side side)
     }
 
     const auto map_size = engine.get_map_size();
-    return result / std::sqrt(map_size.first + map_size.second);
+    result /= std::sqrt(map_size.first + map_size.second);
+    // std::cerr << "turrets: " << result << '\n';
+    return result;
 }
 
 Eval::Type BetterEval::operator() (const Engine& engine, const Side mySide) const {
