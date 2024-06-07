@@ -17,6 +17,10 @@ def interval_mapping(x, a, b, c, d):
 
 class GameSceneManager(AbstractSceneManager):
     def load_scene(self, scene_functions):
+        log_name_splitted = scene_functions['log_name'].split('/')[-1].split('_')
+        left_bot_name = log_name_splitted[1]
+        right_bot_name = log_name_splitted[2]
+
         return Scene([
             Window([
                 LogList(
@@ -28,7 +32,7 @@ class GameSceneManager(AbstractSceneManager):
                 name = 'log',
                 icon = 'console'
             ),
-            Window([ 
+            Window([
                 GameRenderer(
                     (0, 0),
                     (1, 1),
@@ -36,26 +40,26 @@ class GameSceneManager(AbstractSceneManager):
                     id = 'game_renderer',
                     log_name = scene_functions['log_name']
                 )
-            ], 
-                (PROPORTION1, 0), (1 - PROPORTION1, 1 - PROPORTION1), 
+            ],
+                (PROPORTION1, 0), (1 - PROPORTION1, 1 - PROPORTION1),
                 color=(84, 84, 84),
                 name = 'game',
                 icon = 'game',
             ),
             StatsDisplay([
-                Text((0.1, 0.4), (0.1, 0.15), "Left", side = "left"),
-                Text((0.1, 0.75), (0.1, 0.15), "Right", side = "right"),
+                Text((0.0, 0.4), (0.3, 0.15), f"Left ({left_bot_name})", side = "left"),
+                Text((0.0, 0.75), (0.3, 0.15), f"Right ({right_bot_name})", side = "right"),
                 Text((0.3, 0.05), (0.15, 0.15), "income"),
                 Text((0.6, 0.05), (0.15, 0.15), "gold"),
-                
+
                 Text((0.3, 0.4), (0.15, 0.15), '0', id = "left_income"),
                 Text((0.6, 0.4), (0.15, 0.15), '0', id = "left_gold"),
                 Text((0.3, 0.75), (0.15, 0.15), '0', id = "right_income"),
                 Text((0.6, 0.75), (0.15, 0.15), '0', id = "right_gold")
-            ], 
-                (0, 1 - PROPORTION1), (PROPORTION2, PROPORTION1), 
+            ],
+                (0, 1 - PROPORTION1), (PROPORTION2, PROPORTION1),
                 self.update_dict,
-                color=(42, 42, 42), 
+                color=(42, 42, 42),
                 name = 'stats',
                 icon = 'stats',
                 background_color = GUI_COLORS['background2'],
@@ -63,7 +67,7 @@ class GameSceneManager(AbstractSceneManager):
             ),
             Window([
                 Text(
-                    (CONTROLS_GAP1, CONTROLS_GAP1), 
+                    (CONTROLS_GAP1, CONTROLS_GAP1),
                     (0.2, CONTROLS_HEIGHT),
                     text = "game speed:",
                 ),
@@ -129,11 +133,11 @@ class GameSceneManager(AbstractSceneManager):
                     id = 'zoom_info'
                 ),
                 Text(
-                    (CONTROLS_GAP1, CONTROLS_GAP1 * 3 + CONTROLS_HEIGHT * 2), 
-                    (0.2, CONTROLS_HEIGHT), 
+                    (CONTROLS_GAP1, CONTROLS_GAP1 * 3 + CONTROLS_HEIGHT * 2),
+                    (0.2, CONTROLS_HEIGHT),
                     text = "helpers:",
                 ),
-                
+
                 RadioButton(
                     (CONTROLS_GAP1 * 2 + 0.2, CONTROLS_GAP1 * 3 + CONTROLS_HEIGHT * 2),
                     (CONTROLS_WIDTH, CONTROLS_HEIGHT),
@@ -162,15 +166,15 @@ class GameSceneManager(AbstractSceneManager):
                     color = (0, 0, 255),
                     on_click = scene_functions['log_select']
                 ),
-            ], 
+            ],
             (PROPORTION2, 1 - PROPORTION1), (1 - PROPORTION2, PROPORTION1),
-            color=(126, 126, 126), 
+            color=(126, 126, 126),
             name = 'controls',
             icon = 'controls'
         ),
-            
+
         ])
-    
+
     def increase_game_speed(self):
         actual_game_speed = self.scene.get_info('game_renderer', 'game_speed')
         if actual_game_speed > 0:
@@ -231,7 +235,7 @@ class GameSceneManager(AbstractSceneManager):
 
     def get_game_speed(self):
         return self.scene.get_info('game_renderer', 'game_speed')
-    
+
     def toggle_helper(self, helper):
         def toggler():
             helpers = self.scene.get_info('game_renderer', 'helpers')
