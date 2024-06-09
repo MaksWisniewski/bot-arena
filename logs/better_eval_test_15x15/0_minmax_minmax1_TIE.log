@@ -1,0 +1,2463 @@
+map:map15x15.json
+player1:minmax
+player2:minmax1
+F 7 4 | F 7 4
+F 7 0 | F 7 0
+F 8 10 | F 12 5
+F 13 10 | F 10 4
+F 14 0 | F 12 12
+W | F 4 9
+F 8 9 | W
+W | S swordsman
+W | W
+W | W
+W | W
+W | W
+S swordsman | F 2 2
+F 1 8 | W
+W | W
+W | W
+S swordsman | W
+W | F 4 4
+S swordsman | W
+W | W
+S swordsman | W
+W | F 6 1
+S swordsman | W
+W | W
+W | F 11 13
+W | S swordsman
+S swordsman | W
+W | S swordsman
+S swordsman | W
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | W
+W | W
+T 11 5 | F 12 2
+W | W
+S swordsman | F 0 13
+W | W
+S swordsman | S swordsman
+W | S swordsman
+W | S swordsman
+W | W
+W | F 1 4
+W | W
+T 12 6 | F 5 6
+W | W
+W | S swordsman
+W | F 4 14
+W | S swordsman
+W | S swordsman
+T 11 4 | S swordsman
+W | S swordsman
+W | S swordsman
+W | S swordsman
+F 13 6 | W
+W | F 1 11
+W | F 11 12
+S swordsman | S swordsman
+W | W
+S swordsman | F 12 14
+W | S archer
+S swordsman | W
+W | F 10 2
+S swordsman | S archer
+S swordsman | S swordsman
+W | W
+S swordsman | F 6 12
+W | F 13 11
+S swordsman | F 13 13
+S swordsman | W
+W | F 4 2
+S swordsman | F 10 6
+W | F 13 8
+S swordsman | F 3 7
+W | F 7 2
+S swordsman | F 8 6
+S swordsman | F 0 1
+W | F 5 14
+S swordsman | F 11 2
+W | F 6 13
+S swordsman | F 14 4
+S swordsman | F 6 7
+W | F 7 0
+S swordsman | F 1 10
+W | F 2 5
+S swordsman | F 11 10
+W | F 13 3
+S swordsman | F 2 6
+S swordsman | F 12 11
+S swordsman | F 2 3
+S swordsman | F 13 14
+W | S archer
+S swordsman | F 11 7
+W | S archer
+S swordsman | F 5 8
+S swordsman | S swordsman
+W | F 1 14
+W | F 3 12
+W | F 13 12
+F 14 3 | S swordsman
+W | F 9 2
+W | F 13 2
+S swordsman | F 13 9
+W | F 8 4
+F 7 1 | S swordsman
+S swordsman | F 3 5
+W | F 5 4
+W | F 4 10
+W | F 10 13
+F 12 10 | S swordsman
+W | F 8 1
+F 6 4 | F 1 1
+W | F 6 0
+W | F 3 13
+F 13 7 | S swordsman
+W | F 7 4
+F 8 2 | F 3 2
+W | F 9 14
+F 3 0 | S swordsman
+W | F 2 14
+T 4 0 | F 5 7
+S swordsman | F 5 0
+W | S swordsman
+F 0 9 | F 4 3
+S swordsman | F 8 0
+W | F 9 6
+F 9 4 | S swordsman
+S archer | F 9 12
+S swordsman | F 5 10
+S swordsman | F 5 3
+S swordsman | S archer
+F 10 8 | F 9 7
+W | F 1 2
+T 12 1 | F 12 1
+S archer | S archer
+T 12 1 | F 12 1
+T 12 1 | S swordsman
+S archer | S swordsman
+F 5 13 | F 5 13
+S swordsman | F 4 11
+F 5 13 | S swordsman
+F 2 11 | F 2 11
+F 2 11 | F 2 11
+F 2 11 | F 2 11
+S swordsman | F 2 11
+S swordsman | S swordsman
+S archer | S archer
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | W
+W | W
+S swordsman | S archer
+W | S archer
+W | W
+S archer | S archer
+S archer | W
+S swordsman | S swordsman
+S swordsman | W
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | W
+W | S archer
+S swordsman | W
+S archer | S swordsman
+W | S archer
+W | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+W | W
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | W
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+W | S swordsman
+S archer | S swordsman
+W | S archer
+W | S archer
+S swordsman | S archer
+S archer | S archer
+S swordsman | S archer
+S archer | S archer
+W | W
+W | S swordsman
+S swordsman | W
+W | S swordsman
+S swordsman | W
+S archer | S swordsman
+W | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S archer | S archer
+W | S archer
+S archer | S archer
+S archer | W
+W | S archer
+S archer | S swordsman
+S archer | S swordsman
+W | S swordsman
+W | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | W
+W | W
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | W
+S archer | S archer
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | W
+S swordsman | S archer
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | W
+S archer | S swordsman
+W | S archer
+S archer | S swordsman
+W | S archer
+S archer | W
+S swordsman | W
+S swordsman | S archer
+W | W
+W | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | S swordsman
+W | S swordsman
+S archer | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | W
+S archer | S swordsman
+W | W
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | W
+W | S archer
+S swordsman | S swordsman
+S archer | S archer
+W | S archer
+W | S swordsman
+S archer | S swordsman
+W | S archer
+S archer | S archer
+S swordsman | W
+W | W
+S swordsman | S swordsman
+S archer | S archer
+S archer | S swordsman
+S archer | S swordsman
+S archer | S archer
+W | S archer
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+W | W
+S swordsman | S archer
+W | S swordsman
+S archer | S swordsman
+W | S archer
+W | W
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+W | S archer
+S archer | S archer
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+S archer | W
+S swordsman | W
+S archer | S swordsman
+W | W
+W | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | W
+W | S archer
+S archer | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S archer | S archer
+W | S swordsman
+S swordsman | S archer
+S swordsman | W
+S swordsman | S archer
+W | W
+W | S swordsman
+W | S archer
+W | S swordsman
+W | S archer
+W | S archer
+S archer | S archer
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S archer | S archer
+S archer | S archer
+S archer | W
+S archer | S swordsman
+S archer | S swordsman
+S archer | W
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | W
+S archer | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | W
+W | S archer
+S swordsman | S archer
+S archer | S archer
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+W | S swordsman
+W | W
+W | S archer
+W | S archer
+S swordsman | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S archer
+W | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | W
+W | S swordsman
+W | S swordsman
+W | S archer
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+S archer | S archer
+S swordsman | S swordsman
+W | S archer
+W | W
+W | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+W | S archer
+S archer | S archer
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+W | S swordsman
+S archer | S archer
+W | S archer
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+S archer | S swordsman
+S archer | S archer
+S swordsman | W
+S archer | S archer
+S swordsman | S swordsman
+W | S swordsman
+S archer | W
+W | S swordsman
+W | W
+S archer | S archer
+S swordsman | W
+S archer | S swordsman
+S archer | S archer
+W | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+S archer | S archer
+W | S archer
+S archer | S archer
+W | S archer
+S archer | S swordsman
+S archer | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+W | S swordsman
+W | S swordsman
+W | S swordsman
+S swordsman | S archer
+S swordsman | W
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | S swordsman
+W | S swordsman
+S archer | W
+S archer | S swordsman
+W | S archer
+W | S swordsman
+S archer | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+W | S archer
+W | S swordsman
+S archer | S archer
+W | S swordsman
+W | S swordsman
+W | S swordsman
+S archer | S swordsman
+S archer | W
+S swordsman | S archer
+W | S swordsman
+S archer | W
+S archer | W
+W | S archer
+W | W
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S swordsman
+S archer | W
+S archer | S swordsman
+W | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+W | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S archer
+W | S archer
+W | S swordsman
+W | S swordsman
+S archer | S archer
+S archer | W
+S archer | S swordsman
+S archer | S swordsman
+W | W
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | W
+W | S archer
+S swordsman | W
+S archer | W
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+W | S swordsman
+W | S swordsman
+W | S swordsman
+S archer | W
+S archer | S swordsman
+S archer | W
+W | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S archer | W
+S swordsman | S archer
+S archer | S swordsman
+W | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | S swordsman
+W | S swordsman
+W | S archer
+W | S archer
+S swordsman | S archer
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | W
+S swordsman | S archer
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S swordsman
+W | S swordsman
+W | S swordsman
+W | W
+S swordsman | S archer
+S swordsman | W
+S archer | S swordsman
+S archer | S archer
+S swordsman | W
+S archer | S swordsman
+S swordsman | W
+S swordsman | S archer
+S swordsman | S archer
+S archer | S swordsman
+S archer | S archer
+S swordsman | S archer
+S archer | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | W
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+W | S archer
+S swordsman | S archer
+S archer | S archer
+W | S swordsman
+W | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+W | W
+S swordsman | S swordsman
+W | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S swordsman
+S archer | S archer
+S archer | W
+S swordsman | S archer
+S swordsman | S archer
+W | S archer
+W | S swordsman
+S archer | S archer
+S swordsman | W
+S swordsman | S swordsman
+S swordsman | S archer
+W | S archer
+S archer | S swordsman
+W | S archer
+W | S archer
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+S archer | W
+W | W
+W | S swordsman
+S archer | S swordsman
+S archer | W
+W | S archer
+W | S archer
+W | W
+S swordsman | W
+S swordsman | S swordsman
+W | S archer
+S archer | S swordsman
+S swordsman | W
+S swordsman | S archer
+W | W
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | W
+S archer | S archer
+W | S archer
+S archer | S swordsman
+W | S swordsman
+W | W
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+W | S swordsman
+W | S archer
+S archer | W
+W | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | W
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+W | S swordsman
+W | W
+S archer | W
+S archer | S swordsman
+S archer | S archer
+W | W
+S swordsman | S archer
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+W | S swordsman
+S archer | S swordsman
+S archer | W
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | W
+W | S archer
+S archer | S archer
+W | S archer
+W | S archer
+S archer | S swordsman
+S archer | S archer
+S swordsman | W
+S swordsman | S archer
+S swordsman | W
+S archer | S archer
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | S archer
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+W | S swordsman
+S archer | W
+W | S archer
+S archer | S swordsman
+S archer | W
+S swordsman | S archer
+W | S archer
+S archer | W
+W | S swordsman
+W | S archer
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | W
+S archer | S archer
+S archer | S swordsman
+W | W
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | W
+S swordsman | W
+S swordsman | S swordsman
+S archer | S archer
+W | S archer
+W | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | S swordsman
+W | S archer
+S archer | W
+W | S archer
+W | S archer
+W | S archer
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+W | S swordsman
+W | S archer
+W | S archer
+W | W
+S archer | S swordsman
+S archer | S swordsman
+W | W
+S archer | S archer
+S archer | W
+S archer | W
+S swordsman | S archer
+S archer | S swordsman
+S archer | S swordsman
+W | S swordsman
+W | W
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | W
+W | S swordsman
+W | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+W | S archer
+S archer | S swordsman
+W | S archer
+S archer | S archer
+S archer | S archer
+W | S swordsman
+S swordsman | S archer
+W | W
+W | W
+W | S archer
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S archer | S swordsman
+S archer | W
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | S archer
+S archer | S swordsman
+W | S swordsman
+W | S archer
+S archer | S archer
+W | S archer
+S swordsman | S swordsman
+W | W
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | S archer
+W | W
+W | S swordsman
+W | W
+S archer | S archer
+S swordsman | S archer
+W | S archer
+S swordsman | S swordsman
+W | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+W | W
+S archer | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | W
+S archer | S swordsman
+S archer | W
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+S archer | S swordsman
+W | S swordsman
+S archer | S archer
+W | S swordsman
+W | S swordsman
+S archer | W
+S archer | S swordsman
+S archer | W
+S archer | S archer
+S swordsman | S swordsman
+S archer | S archer
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | W
+W | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | S archer
+S archer | S archer
+S swordsman | W
+W | S swordsman
+S archer | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | W
+W | S swordsman
+W | S archer
+S archer | S archer
+W | S archer
+W | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | W
+S swordsman | S archer
+W | S archer
+W | S archer
+S archer | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S archer
+W | W
+W | S archer
+S swordsman | W
+W | S swordsman
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+W | W
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | W
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S archer | W
+S swordsman | W
+S archer | S archer
+W | W
+W | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+W | S archer
+S swordsman | S archer
+S swordsman | S archer
+W | S archer
+S archer | S swordsman
+W | W
+S swordsman | S archer
+S swordsman | W
+S archer | S archer
+W | W
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S archer | W
+W | S archer
+S swordsman | W
+S archer | S swordsman
+S archer | S archer
+W | S swordsman
+W | S swordsman
+W | W
+W | W
+W | S swordsman
+W | S swordsman
+W | S archer
+S swordsman | S archer
+S archer | S swordsman
+S archer | S swordsman
+S archer | S archer
+S swordsman | S archer
+S archer | S swordsman
+S archer | S swordsman
+S archer | S archer
+W | S archer
+S archer | W
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+S swordsman | S archer
+W | S archer
+W | S swordsman
+S swordsman | S archer
+W | W
+S swordsman | S archer
+S archer | S swordsman
+S archer | W
+S swordsman | S swordsman
+W | W
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | S archer
+W | S swordsman
+S archer | S swordsman
+S archer | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | W
+W | S swordsman
+W | S archer
+S archer | S archer
+S archer | S swordsman
+S archer | S archer
+W | S swordsman
+W | W
+S archer | S swordsman
+S archer | S archer
+S swordsman | W
+S archer | S archer
+S archer | S swordsman
+W | W
+W | S swordsman
+S swordsman | S archer
+W | S archer
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+S archer | S archer
+W | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+W | S archer
+S archer | W
+W | S swordsman
+S swordsman | S archer
+W | S archer
+S archer | S archer
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S swordsman
+W | S archer
+W | S swordsman
+S archer | S archer
+W | S swordsman
+S swordsman | S archer
+W | W
+S archer | S swordsman
+S swordsman | W
+W | S swordsman
+W | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | W
+W | S archer
+W | S swordsman
+S archer | S archer
+W | S swordsman
+W | S archer
+S archer | S swordsman
+S archer | S archer
+S archer | S swordsman
+W | S archer
+W | W
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+S archer | W
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+S archer | W
+S archer | S swordsman
+S archer | W
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | W
+W | S swordsman
+S archer | W
+S archer | S archer
+S archer | S archer
+S swordsman | S swordsman
+S archer | W
+S archer | S archer
+W | W
+W | S archer
+W | S swordsman
+W | S swordsman
+W | S archer
+W | S archer
+S archer | S archer
+S swordsman | W
+S swordsman | S swordsman
+W | W
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+W | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | W
+S archer | S swordsman
+S archer | S archer
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | W
+S archer | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | W
+S archer | W
+S swordsman | S archer
+W | S archer
+S archer | S archer
+S swordsman | S archer
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | S archer
+S archer | S swordsman
+S archer | W
+W | W
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+W | S archer
+S archer | S swordsman
+W | S swordsman
+S swordsman | S archer
+S archer | W
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | W
+S archer | S archer
+W | S archer
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+S archer | S archer
+W | S archer
+W | S archer
+W | S archer
+W | S swordsman
+W | S swordsman
+W | S archer
+S archer | W
+S archer | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+S archer | S archer
+W | S swordsman
+S archer | W
+S swordsman | S archer
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+W | S archer
+W | S archer
+S swordsman | S archer
+S swordsman | S archer
+W | S swordsman
+S archer | S swordsman
+W | W
+W | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | W
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | W
+S swordsman | S archer
+W | S archer
+W | W
+S archer | S swordsman
+S archer | S archer
+S archer | W
+S archer | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S archer | S archer
+S archer | W
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | S archer
+W | W
+S swordsman | S archer
+W | S archer
+S archer | W
+W | S archer
+S swordsman | S swordsman
+W | S archer
+S archer | S archer
+W | W
+S archer | S swordsman
+W | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | W
+W | S archer
+S archer | S archer
+S swordsman | S swordsman
+S archer | W
+S swordsman | W
+S swordsman | S swordsman
+W | W
+S archer | S archer
+W | W
+W | W
+S swordsman | S swordsman
+W | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+W | S swordsman
+W | S swordsman
+S archer | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S archer | W
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | W
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+W | S archer
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+W | W
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S archer
+W | W
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+W | S swordsman
+W | W
+S archer | S archer
+W | S archer
+S archer | W
+S swordsman | S swordsman
+W | W
+S archer | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+W | S swordsman
+W | S archer
+S archer | S archer
+W | S archer
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | W
+S swordsman | W
+S archer | S archer
+W | S archer
+S archer | S swordsman
+S archer | W
+S archer | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | W
+S swordsman | S archer
+W | S archer
+S archer | S swordsman
+W | W
+W | S archer
+W | S swordsman
+S archer | W
+S swordsman | S swordsman
+S archer | S archer
+W | S archer
+W | W
+S archer | S archer
+S swordsman | S archer
+S archer | S archer
+W | W
+W | S swordsman
+S swordsman | W
+W | S swordsman
+W | S swordsman
+W | W
+S archer | S archer
+S swordsman | S archer
+W | S swordsman
+W | S archer
+S swordsman | W
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | W
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+S swordsman | S archer
+S archer | S swordsman
+S archer | W
+S archer | S archer
+S swordsman | W
+S swordsman | W
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+W | S archer
+W | S swordsman
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+W | S archer
+S swordsman | S archer
+S swordsman | W
+W | S archer
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S swordsman
+S swordsman | W
+S archer | S archer
+S swordsman | W
+S archer | S swordsman
+W | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | W
+S swordsman | S archer
+W | W
+W | S swordsman
+S archer | W
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+S swordsman | S swordsman
+W | W
+W | W
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S archer
+S archer | S archer
+W | S swordsman
+S archer | W
+S swordsman | S archer
+S swordsman | W
+W | W
+W | S swordsman
+S swordsman | W
+S archer | S archer
+S swordsman | W
+W | S archer
+S swordsman | W
+S swordsman | S swordsman
+S archer | S archer
+S archer | S archer
+S swordsman | S archer
+W | W
+S archer | W
+S archer | S swordsman
+W | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | S archer
+W | S archer
+S archer | W
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S archer
+W | S archer
+W | S swordsman
+S swordsman | S archer
+S archer | S archer
+S archer | S swordsman
+S swordsman | W
+S archer | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | W
+S swordsman | S swordsman
+W | W
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+W | W
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | W
+W | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+W | S archer
+S archer | W
+S archer | S archer
+S archer | S archer
+S archer | W
+W | S swordsman
+W | S archer
+S swordsman | S swordsman
+W | S archer
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | W
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S archer
+W | W
+S archer | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S archer | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S archer
+S swordsman | W
+S swordsman | W
+W | W
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+S archer | W
+S archer | W
+S swordsman | S archer
+S archer | S archer
+W | S archer
+S archer | W
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+W | S swordsman
+S archer | W
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | W
+W | S archer
+S swordsman | S swordsman
+W | W
+S swordsman | W
+S swordsman | S archer
+S swordsman | S archer
+S archer | S swordsman
+S archer | S archer
+W | W
+S archer | S archer
+W | W
+S archer | S swordsman
+S swordsman | S archer
+W | S swordsman
+W | S swordsman
+S archer | S archer
+W | W
+W | S archer
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+W | S archer
+W | S swordsman
+S swordsman | S swordsman
+W | W
+W | W
+W | S swordsman
+W | S archer
+S swordsman | S swordsman
+W | S archer
+W | W
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | S archer
+W | W
+W | W
+W | W
+S archer | S swordsman
+W | S swordsman
+S archer | W
+S archer | S archer
+S archer | W
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+W | S archer
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+S archer | S archer
+S archer | S archer
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | W
+S archer | S swordsman
+W | W
+W | S archer
+S archer | S archer
+S swordsman | S archer
+W | S archer
+S swordsman | W
+S swordsman | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+W | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | W
+W | S archer
+W | S archer
+W | S archer
+S swordsman | S swordsman
+W | S archer
+S swordsman | S archer
+S swordsman | W
+S archer | S archer
+W | W
+S archer | W
+S swordsman | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+W | W
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+W | S archer
+W | W
+S archer | W
+S archer | S swordsman
+W | S archer
+S swordsman | S archer
+S swordsman | W
+S archer | S archer
+S swordsman | S archer
+S archer | W
+W | S swordsman
+S swordsman | S archer
+W | S swordsman
+S archer | W
+S archer | S swordsman
+S archer | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+S archer | S archer
+S swordsman | W
+W | S archer
+S archer | S swordsman
+S archer | S swordsman
+S archer | W
+W | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S archer | S archer
+S archer | S archer
+W | W
+S archer | W
+S archer | W
+W | S swordsman
+W | S swordsman
+W | S archer
+W | W
+S swordsman | S swordsman
+S archer | S archer
+W | W
+S swordsman | S swordsman
+W | S swordsman
+S archer | W
+S swordsman | S swordsman
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+S archer | W
+W | S swordsman
+S archer | S swordsman
+S archer | W
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | W
+W | S archer
+S archer | S archer
+S archer | S swordsman
+W | S archer
+S swordsman | S archer
+W | S archer
+W | S archer
+S archer | S archer
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S archer
+S archer | W
+S swordsman | S swordsman
+S archer | W
+S swordsman | W
+S archer | S swordsman
+S swordsman | S archer
+W | S archer
+S swordsman | W
+W | S archer
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | S swordsman
+S archer | S swordsman
+W | W
+S archer | S archer
+S swordsman | S swordsman
+W | S swordsman
+S archer | W
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+W | S swordsman
+S archer | W
+S swordsman | S archer
+S swordsman | S archer
+W | W
+W | W
+S swordsman | S archer
+W | S archer
+S archer | S archer
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+W | S archer
+S archer | S swordsman
+S archer | W
+W | S archer
+W | W
+S archer | S swordsman
+S swordsman | S swordsman
+W | W
+W | S archer
+S archer | S swordsman
+S swordsman | W
+S archer | S swordsman
+S swordsman | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | W
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+W | S archer
+S swordsman | S archer
+S swordsman | S swordsman
+W | S archer
+S swordsman | S archer
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S archer
+S swordsman | S archer
+W | S archer
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+S swordsman | S archer
+S archer | W
+S archer | S archer
+S swordsman | S archer
+W | S archer
+S swordsman | S swordsman
+S archer | W
+S archer | S archer
+W | S archer
+S archer | W
+S archer | S swordsman
+S archer | S archer
+W | W
+W | S swordsman
+S archer | S swordsman
+S archer | W
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+S archer | W
+W | W
+S swordsman | S archer
+S archer | W
+S archer | S archer
+S swordsman | W
+W | S swordsman
+S archer | S swordsman
+W | W
+S archer | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | W
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S archer
+W | S swordsman
+W | W
+W | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | W
+W | S swordsman
+W | S swordsman
+S archer | S swordsman
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+W | W
+W | S swordsman
+S archer | W
+S archer | S archer
+S archer | W
+W | W
+W | S archer
+S swordsman | W
+S archer | S swordsman
+S swordsman | S archer
+W | W
+W | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S archer
+S swordsman | W
+S swordsman | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+W | S swordsman
+S archer | S archer
+W | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S archer
+W | W
+W | S swordsman
+S swordsman | W
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+W | S archer
+S swordsman | W
+W | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+W | S swordsman
+W | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S swordsman
+S archer | W
+W | S archer
+W | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+S archer | W
+W | S archer
+S swordsman | S archer
+S archer | W
+W | S archer
+S swordsman | S archer
+S archer | W
+S swordsman | S archer
+S archer | S swordsman
+S archer | W
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+W | S archer
+S swordsman | S swordsman
+S archer | W
+S archer | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | W
+W | S archer
+S archer | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+W | W
+S swordsman | S swordsman
+S archer | W
+S archer | S archer
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S archer
+S archer | W
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S archer | W
+S archer | S archer
+W | W
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | W
+S swordsman | W
+W | S archer
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+W | S archer
+S archer | S archer
+S archer | W
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | W
+W | S archer
+S archer | S archer
+S swordsman | W
+S archer | W
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S archer
+S archer | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S swordsman
+W | S archer
+S archer | S swordsman
+S archer | S swordsman
+W | S swordsman
+W | S swordsman
+W | W
+S archer | W
+S archer | S archer
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+W | S archer
+W | S archer
+W | W
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | S archer
+S archer | S archer
+S archer | S archer
+S swordsman | S swordsman
+W | S archer
+W | W
+W | W
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+S archer | S swordsman
+S swordsman | S archer
+S archer | S archer
+S archer | W
+S swordsman | S archer
+W | S archer
+S archer | W
+W | S archer
+W | S archer
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | W
+S swordsman | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+S swordsman | S swordsman
+S archer | W
+S swordsman | S swordsman
+S swordsman | W
+W | S swordsman
+S archer | W
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+W | W
+W | S archer
+S swordsman | W
+W | S archer
+S archer | W
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | W
+S archer | S archer
+W | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S archer | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+W | S swordsman
+S archer | S archer
+W | W
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | S archer
+S archer | W
+S swordsman | S swordsman
+W | W
+S swordsman | S swordsman
+W | S archer
+S archer | W
+S swordsman | S archer
+S archer | S swordsman
+W | W
+S swordsman | S swordsman
+W | W
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | S archer
+S swordsman | S archer
+W | W
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | S archer
+S archer | S swordsman
+S swordsman | W
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | S archer
+S archer | W
+W | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | W
+S archer | S swordsman
+S swordsman | W
+S archer | S archer
+S swordsman | S archer
+S archer | S archer
+S swordsman | S archer
+S archer | S archer
+S archer | S archer
+S archer | S swordsman
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | W
+W | S archer
+W | W
+W | S archer
+S swordsman | W
+S swordsman | S swordsman
+W | W
+W | S archer
+S archer | S archer
+S swordsman | W
+W | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S archer | W
+W | S swordsman
+S archer | S swordsman
+W | S archer
+S archer | S swordsman
+S archer | S archer
+W | S swordsman
+W | S archer
+S archer | W
+S swordsman | W
+S archer | S archer
+S swordsman | W
+S archer | S swordsman
+S swordsman | S archer
+W | S swordsman
+W | S archer
+S archer | S archer
+W | S archer
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | W
+S archer | W
+W | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S swordsman
+W | S archer
+S archer | S swordsman
+W | S archer
+W | S swordsman
+W | S archer
+S archer | S swordsman
+W | S swordsman
+S archer | S archer
+S archer | S archer
+W | W
+W | W
+S archer | S swordsman
+S archer | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | S archer
+W | W
+S archer | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S swordsman | W
+W | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | W
+W | S archer
+S archer | S archer
+S swordsman | W
+S swordsman | S archer
+W | W
+W | S archer
+S swordsman | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S archer | W
+W | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+S archer | W
+W | S swordsman
+S swordsman | S swordsman
+W | S archer
+S archer | S archer
+S swordsman | W
+W | S swordsman
+S archer | W
+W | S archer
+S archer | S swordsman
+W | W
+S archer | S swordsman
+W | S swordsman
+S archer | S archer
+W | S swordsman
+W | S archer
+W | S swordsman
+S archer | W
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | W
+S archer | S archer
+S archer | W
+W | S swordsman
+S swordsman | S archer
+W | S swordsman
+S archer | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S archer
+W | S swordsman
+S archer | S swordsman
+W | S archer
+S archer | S archer
+S archer | W
+S archer | S swordsman
+S swordsman | W
+S swordsman | S archer
+W | S swordsman
+W | S swordsman
+S swordsman | S archer
+S archer | W
+W | W
+W | S archer
+S swordsman | S swordsman
+W | S archer
+S swordsman | S swordsman
+W | S swordsman
+S archer | S archer
+S swordsman | W
+S swordsman | S archer
+W | S swordsman
+W | S swordsman
+W | S archer
+S swordsman | S swordsman
+W | W
+W | W
+S archer | S swordsman
+W | W
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S swordsman
+W | S archer
+S swordsman | S archer
+S swordsman | S archer
+S archer | S archer
+S archer | S archer
+S swordsman | S archer
+W | S swordsman
+W | S swordsman
+W | S archer
+S swordsman | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+S archer | W
+S swordsman | S archer
+W | S swordsman
+W | S swordsman
+S archer | S archer
+W | S archer
+S archer | W
+S swordsman | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+W | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+W | S archer
+S archer | S swordsman
+W | S swordsman
+W | S swordsman
+S archer | S swordsman
+W | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | W
+S archer | S swordsman
+S swordsman | W
+S swordsman | S swordsman
+W | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S archer | W
+S archer | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S archer
+S archer | S archer
+S archer | S swordsman
+S archer | W
+S archer | S swordsman
+W | S archer
+W | S archer
+W | W
+S swordsman | S swordsman
+S archer | W
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+W | S archer
+S archer | S archer
+W | W
+S archer | S archer
+W | S archer
+S archer | W
+S archer | S archer
+S swordsman | S archer
+W | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+W | S swordsman
+W | S swordsman
+S archer | W
+W | S swordsman
+W | S archer
+S swordsman | W
+S archer | S swordsman
+S swordsman | W
+W | S archer
+S swordsman | W
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+S archer | S archer
+S archer | S archer
+W | S swordsman
+S swordsman | S swordsman
+S swordsman | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S swordsman | W
+W | S swordsman
+W | S archer
+S archer | S swordsman
+W | S archer
+S archer | S archer
+S archer | S swordsman
+S archer | W
+S archer | W
+S swordsman | S swordsman
+S archer | W
+S archer | S archer
+W | S archer
+S archer | S swordsman
+S archer | S archer
+W | W
+S swordsman | S swordsman
+S archer | W
+S swordsman | S swordsman
+S archer | W
+S archer | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+S archer | S archer
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+W | W
+S archer | S archer
+S archer | S swordsman
+W | S swordsman
+W | S swordsman
+W | S archer
+W | S archer
+S archer | S swordsman
+S archer | S swordsman
+W | W
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+S archer | S swordsman
+S archer | S archer
+S swordsman | S swordsman
+W | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+W | S archer
+S archer | W
+S archer | S swordsman
+S archer | W
+S archer | S swordsman
+S swordsman | S swordsman
+W | S archer
+W | S swordsman
+S archer | S swordsman
+S swordsman | S swordsman
+S archer | S swordsman
+W | S archer
+W | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S swordsman | S archer
+S archer | W
+W | S swordsman
+W | S archer
+W | S swordsman
+S archer | W
+W | S archer
+S swordsman | W
+S swordsman | S swordsman
+W | S archer
+S swordsman | S archer
+S archer | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+S swordsman | S archer
+W | S archer
+S archer | W
+W | S archer
+S swordsman | S swordsman
+W | W
+S swordsman | S archer
+S swordsman | S swordsman
+W | S swordsman
+W | W
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | S archer
+S swordsman | S swordsman
+S swordsman | S archer
+W | W
+W | S swordsman
+S swordsman | S swordsman
+W | S swordsman
+W | S archer
+S archer | S archer
+W | S archer
+S swordsman | W
+S archer | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+S archer | S swordsman
+W | S archer
+W | W
+W | S archer
+S archer | S swordsman
+S swordsman | S archer
+S archer | S swordsman
+S archer | S swordsman
+S swordsman | S archer
+S swordsman | S swordsman
+S swordsman | S swordsman
+W | S archer
+S archer | W
+S swordsman | S swordsman
+S archer | W
+S swordsman | S swordsman
+W | S swordsman
+W | S swordsman
+W | S swordsman
+S archer | W
+W | S archer
+S archer | S swordsman
+S swordsman | W
+W | W
+S archer | S archer
+S swordsman | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S archer
+S archer | S swordsman
+S archer | S swordsman
+S archer | S archer
+S archer | S swordsman
+S swordsman | S swordsman
+W | W
+W | W
+W | S archer
+S archer | S swordsman
+S archer | S archer
+W | S swordsman
+S archer | S archer
+S swordsman | W
+S archer | S archer
+W | S archer
+W | S archer
+S swordsman | S archer
+W | S swordsman
+S swordsman | S archer
+S archer | S archer
+W | S archer
+S swordsman | S swordsman
+W | S swordsman
+S archer | S archer
+S swordsman | S archer
+W | S archer
+W | W
+S archer | S swordsman
+W | W
+W | S swordsman
+S archer | W
+S archer | W
+S swordsman | S archer
+S archer | S archer
+S swordsman | S swordsman
+S archer | S archer
