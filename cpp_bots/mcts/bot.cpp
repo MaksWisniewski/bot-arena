@@ -43,7 +43,7 @@ int main()
 {
     for (;;)
     {
-        MCTSBot bot;
+        MCTSBot bot{40};
         bot.run();
     }
 }

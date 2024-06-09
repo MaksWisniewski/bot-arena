@@ -160,9 +160,9 @@ bool MCTSNode::simulate(Engine& engine, const Side my_side, int max_simulation_l
 
     // TODO:
     // - dependency injection
-    // - evaluate only once ( const auto result = evaluate(engine, my_side) > 0; ) ??
-    const Eval_1 evaluate;
-    const auto result = evaluate(engine, my_side) > evaluate(engine, other_side(my_side));
+    const BetterEval evaluate;
+    const auto result = evaluate(engine, my_side) > 0;
+    // const auto result = evaluate(engine, my_side) > evaluate(engine, other_side(my_side));
 
     // const auto result = engine.isWin(my_side);
 
