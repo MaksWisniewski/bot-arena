@@ -1,6 +1,7 @@
 #include "is_useless.hpp"
 
 #include <array>
+#include <random>
 
 std::pair<int, int> operator + (const std::pair<int, int>& x, const std::pair<int, int>& y)
 {
@@ -22,8 +23,16 @@ bool is_near_path(const std::pair<int, int>& position, const Path& path)
     return false;
 }
 
-// To powinno bardziej oddać w minmax'ie
+double get_random_number()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.0, 1.0);
+    return dis(gen);
+}
+
 // TODO: filtrować jakoś farmy
+// TODO: check if is_useless isn't useless :)
 bool is_useless(const std::string& move, const Path& path)
 {
     if (move.front() == 'T' and not is_near_path(parse_builiding_position(move), path))
@@ -31,10 +40,9 @@ bool is_useless(const std::string& move, const Path& path)
         return true;
     }
 
-    static bool useless_farm = true;
     if (move.front() == 'F')
     {
-        return useless_farm ^= 1;
+        return get_random_number() < std::min(0.8, 0.02 * path.size());
     }
 
     return false;

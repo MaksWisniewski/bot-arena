@@ -173,8 +173,8 @@ Eval::Type eval_turrets(const Engine& engine, const Side side)
     return result;
 }
 
-Eval::Type BetterEval::operator() (const Engine& engine, const Side mySide) const {
-
+Eval::Type BetterEval::operator() (const Engine& engine, const Side mySide) const
+{
     const auto otherSide = other_side(mySide);
 
     if(engine.isWin(mySide))
