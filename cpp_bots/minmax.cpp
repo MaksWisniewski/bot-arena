@@ -1,10 +1,9 @@
 #include "common/bot/bot.hpp"
 #include "common/engine/engine.hpp"
 #include "common/eval_func/eval.hpp"
-#include "common/json.hpp"
+#include "common/read_json.hpp"
 
 #include <iostream>
-#include <fstream>
 #include <format>
 
 #include <climits>
@@ -12,7 +11,6 @@
 #include <chrono>
 #include <random>
 
-#include <optional>
 #include <getopt.h>
 
 class MinMaxBot : public Bot
@@ -144,46 +142,30 @@ private:
     std::mt19937 rng;
 };
 
-std::optional<Json> read_json(const std::string& filename)
-{
-    std::ifstream file{filename};
-
-    if (not file.is_open())
-    {
-        std::cerr << std::format("[minmax] could not open the file: {0}\n", filename);
-        return std::nullopt;
-    }
-
-    Json result;
-    file >> result;
-
-    file.close();
-
-    return result;
-}
-
 BetterEval get_eval_with_parameters(int argc, char** argv)
 {
     option options[] = {
-        {"eval-params", required_argument, 0, 'p'},
+        {"eval-config", required_argument, 0, 'c'},
         {0, 0, 0, 0}
     };
 
     int option;
-    while ((option = getopt_long(argc, argv, "p:", options, nullptr)) != -1)
+    while ((option = getopt_long(argc, argv, "c:", options, nullptr)) != -1)
     {
         switch (option)
         {
-            case 'p':
+            case 'c':
             {
-                const auto eval_params_opt = read_json(optarg);
-                if (eval_params_opt)
+                const auto eval_config_opt = read_json(optarg);
+                if (not eval_config_opt)
                 {
-                    const auto eval_params = eval_params_opt.value();
-                    std::cerr << "[minmax] running with eval parameters: " << eval_params << '\n';
-                    return BetterEval{eval_params};
+                    std::cerr << "[minmax] failed to read eval parameters from file: " << optarg << '\n';
+                    break;
                 }
-                break;
+
+                const auto eval_config = eval_config_opt.value();
+                std::cerr << "[minmax] running with eval parameters: " << eval_config << '\n';
+                return BetterEval{eval_config};
             }
         }
     }
