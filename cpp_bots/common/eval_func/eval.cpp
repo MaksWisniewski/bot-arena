@@ -188,8 +188,6 @@ Eval::Type BetterEval::operator() (const Engine& engine, const Side mySide) cons
 
     Type result = 0;
 
-    // std::cerr << "income_weight: " << income_weight << ", control_weight: " << control_weight << ", turrets_weight: " << turrets_weight << '\n';
-
     result += eval_income(engine, mySide) * income_weight;
     result -= eval_income(engine, otherSide) * income_weight;
 

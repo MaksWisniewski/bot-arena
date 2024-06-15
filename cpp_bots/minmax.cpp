@@ -170,7 +170,7 @@ BetterEval get_eval_with_parameters(int argc, char** argv)
     };
 
     int option;
-    while ((option = getopt_long(argc, argv, "hp:", options, nullptr)) != -1)
+    while ((option = getopt_long(argc, argv, "p:", options, nullptr)) != -1)
     {
         switch (option)
         {
