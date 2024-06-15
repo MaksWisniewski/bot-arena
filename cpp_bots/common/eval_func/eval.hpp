@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../engine/engine.hpp"
+#include "../json.hpp"
 
 // klasa abstrakcyjna
 class Eval
@@ -25,5 +26,12 @@ public:
 class BetterEval : public Eval
 {
 public:
+    BetterEval() = default;
+    BetterEval(const Json&);
     Type operator() (const Engine&, Side) const override;
+
+private:
+    Type income_weight = 1;
+    Type control_weight = 1;
+    Type turrets_weight = 1;
 };

@@ -188,15 +188,23 @@ Eval::Type BetterEval::operator() (const Engine& engine, const Side mySide) cons
 
     Type result = 0;
 
-    // TODO: * jakieś wagi (?)
-    result += eval_income(engine, mySide);
-    result -= eval_income(engine, otherSide);
+    // std::cerr << "income_weight: " << income_weight << ", control_weight: " << control_weight << ", turrets_weight: " << turrets_weight << '\n';
 
-    result += eval_control(engine, mySide);
-    result -= eval_control(engine, otherSide);
+    result += eval_income(engine, mySide) * income_weight;
+    result -= eval_income(engine, otherSide) * income_weight;
 
-    result += eval_turrets(engine, mySide);
-    result -= eval_turrets(engine, otherSide);
+    result += eval_control(engine, mySide) * control_weight;
+    result -= eval_control(engine, otherSide) * control_weight;
+
+    result += eval_turrets(engine, mySide) * turrets_weight;
+    result -= eval_turrets(engine, otherSide) * turrets_weight;
 
     return result;
+}
+
+BetterEval::BetterEval(const Json& json) :
+    income_weight{json["income_weight"]},
+    control_weight{json["control_weight"]},
+    turrets_weight{json["turrets_weight"]}
+{
 }

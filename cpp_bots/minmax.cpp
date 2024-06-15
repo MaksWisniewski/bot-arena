@@ -1,25 +1,30 @@
-// itearative Deepening
-// warning moze byc tak ze potrzebne jest splamietyywanie?
-
 #include "common/bot/bot.hpp"
 #include "common/engine/engine.hpp"
 #include "common/eval_func/eval.hpp"
-// #include "common/optimizations/is_useless.hpp"
+#include "common/json.hpp"
 
 #include <iostream>
+#include <fstream>
 #include <format>
+
 #include <climits>
 #include <algorithm>
 #include <chrono>
+#include <random>
 
-const int MAXDEPTH = 5;
+#include <optional>
+#include <getopt.h>
 
 class MinMaxBot : public Bot
 {
 public:
-    MinMaxBot(Eval& _eval) : eval(_eval) {};
+    MinMaxBot(Eval& _eval) : eval(_eval)
+    {
+        std::random_device rd;
+        rng = std::mt19937{rd()};
+    }
 
-    Eval::Type search(const Engine& engine, Side side, int depth=MAXDEPTH, Eval::Type alpha=LLONG_MIN, Eval::Type beta=LLONG_MAX)
+    Eval::Type search(const Engine& engine, Side side, int depth, Eval::Type alpha=LLONG_MIN, Eval::Type beta=LLONG_MAX)
     {
         if (std::chrono::high_resolution_clock::now() >= max_time)
         {
@@ -32,10 +37,7 @@ public:
 
         bool isMaximizingPlayer = side == this->side;
         auto moves = engine.get_legal_moves(side);
-        std::random_shuffle(moves.begin(), moves.end());
-
-        // const auto p = engine.get_path();
-        // const Path path{p.begin(), p.end()};
+        std::shuffle(moves.begin(), moves.end(), rng);
 
         if(isMaximizingPlayer)
         {
@@ -43,17 +45,12 @@ public:
 
             for(auto &move : moves)
             {
-                // if (is_useless(move, path))
-                // {
-                //     continue;
-                // }
-
                 if (is_timeout)
                 {
                     return 0;
                 }
 
-                Engine temp_engine = engine; // kopia engina
+                Engine temp_engine = engine;
                 if(side == Side::left)
                     temp_engine.make_move(move, "W");
                 else
@@ -72,17 +69,12 @@ public:
 
             for(auto &move : moves)
             {
-                // if (is_useless(move, path))
-                // {
-                //     continue;
-                // }
-
                 if (is_timeout)
                 {
                     return 0;
                 }
 
-                Engine temp_engine = engine; // kopia engina
+                Engine temp_engine = engine;
                 if(side == Side::left)
                     temp_engine.make_move(move, "W");
                 else
@@ -99,17 +91,13 @@ public:
 
     std::string make_move() override
     {
-        // TODO: probably can be done better
         max_time = std::chrono::high_resolution_clock::now() + std::chrono::seconds{move_timeout} - std::chrono::milliseconds{25};
         is_timeout = false;
 
         Engine engine{arena_properties};
 
         auto legal_moves = engine.get_legal_moves(side);
-        std::random_shuffle(legal_moves.begin(), legal_moves.end());
-
-        // const auto p = engine.get_path();
-        // const Path path{p.begin(), p.end()};
+        std::shuffle(legal_moves.begin(), legal_moves.end(), rng);
 
         std::string bestMove = "W";
 
@@ -121,11 +109,6 @@ public:
 
             for (auto &move : legal_moves)
             {
-                // if (is_useless(move, path))
-                // {
-                //     continue;
-                // }
-
                 if (is_timeout)
                 {
                     std::cerr << std::format("[minmax] searched for max depth {0}, best move: {1}\n", depth, bestMove);
@@ -158,12 +141,60 @@ private:
     Eval& eval;
     std::chrono::system_clock::time_point max_time;
     bool is_timeout;
+    std::mt19937 rng;
 };
 
-int main()
+std::optional<Json> read_json(const std::string& filename)
 {
-    // Eval_1 eval{};
-    BetterEval eval{};
+    std::ifstream file{filename};
+
+    if (not file.is_open())
+    {
+        std::cerr << std::format("[minmax] could not open the file: {0}\n", filename);
+        return std::nullopt;
+    }
+
+    Json result;
+    file >> result;
+
+    file.close();
+
+    return result;
+}
+
+BetterEval get_eval_with_parameters(int argc, char** argv)
+{
+    option options[] = {
+        {"eval-params", required_argument, 0, 'p'},
+        {0, 0, 0, 0}
+    };
+
+    int option;
+    while ((option = getopt_long(argc, argv, "hp:", options, nullptr)) != -1)
+    {
+        switch (option)
+        {
+            case 'p':
+            {
+                const auto eval_params_opt = read_json(optarg);
+                if (eval_params_opt)
+                {
+                    const auto eval_params = eval_params_opt.value();
+                    std::cerr << "[minmax] running with eval parameters: " << eval_params << '\n';
+                    return BetterEval{eval_params};
+                }
+                break;
+            }
+        }
+    }
+
+    std::cerr << "[minmax] running with default eval parameters\n";
+    return {};
+}
+
+int main(int argc, char** argv)
+{
+    auto eval = get_eval_with_parameters(argc, argv);
     for (;;)
     {
         MinMaxBot bot{eval};
