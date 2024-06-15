@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../common/engine/engine.hpp"
+#include "../common/eval_func/eval.hpp"
 
 #include <string>
 #include <chrono>
@@ -22,6 +23,7 @@ public:
     Result update(
         Engine&,
         Side,
+        const Eval&,
         const std::chrono::system_clock::time_point& max_time,
         bool& is_timeout,
         int max_simulation_length = default_max_simulation_length);
@@ -36,12 +38,13 @@ private:
     Result expand(
         const Engine&,
         Side,
+        const Eval&,
         const std::chrono::system_clock::time_point& max_time,
         bool& is_timeout,
         int max_simulation_length);
 
     // returns true if simulation ended with win for given side
-    bool simulate(Engine&, Side, int max_simulation_length);
+    bool simulate(Engine&, Side, const Eval&, int max_simulation_length);
 
     double score() const;
     bool is_leaf() const;

@@ -1,5 +1,6 @@
 #include "../common/bot/bot.hpp"
 #include "../common/engine/engine.hpp"
+#include "../common/eval_func/eval.hpp"
 #include "node.hpp"
 
 #include <iostream>
@@ -8,8 +9,9 @@
 class MCTSBot : public Bot
 {
 public:
-    MCTSBot(int max_simulation_length = MCTSNode::default_max_simulation_length) :
-        max_simulation_length(max_simulation_length)
+    MCTSBot(Eval& eval, int max_simulation_length = MCTSNode::default_max_simulation_length) :
+        eval{eval},
+        max_simulation_length{max_simulation_length}
     {
         std::cerr << std::format("[mcts] running with max simulation length: {0}\n", max_simulation_length);
     }
@@ -25,7 +27,7 @@ public:
         int number_of_simulations;
         for (number_of_simulations = 0; not is_timeout; number_of_simulations++)
         {
-            root.update(engine, side, max_time, is_timeout, max_simulation_length);
+            root.update(engine, side, eval, max_time, is_timeout, max_simulation_length);
         }
 
         const auto move = root.get_best_move();
@@ -36,14 +38,16 @@ public:
     }
 
 private:
+    Eval& eval;
     int max_simulation_length;
 };
 
 int main()
 {
+    BetterEval eval{};
     for (;;)
     {
-        MCTSBot bot{40};
+        MCTSBot bot{eval, 40};
         bot.run();
     }
 }

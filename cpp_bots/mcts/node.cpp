@@ -1,6 +1,5 @@
 #include "node.hpp"
 #include "../common/optimizations/is_useless.hpp"
-#include "../common/eval_func/eval.hpp"
 
 #include <algorithm>
 #include <random>
@@ -13,13 +12,14 @@ MCTSNode::MCTSNode(const Side side, const MCTSNode* parent) : side(side), games_
 MCTSNode::Result MCTSNode::update(
     Engine& engine,
     const Side my_side,
+    const Eval& eval,
     const std::chrono::system_clock::time_point& max_time,
     bool& is_timeout,
     int max_simulation_length)
 {
     if (is_leaf())
     {
-        return expand(engine, my_side, max_time, is_timeout, max_simulation_length);
+        return expand(engine, my_side, eval, max_time, is_timeout, max_simulation_length);
     }
 
     const auto move = select_move();
@@ -33,7 +33,7 @@ MCTSNode::Result MCTSNode::update(
         engine.make_move("W", move);
     }
 
-    const auto result = children.at(move).update(engine, my_side, max_time, is_timeout, max_simulation_length);
+    const auto result = children.at(move).update(engine, my_side, eval, max_time, is_timeout, max_simulation_length);
 
     games_played += result.games_played;
     games_won += result.games_won;
@@ -73,6 +73,7 @@ std::string MCTSNode::select_move() const
 MCTSNode::Result MCTSNode::expand(
     const Engine& engine,
     const Side my_side,
+    const Eval& eval,
     const std::chrono::system_clock::time_point& max_time,
     bool& is_timeout,
     int max_simulation_length)
@@ -123,7 +124,7 @@ MCTSNode::Result MCTSNode::expand(
         }
 
         MCTSNode child{other_side(side), this};
-        result.games_won += child.simulate(child_engine, my_side, max_simulation_length);
+        result.games_won += child.simulate(child_engine, my_side, eval, max_simulation_length);
         children.insert({move, child});
     }
 
@@ -143,7 +144,7 @@ std::string get_random_move(const std::vector<std::string>& moves)
     return moves[randomIndex];
 }
 
-bool MCTSNode::simulate(Engine& engine, const Side my_side, int max_simulation_length)
+bool MCTSNode::simulate(Engine& engine, const Side my_side, const Eval& eval, int max_simulation_length)
 {
     for (int i = 0; i < max_simulation_length; i++)
     {
@@ -158,13 +159,7 @@ bool MCTSNode::simulate(Engine& engine, const Side my_side, int max_simulation_l
         engine.make_move(left_move, right_move);
     }
 
-    // TODO:
-    // - dependency injection
-    const BetterEval evaluate;
-    const auto result = evaluate(engine, my_side) > 0;
-    // const auto result = evaluate(engine, my_side) > evaluate(engine, other_side(my_side));
-
-    // const auto result = engine.isWin(my_side);
+    const auto result = eval(engine, my_side) > 0;
 
     games_played++;
     games_won += result;
