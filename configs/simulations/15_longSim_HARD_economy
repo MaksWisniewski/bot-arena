@@ -1,6 +1,8 @@
 {
     "bot_left": "mcts",
+    "bot_left_args": "",
     "bot_right": "minmax",
+    "bot_right_args": "",
     "game_timeout": 16800,
     "games": 4,
     "log_name": "15_longSim_HARD_economy3",

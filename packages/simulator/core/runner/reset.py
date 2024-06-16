@@ -17,8 +17,8 @@ def kill_player_instances(player_instances: dict, config: SimConfig):
     if not player_instances:
         for playerX in player_instances.values():
             playerX.kill()
-        player_instances[0] = Bot(config.bot_left)
-        player_instances[1] = Bot(config.bot_right)
+        player_instances[0] = Bot(config.bot_left, config.bot_left_args)
+        player_instances[1] = Bot(config.bot_right, config.bot_right_args)
 
 
 def initialize_players(player_instances: dict, config: SimConfig, game: Game):

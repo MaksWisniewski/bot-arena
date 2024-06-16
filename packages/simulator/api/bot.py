@@ -9,9 +9,9 @@ from packages.simulator.core.get_run_command import get_run_command
 
 
 class Bot:
-    def __init__(self, file):
+    def __init__(self, file, args):
         file = os.path.join(BOTS_DIRECTORY, file)
-        self.process = subprocess.Popen(get_run_command(file), bufsize=1, shell=False, text=True,
+        self.process = subprocess.Popen(get_run_command(file, args), bufsize=1, shell=False, text=True,
                                         stdout=subprocess.PIPE, stdin=subprocess.PIPE)
         self.in_queue = queue.Queue()
         self.out_queue = queue.Queue()

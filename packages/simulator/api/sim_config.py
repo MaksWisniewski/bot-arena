@@ -4,7 +4,9 @@ import json
 class SimConfig:
     def __init__(self,
                  bot_left,
+                 bot_left_args,
                  bot_right,
+                 bot_right_args,
                  map_name,
                  log_name,
                  games,
@@ -12,7 +14,9 @@ class SimConfig:
                  move_timeout,
                  game_timeout):
         self.bot_left = bot_left
+        self.bot_left_args = bot_left_args
         self.bot_right = bot_right
+        self.bot_right_args = bot_right_args
         self.map_name = map_name
         self.log_name = log_name
         self.games = games

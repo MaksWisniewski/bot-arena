@@ -1,6 +1,8 @@
 {
     "bot_left": "minmax",
+    "bot_left_args": "",
     "bot_right": "mcts",
+    "bot_right_args": "",
     "game_timeout": 600,
     "games": 1,
     "log_name": "temp",
