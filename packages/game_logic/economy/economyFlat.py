@@ -2,10 +2,10 @@ import json
 import os
 import pathlib
 
-from packages.game_logic.economy.EconomyFarm import EconomyFarm
-from packages.game_logic.economy.EconomySoldier import EconomySoldier
-from packages.game_logic.economy.EconomyTurret import EconomyTurret
-
+from packages.game_logic.economy.types.EconomyFarm import EconomyFarm
+from packages.game_logic.economy.types.EconomySoldier import EconomySoldier
+from packages.game_logic.economy.types.EconomyTurret import EconomyTurret
+from packages.cli import ECONOMY_CONFIGS_DIR
 
 class EconomyFlat:
     def __init__(self,
@@ -51,18 +51,7 @@ class EconomyFlat:
 
     @classmethod
     def fromFilename(cls, name):
-        configsPath = pathlib.Path(__file__).parent.parent.resolve()
-        filepath = os.path.join(configsPath, name)
+        filepath = os.path.join(ECONOMY_CONFIGS_DIR, name)
         cls.fromFile(filepath)
 
-class EconomySoldiers:
-    swordsman: EconomySoldier
-    archer: EconomySoldier
-class Economy:
-    def __init__(self, economy: EconomyFlat):
-        self._updateSoldiers(economy)
-    def _updateSoldiers(self, economy: EconomyFlat):
-        soldiers = EconomySoldiers
-        soldiers.swordsman = EconomySoldier.__dict__ = economy.soldiers["swordsman"]
-        soldiers.archer = EconomySoldier.__dict__ = economy.soldiers["archer"]
-        self.soldiers = soldiers
+

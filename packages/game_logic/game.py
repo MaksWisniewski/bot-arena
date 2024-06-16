@@ -9,7 +9,7 @@ from .objects.map import Map
 from .objects.turrets import Turrets, Turret
 from .objects.soldiers import Soldiers, Soldier
 from .objects.farms import Farms, Farm
-from packages.game_logic.economy.economy import EconomyFlat
+from packages.game_logic.economy import *
 import os, random
 
 from packages import MAPS_DIRECTORY
@@ -28,11 +28,11 @@ ErrorCode = {
 
 
 class Game:
-    def __init__(self, economy_name: str, map_path=None, state=None, ) -> None:
+    def __init__(self, economy_name: str = None, map_path=None, state=None, ) -> None:
         map_path = os.path.join(MAPS_DIRECTORY, map_path) if map_path is not None else None
 
         self._map = Map(map_path)
-        self.economy = EconomyFlat.fromFilename(economy_name)
+        self.economy = Economy(EconomyFlat.fromFilename(economy_name))
 
         START_GOLD = self.economy.start_gold
         PASSIVE_GOLD = self.economy.passive_gold
@@ -100,9 +100,9 @@ class Game:
 
     def __handle_actions_error(self) -> tuple[int, int]:
         def check_build_place(action: Action) -> int:
-            if isinstance(action, BuildTurret) and self.gold[action.side] < "self.economy.building[]"COST['turret']:
+            if isinstance(action, BuildTurret) and self.gold[action.side] < self.economy.buildings.turret.cost:
                 return -1
-            if isinstance(action, BuildFarm) and self.gold[action.side] < COST['farm']:
+            if isinstance(action, BuildFarm) and self.gold[action.side] < self.economy.buildings.farm.cost:
                 return -1
             if action.cords[0] < 0 or action.cords[0] >= self._map.MAP_SIZE_X or action.cords[1] < 0 or action.cords[1] >= self._map.MAP_SIZE_Y:
                 return -4
@@ -146,17 +146,18 @@ class Game:
     def __execute_actions(self) -> None:
         def build(action: Action) -> None:
             if isinstance(action, BuildTurret):
-                self.gold[action.side] -= COST['turret']
+                self.gold[action.side] -= self.economy.buildings.turret.cost
                 self.turrets[action.side].spawn(action.cords)
                 return
             if isinstance(action, BuildFarm):
-                self.gold[action.side] -= COST['farm']
+                self.gold[action.side] -= self.economy.buildings.farm.cost
                 self.farms[action.side].spawn(action.cords)
                 return
 
         def spawn(action: Action) -> None:
             soldier_name = action.name
-            self.gold[action.side] -= SOLDIERS_STATS[soldier_name]['cost']
+            cost = getattr(self.economy.soldiers, soldier_name).cost
+            self.gold[action.side] -= cost
             self.soldiers[action.side].spawn(soldier_name)
 
         action_to_function = {
@@ -201,9 +202,9 @@ class Game:
 
         self.gold['left'] += self.income['left']
         self.gold['right'] += self.income['right']
-
-        self.income['left'] = len(self.farms['left']) * FARM_GOLD + PASSIVE_GOLD
-        self.income['right'] = len(self.farms['right']) * FARM_GOLD + PASSIVE_GOLD
+        calculatIncome = lambda side: len(self.farms[side]) * self.economy.buildings.farm.gold + self.economy.passive_gold
+        self.income['left'] = calculatIncome('left')
+        self.income['right'] = calculatIncome('right')
 
         WinLog = self.__is_win()
         if WinLog:
@@ -263,11 +264,16 @@ class Game:
     def get_legal_moves(self, player: str) -> list[Action]:
         moves = [Wait(player)]
 
+        SOLDIERS_STATS = self.economy.soldiers.__dict__
         # spawn soldier
         for soldier_type in SOLDIERS_STATS:
-            if SOLDIERS_STATS[soldier_type]['cost'] <= self.gold[player]:
+            if SOLDIERS_STATS[soldier_type].cost <= self.gold[player]:
                 moves.append(SpawnSoldier(player, soldier_type))
 
+        COST = {
+            'farm': self.economy.buildings.farm.cost,
+            'turret': self.economy.buildings.turret.cost
+        }
         # build
         for building_type in COST:
             if COST[building_type] <= self.gold[player]:

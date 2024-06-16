@@ -1,0 +1,1 @@
+TODO: Describe shapes of `Economy` & `EconomyFlat` 
