@@ -1,6 +1,6 @@
 COST = {
-    'turret': 400,
-    'farm': 300,
+    'turret': 280,
+    'farm': 210,
 }
 
 START_GOLD = 800
