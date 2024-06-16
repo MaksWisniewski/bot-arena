@@ -1,5 +1,4 @@
 image_name="bot_area_image"
-
 if [ "$1" = "select-economy" ] || [ "$1" = "-e" ]; then
     shift
     docker run --rm -v "$(pwd):/usr/src/app":z -it "$image_name" python3 main.py select-economy "$@"
