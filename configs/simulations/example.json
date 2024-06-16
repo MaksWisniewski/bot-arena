@@ -1,12 +1,12 @@
 {
     "bot_left": "minmax",
-    "bot_left_args": "",
+    "bot_left_args": "-c configs/eval_params/BetterEval/example.json",
     "bot_right": "mcts",
-    "bot_right_args": "",
-    "game_timeout": 600,
-    "games": 1,
-    "log_name": "temp",
-    "map_name": "map15x15.json",
-    "move_timeout": 10,
-    "ready_timeout": 10
+    "bot_right_args": "-l 42 -c configs/eval_params/BetterEval/example.json",
+    "game_timeout": 1800,
+    "games": 4,
+    "log_name": "example",
+    "map_name": "map10x10.json",
+    "move_timeout": 2,
+    "ready_timeout": 2
 }
