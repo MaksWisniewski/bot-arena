@@ -12,7 +12,8 @@ class SimConfig:
                  games,
                  ready_timeout,
                  move_timeout,
-                 game_timeout):
+                 game_timeout,
+                 economy_name: str):
         self.bot_left = bot_left
         self.bot_left_args = bot_left_args
         self.bot_right = bot_right
@@ -23,6 +24,7 @@ class SimConfig:
         self.ready_timeout = ready_timeout
         self.move_timeout = move_timeout
         self.game_timeout = game_timeout
+        self.economy_name = economy_name
 
     def toList(self):
         return list(self.__dict__.values())

@@ -15,7 +15,9 @@ def play_game(
         map_name,
         player_instances: dict,
         config: SimConfig):
-    game = Game(map_name)
+    game = Game(
+        economy_name=config.economy_name,
+        map_path=map_name)
     log_maker = LogMaker(log_name, log_number)
     reset(player_instances, config, game)
 

@@ -21,6 +21,7 @@ from packages.simulator.api.sim_config import SimConfig
 @click.option("--ready_timeout", default=5)
 @click.option("--move_timeout", default=2)
 @click.option("--game_timeout", default=60)
+@click.option("--economy", default="default", help='Economy file selection.')
 def run_simulation(
         b1,
         b1_args,
@@ -31,7 +32,8 @@ def run_simulation(
         games,
         ready_timeout,
         move_timeout,
-        game_timeout):
+        game_timeout,
+        economy):
     config = SimConfig(
         bot_left=b1,
         bot_left_args=b1_args,
@@ -42,7 +44,8 @@ def run_simulation(
         games=games,
         ready_timeout=ready_timeout,
         move_timeout=move_timeout,
-        game_timeout=game_timeout)
+        game_timeout=game_timeout,
+        economy_name=economy)
 
     config.toFile(SIMFILE_LAST)
     simulate(config)

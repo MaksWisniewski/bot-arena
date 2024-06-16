@@ -1,5 +1,5 @@
 from .stats import COST
-from .stats import START_GOLD, PASSIVE_GOLD, FARM_GOLD
+from .stats import PASSIVE_GOLD, FARM_GOLD
 from .stats import SOLDIERS_STATS
 
 from .actions import Action, BuildAction
@@ -9,7 +9,7 @@ from .objects.map import Map
 from .objects.turrets import Turrets, Turret
 from .objects.soldiers import Soldiers, Soldier
 from .objects.farms import Farms, Farm
-
+from packages.game_logic.economy.economy import EconomyFlat
 import os, random
 
 from packages import MAPS_DIRECTORY
@@ -26,18 +26,23 @@ ErrorCode = {
     3: 'Tie'
 }
 
+
 class Game:
-    def __init__(self, map_path = None, state = None) -> None:
+    def __init__(self, economy_name: str, map_path=None, state=None, ) -> None:
         map_path = os.path.join(MAPS_DIRECTORY, map_path) if map_path is not None else None
 
         self._map = Map(map_path)
+        self.economy = EconomyFlat.fromFilename(economy_name)
+
+        START_GOLD = self.economy.start_gold
+        PASSIVE_GOLD = self.economy.passive_gold
 
         self.turrets = {
             'left': Turrets(self._map.path),
             'right': Turrets(self._map.path)
         }
 
-        self.soldiers  = {
+        self.soldiers = {
             'left': Soldiers('left', self._map.path),
             'right': Soldiers('right', self._map.path)
         }
@@ -82,7 +87,6 @@ class Game:
 
             self.income[player] = players[player]['income']
 
-
     def __update_soldiers(self) -> None:
         self.soldiers['left'].fight(self.soldiers['right'])
         self.soldiers['right'].fight(self.soldiers['left'])
@@ -96,7 +100,7 @@ class Game:
 
     def __handle_actions_error(self) -> tuple[int, int]:
         def check_build_place(action: Action) -> int:
-            if isinstance(action, BuildTurret) and self.gold[action.side] < COST['turret']:
+            if isinstance(action, BuildTurret) and self.gold[action.side] < "self.economy.building[]"COST['turret']:
                 return -1
             if isinstance(action, BuildFarm) and self.gold[action.side] < COST['farm']:
                 return -1
@@ -110,7 +114,7 @@ class Game:
                 self.turrets['right'],
                 self.farms['left'],
                 self.farms['right']
-                ]
+            ]
 
             for place in wrong_build_places:
                 if action.cords in place:
@@ -135,7 +139,7 @@ class Game:
                 return (-3, -3)
 
         left_error = check_spawn_soldier(self.action_left) if isinstance(self.action_left, SpawnSoldier) else left_error
-        right_error = check_spawn_soldier(self.action_right) if isinstance(self.action_right, SpawnSoldier) else right_error
+        right_error = check_spawn_soldier(self.action_right) if isinstance(self.action_right,SpawnSoldier) else right_error
 
         return (left_error, right_error)
 
@@ -230,7 +234,7 @@ class Game:
 
         size_x, size_y = self.get_map_size()
 
-        return [(x,y) for x in range(size_x) for y in range(size_y) if (x,y) not in non_empty_cells]
+        return [(x, y) for x in range(size_x) for y in range(size_y) if (x, y) not in non_empty_cells]
 
     def get_soldiers(self) -> dict[str, list[Soldier]]:
         return {
@@ -275,7 +279,7 @@ class Game:
     def get_random_move(self, player: str) -> Action:
         return random.choice(self.get_legal_moves(player))
 
-    def generate_random_map(self, map_path, size_x = 10, size_y = 10) -> None:
+    def generate_random_map(self, map_path, size_x=10, size_y=10) -> None:
         self._map.generate_random_map(map_path, size_x, size_y)
 
     def display(self) -> None:
