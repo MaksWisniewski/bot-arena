@@ -45,7 +45,7 @@ if __name__ == "__main__":
 - The `Move` class is used to generate moves in the `make_move` method.
 - Customize and expand the template to implement unique bot strategies according to your needs.
 ---
-**Input Format: JSON for Arena Properties:**
+#### Input Format: JSON for Arena Properties:
 
 Values for `arena_properties` are expected in JSON format, as shown below:
 
