@@ -31,4 +31,4 @@ Contains `WrongMove` exception which is triggered once player tries to do illega
 
 ### `bot.py`
 
-Contains bot class that developer may extend to easily create new bot.
+Contains `Bot` class that creates bot processes and controls their communication with the arena.

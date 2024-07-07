@@ -28,7 +28,7 @@ Example usage:
 Used to clean compiled object files of C++ bots (it doesn't remove linked bot executables from `bots` directory). It is equivalent to `make clean` run in `cpp_bots` directory.
 
 ### `select-economy`, `-e`
-Used to select economy configuration used in simulations. The configuration files are stored in [`configs/economies`](configs/economies) directory.
+Used to select economy configuration used in simulations. The configuration files are stored in [`configs/economies`](configs/economies) directory. Their format is described [here](/packages/cli/README.md#economy-configuration-format-see-packagesgame_logicstatspy).
 After running `./RUN.sh -e` you will be prompted to select one of available economies.
 You can also provide configuration name directly from command line by `--economy` option.
 
@@ -218,6 +218,8 @@ The path has to:
 To simplify the implementation of bots in Python for Bot Arena, a dedicated package is available. This package provides a class template, `Bot`, that offers tools for easier implementation of your own agents.
 Explore the [Bot Package on GitHub](https://github.com/MaksWisniewski/bot-arena/tree/main/bot_package) for seamless bot implementation in Python for Bot Arena.
 
+#### C++ bots
+We also provide the framework for creating bots in C++, see [`cpp_bots`](cpp_bots/README.md).
 
 ## What is log?
 Log is our handy way of keeping track what choice did each bot in every turn. So to answer the question log is a text file that in each line has information about a turn in played game. There is a convention to the name and content of a log file.

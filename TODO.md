@@ -20,3 +20,16 @@ jak mocna powinna być wieża?
     - żołnierza od odległości od bazy/hp/rodzaju/kosztu/...
 
 # Wizualizacja w czasie rzeczywistym podczas symulacji (?)
+
+# Dokumentacja
+- [x] linki do poprzedniego repo (przed forkiem) należy uaktualnić
+- [x] bot_package/README.md – dodać opisy nowych pól struktury arena_properties
+- [x] pełny opis parametrów wywołania RUN.sh
+- [x] opis formatu pliku z definicją ekonomii
+- [ ] opis formatu pliku definiującego planszę
+- [ ] opis formatu interfejsu bot-arena
+- w głównym readme.md:
+    - [ ] dodałbym jakiś wstęp, o co chodzi w tym projekcie
+    - [ ] „Script RUN.sh Usage” przesunąłbym do rozdziału „Activation” p.3 „use bash script RUN.sh”, tytuł rozdziału zmieniłbym na „How to launch”
+    - [x] dodałbym link do \cpp_bots\README.md w rozdziale „Bot standard”
+- [ ] poprawiłbym linki względne do podrzędnych .md, nie działają w przeglądarce, ale nie wiem, czy .md ma taką możliwość
