@@ -108,9 +108,9 @@ Example usage:
 ```
 
 ##### `rerun-simulation`, `--sim-r`
-Used to rerun last simulation. The last simulation configuration is stored in [`configs/simulations/last`](configs/simulations/last) file which is updated in every run.
+Used to rerun last simulation. The last simulation configuration is stored in `configs/simulations/last` file which is automatically generated in every run.
 
-##### `concurrent-rerun-simulation`, `-csim-r`
+##### `concurrent-rerun-simulation`, `--csim-r`
 The concurrent version of `rerun-simulation`, used to rerun last simulation with each game run on separate thread.
 
 ##### `run-simulation-from-config`, `--sim-c`
@@ -122,7 +122,7 @@ Example usage:
 ./RUN.sh --sim-c --config example.json
 ```
 
-### GUI Usage
+### GUI usage
 The program consists of 2 scenes where user can set up a simulation and a scene, where he can watch and analyze the bots' performance. Each scene consists of windows with different functionalities.
 
 - ### Simulation creation scene
