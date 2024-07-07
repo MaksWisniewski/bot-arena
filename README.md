@@ -1,78 +1,3 @@
-# *<b> Script `RUN.sh` Usage </b>*
-
-## Interactive mode
-This script provides the following options:
-
-1. **Run Docker build command**: Builds a Docker image using the specified Dockerfile. <u>*This option is necessary to execute before any other option.*</u>
-2. **Run Shell in Docker container**: Launches shell in a Docker container based on the built image.
-3. **Compile C++ bots**: Compiles C++ bots located in the `cpp_bots` directory.
-4. **Clean C++ bots**: Cleans up compiled C++ bot files.
-5. **Run simulation**: Executes a simulation using the specified Python script.
-
-To use the script, run it and choose the desired option by entering the corresponding number.
-
-## Command line arguments
-
-### `build-docker`, `--build-docker`
-Used to build docker image.
-
-### `compile`, `--compile`
-Used to compile C++ bots. You can specify one or more bots to be compiled.
-If you don't provide any specific bot name, all bots are built by default.
-
-Example usage:
-- compile all bots: `./RUN.sh compile`, it is equivalent to `./RUN.sh compile all`.
-- compile specific bots: `./RUN.sh compile minmax mcts`.
-
-### `clean`, `--clean`
-Used to clean compiled object files of C++ bots (it doesn't remove linked bot executables from `bots` directory). It is equivalent to `make clean` run in `cpp_bots` directory.
-
-### `select-economy`, `-e`
-Used to select economy configuration used in simulations. The configuration files are stored in [`configs/economies`](configs/economies) directory. Their format is described [here](/packages/cli/README.md#economy-configuration-format-see-packagesgame_logicstatspy).
-After running `./RUN.sh -e` you will be prompted to select one of available economies.
-You can also provide configuration name directly from command line by `--economy` option.
-
-Example usage:
-```
-./RUN.sh ./RUN.sh select-economy --economy easy
-```
-
-### `run-simulation`, `--sim`
-Used to run simulation. You can run `./RUN.sh --sim` and you will be prompted to provide necessary paramteres.
-You can also provide simulation parameters directly from command line using below options:
-- `--b1 <name>` - left bot name
-- `--b1_args <args>` - command line arguments for left bot
-- `--b2 <name>` - right bot name
-- `--b2_args <args>` - command line arguments for right bot
-- `--map <name>` - map name, map files are stored in `maps` directory
-- `--log_name <name>` - name of file the simulation log is written to, logs are created in `logs` directory
-- `--games <number>` - number of games to be played
-- `--ready_timeout <seconds>`- time that bots have for preprocessing (in seconds)
-- `--move_timeout <seconds>` - time for single move (in seconds)
-- `--game_timeout <seconds>` - time for single game (in seconds)
-
-Above options can be displayed by running `./RUN.sh --sim --help`
-
-Example usage:
-```
-./RUN.sh --sim --b1 minmax --b1_args "-c configs/eval_params/BetterEval/example.json" --b2 mcts --b2_args "-l 42 -c configs/eval_params/BetterEval/example.json" --map map10x10.json --log_name test --games 2 --ready_timeout 1 --move_timeout 1 --game_timeout 10
-```
-
-### `rerun-simulation`, `--sim-r`
-Used to rerun last simulation. The last simulation configuration is stored in [`configs/simulations/last`](configs/simulations/last) file which is updated in every run.
-
-### `concurrent-rerun-simulation`, `-csim-r`
-The concurrent version of `rerun-simulation`, used to rerun last simulation with each game run on separate thread.
-
-### `run-simulation-from-config`, `--sim-c`
-Used to run simulation with parameters given in configuration file. When you run `./RUN.sh --sim-c` you will be prompted to select one of available configurations stored in [`configs/simulations`](configs/simulations) directory.
-You can also specify the configuration file name with `--config` option.
-
-Example usage:
-```
-./RUN.sh --sim-c --config example.json
-```
-
 # <b> BOT ARENA </b>
 
 <p align="center">
@@ -117,12 +42,87 @@ setuptools 68.2.2
 wheel      0.41.2
 ```
 
-### Activation
+### How to launch
 1. Go to the root folder of the project in terminal.
 2. Start the app with "py main.py" instuction.
 3. Or use bash script `RUN.sh`
 
-### Usage
+### `RUN.sh` script usage
+
+#### Interactive mode
+This script provides the following options:
+
+1. **Run Docker build command**: Builds a Docker image using the specified Dockerfile. <u>*This option is necessary to execute before any other option.*</u>
+2. **Run Shell in Docker container**: Launches shell in a Docker container based on the built image.
+3. **Compile C++ bots**: Compiles C++ bots located in the `cpp_bots` directory.
+4. **Clean C++ bots**: Cleans up compiled C++ bot files.
+5. **Run simulation**: Executes a simulation using the specified Python script.
+
+To use the script, run it and choose the desired option by entering the corresponding number.
+
+#### Command line arguments
+
+##### `build-docker`, `--build-docker`
+Used to build docker image.
+
+##### `compile`, `--compile`
+Used to compile C++ bots. You can specify one or more bots to be compiled.
+If you don't provide any specific bot name, all bots are built by default.
+
+Example usage:
+- compile all bots: `./RUN.sh compile`, it is equivalent to `./RUN.sh compile all`.
+- compile specific bots: `./RUN.sh compile minmax mcts`.
+
+##### `clean`, `--clean`
+Used to clean compiled object files of C++ bots (it doesn't remove linked bot executables from `bots` directory). It is equivalent to `make clean` run in `cpp_bots` directory.
+
+##### `select-economy`, `-e`
+Used to select economy configuration used in simulations. The configuration files are stored in [`configs/economies`](configs/economies) directory. Their format is described [here](/packages/cli/README.md#economy-configuration-format-see-packagesgame_logicstatspy).
+After running `./RUN.sh -e` you will be prompted to select one of available economies.
+You can also provide configuration name directly from command line by `--economy` option.
+
+Example usage:
+```
+./RUN.sh ./RUN.sh select-economy --economy easy
+```
+
+##### `run-simulation`, `--sim`
+Used to run simulation. You can run `./RUN.sh --sim` and you will be prompted to provide necessary paramteres.
+You can also provide simulation parameters directly from command line using below options:
+- `--b1 <name>` - left bot name
+- `--b1_args <args>` - command line arguments for left bot
+- `--b2 <name>` - right bot name
+- `--b2_args <args>` - command line arguments for right bot
+- `--map <name>` - map name, map files are stored in `maps` directory
+- `--log_name <name>` - name of file the simulation log is written to, logs are created in `logs` directory
+- `--games <number>` - number of games to be played
+- `--ready_timeout <seconds>`- time that bots have for preprocessing (in seconds)
+- `--move_timeout <seconds>` - time for single move (in seconds)
+- `--game_timeout <seconds>` - time for single game (in seconds)
+
+Above options can be displayed by running `./RUN.sh --sim --help`
+
+Example usage:
+```
+./RUN.sh --sim --b1 minmax --b1_args "-c configs/eval_params/BetterEval/example.json" --b2 mcts --b2_args "-l 42 -c configs/eval_params/BetterEval/example.json" --map map10x10.json --log_name test --games 2 --ready_timeout 1 --move_timeout 1 --game_timeout 10
+```
+
+##### `rerun-simulation`, `--sim-r`
+Used to rerun last simulation. The last simulation configuration is stored in [`configs/simulations/last`](configs/simulations/last) file which is updated in every run.
+
+##### `concurrent-rerun-simulation`, `-csim-r`
+The concurrent version of `rerun-simulation`, used to rerun last simulation with each game run on separate thread.
+
+##### `run-simulation-from-config`, `--sim-c`
+Used to run simulation with parameters given in configuration file. When you run `./RUN.sh --sim-c` you will be prompted to select one of available configurations stored in [`configs/simulations`](configs/simulations) directory.
+You can also specify the configuration file name with `--config` option.
+
+Example usage:
+```
+./RUN.sh --sim-c --config example.json
+```
+
+### GUI Usage
 The program consists of 2 scenes where user can set up a simulation and a scene, where he can watch and analyze the bots' performance. Each scene consists of windows with different functionalities.
 
 - ### Simulation creation scene
