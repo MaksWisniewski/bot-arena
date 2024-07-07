@@ -67,33 +67,33 @@ Values for `arena_properties` are expected in JSON format, as shown below:
             # ...
         ],
         'map_size': [width, height],  # Map size
-        'stats': {
-            'soldiers': {
+        'stats': {  # game parameters
+            'soldiers': {  # soldier parameters
                 'swordsman': {
-                    'max_hp': 600,
-                    'damage': 100,
-                    'range': 1,
-                    'cost': 100,
+                    'max_hp': 600,  # swordsman's maximum hp
+                    'damage': 100,  # swordsman's damage
+                    'range': 1,  # swordsman's range
+                    'cost': 100,  # swordsman's cost
                 },
                 'archer': {
-                    'max_hp': 300,
-                    'damage': 200,
-                    'range': 3,
-                    'cost': 150,
+                    'max_hp': 300,  # archer's maximum hp
+                    'damage': 200,  # archer's damage
+                    'range': 3,  # archer's range
+                    'cost': 150,  # archer's cost
                 }
             },
-            'buildings': {
+            'buildings': {  # building parameters
                 'farm': {
-                    'gold': 5,
-                    'cost': 100
+                    'gold': 5,  # gold produced by the farm in each turn
+                    'cost': 100  # cost of the farm
                 },
                 'turret': {
-                    'attack': 10,
-                    'range': 3,
-                    'cost': 200
+                    'attack': 10,  # turret's attack
+                    'range': 3,  # turret's range
+                    'cost': 200  # turret's cost
                 }
             },
-            'passive_gold': 10
+            'passive_gold': 10  # base income (without farms)
         }
     },
     'players': {
@@ -112,9 +112,9 @@ Values for `arena_properties` are expected in JSON format, as shown below:
             },
             'units': [
                 {
-                    'position': p1,
-                    'type': t1,
-                    'hp': hp1
+                    'position': p1,  # unit position on the path (int)
+                    'type': t1,  # unit type ("swordsman" or "archer")
+                    'hp': hp1  # unit hp (int)
                 },
                 # ...
             ],

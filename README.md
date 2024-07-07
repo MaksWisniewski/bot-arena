@@ -11,11 +11,67 @@ This script provides the following options:
 
 To use the script, run it and choose the desired option by entering the corresponding number.
 
-## Run simulation
-You can also use `RUN.sh` script to run simulation by running it with `run-simulation` or `--sim` option and providing simulation arguments as for `main.py`.
+## Command line arguments
 
-### Example usage:
-```./RUN.sh --sim --b1 minmax --b2 random_bot.py --map map5x5.json```
+### `build-docker`, `--build-docker`
+Used to build docker image.
+
+### `compile`, `--compile`
+Used to compile C++ bots. You can specify one or more bots to be compiled.
+If you don't provide any specific bot name, all bots are built by default.
+
+Example usage:
+- compile all bots: `./RUN.sh compile`, it is equivalent to `./RUN.sh compile all`.
+- compile specific bots: `./RUN.sh compile minmax mcts`.
+
+### `clean`, `--clean`
+Used to clean compiled object files of C++ bots (it doesn't remove linked bot executables from `bots` directory). It is equivalent to `make clean` run in `cpp_bots` directory.
+
+### `select-economy`, `-e`
+Used to select economy configuration used in simulations. The configuration files are stored in [`configs/economies`](configs/economies) directory.
+After running `./RUN.sh -e` you will be prompted to select one of available economies.
+You can also provide configuration name directly from command line by `--economy` option.
+
+Example usage:
+```
+./RUN.sh ./RUN.sh select-economy --economy easy
+```
+
+### `run-simulation`, `--sim`
+Used to run simulation. You can run `./RUN.sh --sim` and you will be prompted to provide necessary paramteres.
+You can also provide simulation parameters directly from command line using below options:
+- `--b1 <name>` - left bot name
+- `--b1_args <args>` - command line arguments for left bot
+- `--b2 <name>` - right bot name
+- `--b2_args <args>` - command line arguments for right bot
+- `--map <name>` - map name, map files are stored in `maps` directory
+- `--log_name <name>` - name of file the simulation log is written to, logs are created in `logs` directory
+- `--games <number>` - number of games to be played
+- `--ready_timeout <seconds>`- time that bots have for preprocessing (in seconds)
+- `--move_timeout <seconds>` - time for single move (in seconds)
+- `--game_timeout <seconds>` - time for single game (in seconds)
+
+Above options can be displayed by running `./RUN.sh --sim --help`
+
+Example usage:
+```
+./RUN.sh --sim --b1 minmax --b1_args "-c configs/eval_params/BetterEval/example.json" --b2 mcts --b2_args "-l 42 -c configs/eval_params/BetterEval/example.json" --map map10x10.json --log_name test --games 2 --ready_timeout 1 --move_timeout 1 --game_timeout 10
+```
+
+### `rerun-simulation`, `--sim-r`
+Used to rerun last simulation. The last simulation configuration is stored in [`configs/simulations/last`](configs/simulations/last) file which is updated in every run.
+
+### `concurrent-rerun-simulation`, `-csim-r`
+The concurrent version of `rerun-simulation`, used to rerun last simulation with each game run on separate thread.
+
+### `run-simulation-from-config`, `--sim-c`
+Used to run simulation with parameters given in configuration file. When you run `./RUN.sh --sim-c` you will be prompted to select one of available configurations stored in [`configs/simulations`](configs/simulations) directory.
+You can also specify the configuration file name with `--config` option.
+
+Example usage:
+```
+./RUN.sh --sim-c --config example.json
+```
 
 # <b> BOT ARENA </b>
 
@@ -160,7 +216,7 @@ The path has to:
 ### Bot standard
 #### Bot Package Python
 To simplify the implementation of bots in Python for Bot Arena, a dedicated package is available. This package provides a class template, `Bot`, that offers tools for easier implementation of your own agents.
-Explore the [Bot Package on GitHub](https://github.com/BartoszKruszewski/bot-arena/tree/main/bot_package) for seamless bot implementation in Python for Bot Arena.
+Explore the [Bot Package on GitHub](https://github.com/MaksWisniewski/bot-arena/tree/main/bot_package) for seamless bot implementation in Python for Bot Arena.
 
 
 ## What is log?
